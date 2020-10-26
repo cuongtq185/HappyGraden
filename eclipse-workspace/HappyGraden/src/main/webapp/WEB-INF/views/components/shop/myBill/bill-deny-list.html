@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head></head>
+
+<body>
+	<th:block th:fragment="bill-deny-list">
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card">
+
+							<div class="card-header card-header-primary">
+								<h4 class="card-title ">All Bill List</h4>
+								 <div th:replace="components/shop/myBill/head-nav-bill :: head-nav-bill"></div> 
+							</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table">
+										<thead class=" text-primary">
+											<th>Id Bill</th>
+											<th>Customer</th>
+											<th>Address</th>
+											<th>Total</th>
+										</thead>
+										<tbody>
+
+											<tr th:if="${!bills.empty or bills != null}"
+												th:each="bill, i : ${bills}">
+												<td><span th:text="${bill.id}"></span></td>
+												<td><span th:text="${bill.account}"></span></td>
+												<td><span th:text="${bill.address}"></span></td>
+												<td><span th:inline="text">$ [[${#numbers.formatDecimal(bill.totalPrice, 0, 'COMMA', 0, 'POINT')}]]</span></td>
+										</tbody>
+									</table>
+										<div style="display: flex; align-items: center;">
+											<script th:inline="javascript">
+											const pageable=[[${pageable}]]
+											 console.log(pageable)
+											</script>
+											<nav th:if="${pageable.totalPages > 0}" class="pagination">
+												<ul class="pagination" style="margin-bottom: 0px;">
+													<li
+														th:class="${pageable.preMaxPage > 0} ? 'page-item ' : 'page-item disabled'">
+														<a class="page-link" th:with="result=${ pageable.page - 1}"
+														th:href="@{/shop/mybills/__${mode}__(limit=${pageable.limit}, page=${result})}"><i
+															class="fas fa-arrow-left"></i></a>
+													</li>
+							
+													<li th:each="item : ${pageable.items}"
+														th:class="${item.current == true} ? 'page-item active' : 'page-item'">
+														<!--  --> <a
+														th:href="@{/shop/mybills/__${mode}__(limit=${pageable.limit}, page=${item.number})}"
+														class="page-link" th:text="${item.number}"> </a>
+													</li>
+													<li
+														th:class="${pageable.nextMaxPage > 0} ? 'page-item ' : 'page-item disabled'">
+														<a class="page-link" th:with="result=${ pageable.page + 1}"
+														th:href="@{/shop/mybills/__${mode}__(limit=${pageable.limit}, page=${result})}"><i
+															class="fas fa-arrow-right"></i></a>
+													</li>
+												</ul>
+											</nav>
+										</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<th:block th:replace="components/shop/myBill/confirm-bill-modal :: confirm-bill-modal"></th:block>
+			
+			
+			<script th:inline="javascript">
+			
+	        console.log([[${ pageable }]])
+			function confirmBill(bill_id) {
+        	 var token = $("meta[name='_csrf']").attr("content");
+		        var header = $("meta[name='_csrf_header']").attr("content");
+		        data = `{"bill_id" : ${bill_id}}`;
+                
+                Swal.fire({
+                	  title: 'Are you sure?',
+                	  html: 'This bill will be confirm! <br> You will not be able to revert this!',
+                	  icon: 'warning',
+                	  showCancelButton: true,
+                	  confirmButtonColor: '#3085d6',
+                	  cancelButtonColor: '#d33',
+                	  confirmButtonText: 'Yes, confirm it!'
+                	}).then((result) => {
+                		
+                	  if (result.value) {
+      	                $.ajax({
+    	                    url: `/bill/confirm`,
+    	                    type: 'PUT',
+
+    	                    dataType: "json",
+    	                    contentType: "application/json",
+
+    	                    // data: JSON.stringify(`{"product_id" : ${product_id}}`),
+    	                    data: data,
+    	                    // data: JSON.stringify(data),
+
+    	                    beforeSend: function (xhr) {
+    	                        xhr.setRequestHeader(header, token);
+    	                    },
+
+    	                    success: function (data, status, xhr) {
+    	                    	//md.showAddProductNoti('bottom','right',data.msg)
+    	                    //  
+    							Swal.fire({
+    	                    		  position: 'center',
+    	                    		  icon: 'success',
+    	                    		  title: 'Confirm Bill Success',
+    	                    		  showConfirmButton: false,
+    	                    		  timer: 1000
+    		                    		}).then(()=>{
+    		                                window.location.href = window.location.href;
+    		                    		}) 
+    	                     },
+    	                    error: function (request, status, error) {
+
+    	                        try {
+    	                            if (request.status == 405) {
+    	                                window.location.href = `${home}/login`;
+    	                            }
+    	                            // console.log(request.status);
+    	                            // console.log(status);
+    	                            // console.log(error);
+    	                            // window.location.href = `${home}/login`;
+    	                        } catch (error) { }
+    	                    }
+    	                });
+                	  }
+                	})
+                	
+          
+            }
+			</script>
+	</th:block>
+
+</body>
+
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+    <th:block th:include="layout/head :: head"></th:block>
+</head>
+
+<body class="my-3">
+
+    <!-- [[${bill?.id}]]
+    <br>
+    [[${bill?.account}]]
+    <br>
+    [[${bill?.address}]]
+    <br>
+    [[${bill?.payment}]]
+    <br>
+    [[${bill?.payment > 0} ? 'success' : '']]
+    <br>
+    [[${bill?.payment == 0} ? 'waiting payment' : '']]
+    <br>
+    [[${bill?.payment < 0} ? 'payment error' : '' ]] <br>
+        [[${bill?.createAt}]]
+        <br> -->
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                Invoice
+                <strong>[[${bill?.createAt}]]</strong>
+                <span class="float-right"> <strong>Status:</strong> [[${bill?.payment == 0} ? 'Pending' : '']][[${bill?.payment > 0} ? 'Success' : '']][[${bill?.payment < 0} ? 'Error' : '' ]]</span>
+
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <!-- <div class="col-sm-6">
+                            <h6 class="mb-3">From:</h6>
+                            <div>
+                                <strong>Webz Poland</strong>
+                            </div>
+                            <div>Madalinskiego 8</div>
+                            <div>71-101 Szczecin, Poland</div>
+                            <div>Email: info@webz.com.pl</div>
+                            <div>Phone: +48 444 666 3333</div>
+                        </div> -->
+
+                    <!-- <div class="col-sm-6">
+                            <h6 class="mb-3">To:</h6>
+                            <div>
+                                <strong>Bob Mart</strong>
+                            </div>
+                            <div>Attn: Daniel Marek</div>
+                            <div>43-190 Mikolow, Poland</div>
+                            <div>Email: marek@daniel.com</div>
+                            <div>Phone: +48 123 456 789</div>
+                        </div> -->
+
+                    <div class="col-sm-6">
+
+                    </div>
+                    <div class="col-sm-6">
+                        <h6 class="mb-3">To:</h6>
+                        <div>
+                            <strong>[[${#authentication.name}]]</strong>
+                        </div>
+                        <div>[[${bill?.address}]]</div>
+                    </div>
+
+                </div>
+
+                <div class="table-responsive-sm">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th class="center">#</th>
+                                <th>Item</th>
+                                <th>Description</th>
+
+                                <th class="right">Price</th>
+                                <th class="center">Qty</th>
+                                <th class="right">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="item, i : ${bill_item}">
+                                <td class="center">[[${i.count}]]</td>
+                                <!-- [[${item.product}]] -->
+                                <td class="left strong" th:onclick="window.location=[[@{/product/__${item?.product}__}]];"><a th:href="@{/product/__${item?.product}__}">[[${item?.productName != null} ? ${item.productName} : '']]</a></td>
+                                <td class="left"></td>
+                                <td class="right">$[[${item?.price != null} ? ${item.price} : '']]</td>
+                                <td class="center">[[${item?.quantity != null} ? ${item.quantity} : '']]</td>
+                                <td class="right">$[[${item?.total != null} ? ${item.total} : '']]</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-sm-5">
+
+                    </div>
+
+                    <div class="col-lg-4 col-sm-5 ml-auto">
+                        <table class="table table-clear">
+                            <tbody>
+                                <!-- <tr>
+                                    <td class="left">
+                                        <strong>Subtotal</strong>
+                                    </td>
+                                    <td class="right">$8.497,00</td>
+                                </tr>
+                                <tr>
+                                    <td class="left">
+                                        <strong>Discount (20%)</strong>
+                                    </td>
+                                    <td class="right">$1,699,40</td>
+                                </tr>
+                                <tr>
+                                    <td class="left">
+                                        <strong>VAT (10%)</strong>
+                                    </td>
+                                    <td class="right">$679,76</td>
+                                </tr> -->
+                                <tr>
+                                    <td class="left">
+                                        <strong>Total</strong>
+                                    </td>
+                                    <td class="right">
+                                        <strong>$[[${total}]]</strong>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

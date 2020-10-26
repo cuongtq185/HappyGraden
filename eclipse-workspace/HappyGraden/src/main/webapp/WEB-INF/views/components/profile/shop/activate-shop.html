@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+
+</head>
+
+<body>
+	<th:block th:fragment="activate-shop">
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-10">
+						<div class="card">
+							<div class="card-header card-header-primary">
+								<h3 class="card-title">Your shop have been delete!</h3>
+							</div>
+							<div class="card-body"
+								style="padding-left: 100px; padding-right: 100px">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="bmd-label-floating">Your shop have been
+												delete!</label>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<button type="button" class="btn btn-primary"
+												th:onclick="activateShop()">Activate Shop</button>
+											<a type="button" class="btn btn-primary"
+												th:href="@{/}">BACK TO HOME</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script th:inline="javascript">
+			//edit Shop
+			function activateShop() {
+				var token = $("meta[name='_csrf']").attr("content");
+				var header = $("meta[name='_csrf_header']").attr("content");
+
+				$.ajax({
+					url : `/shop/activate`,
+					type : 'PUT',
+					beforeSend : function(xhr) {
+						xhr.setRequestHeader(header, token);
+					},
+
+					success : function(data, status, xhr) {
+						alert("Activate Request have been send! Please waitting for admin check!");
+						// To reload the page discarding the POST data(perform a GET request)
+						window.location.href = window.location.href;
+					},
+					error : function(request, status, error) {
+						alert(status);
+						// To reload the page discarding the POST data(perform a GET request)
+						window.location.href = window.location.href;
+					}
+				});
+			}
+		</script>
+
+	</th:block>
+</body>
+</html>

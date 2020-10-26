@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head></head>
+
+<body>
+
+
+	<th:block th:fragment="leftNavProfile">
+        <!-- data-image="../assets/img/sidebar-1.jpg" -->
+		<div class="sidebar" data-color="azure" data-background-color="white">
+			<!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+			<div class="logo">
+				<a th:href="@{/}"
+					class="simple-text logo-normal"> P2Po </a>
+			</div>
+			<div class="sidebar-wrapper">
+				<ul class="nav">
+					<li
+						th:classappend="${#request.getRequestURI() == '/profile/home' ? 'nav-item active' : 'nav-item'}">
+						<a class="nav-link" th:href="@{/profile/home}"> <i
+							class="material-icons">dashboard</i>
+							<p>Dashboard</p>
+					</a>
+					</li>
+					<li
+						th:classappend="${#request.getRequestURI().startsWith('/profile/myaccount') ? 'nav-item active' : 'nav-item'}">
+						<a class="nav-link" th:href="@{/profile/myaccount?mode=edit}">
+							<i class="material-icons">person</i>
+							<p>My Account</p>
+					</a>
+					</li>
+					<li
+						th:classappend="${#request.getRequestURI().startsWith('/profile/mybill') ? 'nav-item active' : 'nav-item'}">
+						<a class="nav-link" th:href="@{/profile/mybills/waiting-confirm}"> <i
+							class="material-icons">content_paste</i>
+							<p>My Bill</p>
+					</a>
+					</li>
+					<li
+						th:classappend="${#request.getRequestURI().startsWith('/profile/createshop') ? 'nav-item active' : 'nav-item'}">
+						<a class="nav-link" th:href="@{/profile/createshop}">
+							<i class="material-icons">store</i>
+							<p>Create Your Shop</p>
+					</a>
+					</li>
+
+
+				</ul>
+			</div>
+		</div>
+	</th:block>
+</body>
+</html>

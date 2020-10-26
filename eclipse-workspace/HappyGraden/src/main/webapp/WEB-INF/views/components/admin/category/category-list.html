@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head></head>
+
+<body>
+	<th:block th:fragment="content">
+		<div id="category-list-table">
+			<table class="table">
+				<thead class=" text-primary">
+					<th>ID</th>
+					<th>Name</th>
+					<th class="text-center">Action</th>
+				</thead>
+				<tbody>
+					<tr th:if="${!pageable.data.empty or pageable.data != null}"
+						th:each="category, i : ${pageable.data}">
+						<td><span
+							th:text="${i.count+(pageable.limit*(pageable.page -1))}"></span></td>
+						<td><span th:text="${category.name}"></span></td>
+
+						<td class="text-center"><span> </span> <span> <span><a
+									type="button" rel="tooltip" title="Edit category"
+									th:href="@{'/admin/category/edit/' + ${category.id}}"
+									class="btn btn-large btn-primary btn-just-icon"><i
+										class="fas fa-edit"></i></a> </span>
+								<button type="button" class="btn  btn-danger btn-just-icon"
+									rel="tooltip" title="Delete category"
+									th:onclick="|DeleteCategory(${category.id})|">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+						</span></td>
+					</tr>
+				</tbody>
+			</table>
+			<div th:replace="admin/layout/panigation :: content(${pageable})"></div>
+		</div>
+
+
+	</th:block>
+
+</body>
+
+</html>

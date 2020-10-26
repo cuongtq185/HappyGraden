@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head></head>
+
+<body>
+	<th:block th:fragment="content">
+		<div id="brand-list-table">
+			<table class="table">
+				<thead class=" text-primary">
+					<th>ID</th>
+					<th>Name</th>
+					<th class="text-center">Action</th>
+				</thead>
+				<tbody>
+					<tr th:if="${!pageable.data.empty or pageable.data != null}"
+						th:each="brand, i : ${pageable.data}">
+						<td><span
+							th:text="${i.count+(pageable.limit*(pageable.page -1))}"></span></td>
+						<td><span th:text="${brand.name}"></span></td>
+
+						<td class="text-center"><span> </span> <span> <span><a
+									type="button" rel="tooltip" title="Edit Brand"
+									th:href="@{'/admin/brand/edit/' + ${brand.id}}"
+									class="btn btn-large btn-primary btn-just-icon"><i
+										class="fas fa-edit"></i></a> </span>
+								<button type="button" rel="tooltip" title="Delete Brand"
+									class="btn  btn-danger btn-just-icon"
+									th:onclick="|DeleteBrand(${brand.id})|">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+						</span></td>
+					</tr>
+				</tbody>
+			</table>
+			<div th:replace="admin/layout/panigation :: content(${pageable})"></div>
+		</div>
+
+
+	</th:block>
+
+</body>
+
+</html>

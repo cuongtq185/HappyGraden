@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+    <th:block th:include="admin/layout/head :: head"></th:block>
+    
+</head>
+
+<body>
+           <div class="wrapper ">
+          
+    <div th:replace="admin/layout/leftNavAdmin :: leftNavAdmin"></div> 
+    
+    <div class="main-panel">
+      <!-- Navbar -->
+     	<div th:replace="admin/layout/HeadNavAdmin :: headNavAdmin"></div> 
+      <!-- End Navbar -->
+       <!-- content -->
+        <div th:replace="components/admin/shop/shop-deactive-table :: shop-deactive-table"></div> 
+        <!-- End content -->
+        <div th:replace="admin/layout/footerAdmin :: footerAdmin"></div> 
+    </div>
+  </div>
+    <th:block th:replace="admin/layout/footer :: footer"></th:block>
+    
+     <script th:inline="javascript">
+        const shops = [[${ shops }]]
+          function acceptShop(i) {
+        	console.log(i)
+                var token = $("meta[name='_csrf']").attr("content");
+                var header = $("meta[name='_csrf_header']").attr("content");
+                $.ajax({
+                    url: `/admin/shop/accept/${shops[i].id}`,
+                    type: 'PUT',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader(header, token);
+                    },
+                    success: function (data, status, xhr) {
+                    	Swal.fire({
+                    		  position: 'center',
+                    		  icon: 'success',
+                    		  title: 'Active Success',
+                    		  showConfirmButton: false,
+                    		  timer: 800
+                    		}).then(()=>{
+                                window.location.href = window.location.href;
+
+                    		})
+                    },
+                    error: function (request, status, error) {
+                        alert(status);
+                        window.location.href = window.location.href;
+                    }
+                });
+            
+              
+            }
+      </script>
+</body>
+</html>

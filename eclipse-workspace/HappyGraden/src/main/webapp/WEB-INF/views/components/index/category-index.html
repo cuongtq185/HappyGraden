@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head>
+	 
+</head>
+<body>
+	<th:block th:fragment="category-index">
+		<!-- Popular Categories bar -->
+		<nav class="main_nav">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+						<div class="main_nav_content d-flex flex-row">
+							<div class="cat_menu_container">
+								<div
+									class="cat_menu_title d-flex flex-row align-items-center justify-content-start">
+									<div class="cat_burger">
+										<span></span><span></span><span></span>
+									</div>
+									<div class="cat_menu_text">categories</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<!-- Popular Categoriy item -->
+		<div class="popular_categories">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-1">
+						<div class="popular_categories_slider_nav">
+							<div class="popular_categories_prev popular_categories_nav">
+								<i style="color: black;" class="fas fa-angle-left ml-auto"></i>
+							</div>
+						</div>
+					</div>
+
+					<!-- Popular Categories Slider -->
+					
+					<div class="col-lg-10">
+						<div class="popular_categories_slider_container">
+							<div class="owl-carousel owl-theme popular_categories_slider">
+								<th:block th:each="category : ${categories}">
+								<!-- Popular Categories Item -->
+								<div style="cursor:pointer" class="owl-item" th:onclick="window.location=[[@{/category(id=${category.id})}]];">
+									<div
+										class="popular_category d-flex flex-column align-items-center justify-content-center">
+										<div class="popular_category_image">
+											<img th:src="@{static/template/ontech/images/popular_5.png}"
+												alt="">
+										</div>
+										<a th:href="@{/category(id=${category.id})}" class="popular_category_text" th:text="${category.name}"></a>
+									</div>
+								</div>
+
+								
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-1" style="text-align: right;">
+						<div class="popular_categories_slider_nav">
+							<div class="popular_categories_next popular_categories_nav">
+								<i style="color: black;" class="fas fa-angle-right ml-auto"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+	  
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+
+</head>
+
+<body>
+	<th:block th:fragment="create-shop">
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="card">
+							<div class="card-header card-header-primary">
+								<h3 class="card-title">
+									Create Your Shop
+								</h3>
+							</div>
+							<div class="card-body"
+								style="padding-left: 100px; padding-right: 100px">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="bmd-label-floating">Shop Name</label> <input
+												id="name" name="name" type="text" class="form-control"
+												 />
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="bmd-label-floating">Address</label> <input
+												id="address" name="address" type="text" class="form-control"
+												 />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="bmd-label-floating">Phone</label> <input
+												id="phone" name="phone" type="text" class="form-control"
+												 />
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="bmd-label-floating">Email</label> <input
+												id="email" name="email" type="text" class="form-control"
+												 />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="bmd-label-floating">Details</label> <input
+												id="detail" name="detail" type="text" class="form-control"
+												 />
+										</div>
+									</div>
+								</div>
+								<button th:onclick="createShop()"
+									class="btn btn-primary pull-right">Create Shop</button>
+								<div class="clearfix"></div>
+							</div>
+
+						</div>
+					</div>
+					<div class="col-md-4">
+						<img alt="" src="">
+					</div>
+				</div>
+			</div>
+		</div>
+		<script th:inline="javascript">	
+		
+
+
+		const account = [[${ current_account }]];
+		const shop = [[${shop}]];
+	//edit Shop
+		function createShop() {
+            let newShop = new Object();
+		    console.log("Start edit");
+			console.log(newShop);
+		   	newShop.phone = $("#phone").val();
+		    newShop.email = $("#email").val();
+		    newShop.name = $("#name").val();
+		    newShop.address = $("#address").val();
+		    newShop.detail = $("#detail").val();
+		    
+		    
+		    var token = $("meta[name='_csrf']").attr("content");
+		    var header = $("meta[name='_csrf_header']").attr("content");
+		    
+		    console.log(newShop)
+	
+   		     $.ajax({
+		        type: "POST",
+		        url: `/shop/create`,
+		        dataType: "json",
+		        contentType: "application/json",
+		        data: JSON.stringify(newShop),
+	
+		        beforeSend: function (xhr) {
+		            xhr.setRequestHeader(header, token);
+		        },
+	
+		        success: function (data, status, xhr) {
+		        	alert(data.msg);
+		        	window.location.href = window.location.href;
+		        },
+		        error: function (request, status, error) {
+                    try {
+                        alert(request.responseJSON.msg);
+                    } catch (error) { }
+		           // window.location.href = window.location.href;
+		        }
+		    });    
+	
+		    console.log("End edit");
+		}
+
+		</script>
+
+	</th:block>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+    <th:block th:include="layout/head :: head"></th:block>
+    <!-- <th:block th:include="index/layout/index-head :: index-head"></th:block>  -->
+    <meta name="description" content="P2PO">
+    <meta th:name="_csrf" th:content="${_csrf.token}" />
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">-->
+
+
+    <link rel="stylesheet" type="text/css" th:href="@{/static/template/ontech/styles/cart_styles.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/template/ontech/styles/cart_responsive.css}">
+
+
+</head>
+
+<body>
+
+    <div class="super_container">
+
+        <div th:replace="index/layout/header_index :: header_index"></div>
+
+        <!-- Main Navigation -->
+
+        <nav class="main_nav">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+
+                        <div class="main_nav_content d-flex flex-row">
+
+
+                            <!-- Menu Trigger -->
+
+                            <div class="menu_trigger_container ml-auto">
+                                <div class="menu_trigger d-flex flex-row align-items-center justify-content-end">
+                                    <div class="menu_burger">
+                                        <div class="menu_trigger_text">menu</div>
+                                        <div class="cat_burger menu_burger_inner">
+                                            <span></span><span></span><span></span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Menu -->
+
+        <div class="page_menu">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+
+                        <div class="page_menu_content">
+
+                            <div class="page_menu_search">
+                                <form action="#">
+                                    <input type="search" required="required" class="page_menu_search_input"
+                                        placeholder="Search for products...">
+                                </form>
+                            </div>
+                            <ul class="page_menu_nav">
+                                <li class="page_menu_item has-children">
+                                    <a href="#">Language<i class="fa fa-angle-down"></i></a>
+                                    <ul class="page_menu_selection">
+                                        <li><a href="#">English<i class="fa fa-angle-down"></i></a></li>
+                                        <li><a href="#">Italian<i class="fa fa-angle-down"></i></a></li>
+                                        <li><a href="#">Spanish<i class="fa fa-angle-down"></i></a></li>
+                                        <li><a href="#">Japanese<i class="fa fa-angle-down"></i></a></li>
+                                    </ul>
+                                </li>
+                                <li class="page_menu_item has-children">
+                                    <a href="#">Currency<i class="fa fa-angle-down"></i></a>
+                                    <ul class="page_menu_selection">
+                                        <li><a href="#">US Dollar<i class="fa fa-angle-down"></i></a></li>
+                                        <li><a href="#">EUR Euro<i class="fa fa-angle-down"></i></a></li>
+                                        <li><a href="#">GBP British Pound<i class="fa fa-angle-down"></i></a></li>
+                                        <li><a href="#">JPY Japanese Yen<i class="fa fa-angle-down"></i></a></li>
+                                    </ul>
+                                </li>
+                                <li class="page_menu_item">
+                                    <a href="index.html">Home<i class="fa fa-angle-down"></i></a>
+                                </li>
+                                <li class="page_menu_item has-children">
+                                    <a href="#">Super Deals<i class="fa fa-angle-down"></i></a>
+                                    <ul class="page_menu_selection">
+                                        <li><a href="#">Super Deals<i class="fa fa-angle-down"></i></a></li>
+                                        <li class="page_menu_item has-children">
+                                            <a href="#">Menu Item<i class="fa fa-angle-down"></i></a>
+                                            <ul class="page_menu_selection">
+                                                <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                                <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                                <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                                <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                        <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                        <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                    </ul>
+                                </li>
+                                <li class="page_menu_item has-children">
+                                    <a href="#">Featured Brands<i class="fa fa-angle-down"></i></a>
+                                    <ul class="page_menu_selection">
+                                        <li><a href="#">Featured Brands<i class="fa fa-angle-down"></i></a></li>
+                                        <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                        <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                        <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                    </ul>
+                                </li>
+                                <li class="page_menu_item has-children">
+                                    <a href="#">Trending Styles<i class="fa fa-angle-down"></i></a>
+                                    <ul class="page_menu_selection">
+                                        <li><a href="#">Trending Styles<i class="fa fa-angle-down"></i></a></li>
+                                        <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                        <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                        <li><a href="#">Menu Item<i class="fa fa-angle-down"></i></a></li>
+                                    </ul>
+                                </li>
+                                <li class="page_menu_item"><a href="blog.html">blog<i class="fa fa-angle-down"></i></a>
+                                </li>
+                                <li class="page_menu_item"><a href="contact.html">contact<i
+                                            class="fa fa-angle-down"></i></a></li>
+                            </ul>
+
+                            <div class="menu_contact">
+                                <div class="menu_contact_item">
+                                    <div class="menu_contact_icon"><img
+                                            th:src="@{/static/template/ontech/images/phone_white.png}" alt=""></div>
+                                    +38 068 005 3570
+                                </div>
+                                <div class="menu_contact_item">
+                                    <div class="menu_contact_icon"><img
+                                            th:src="@{/static/template/ontech/images/mail_white.png}" alt=""></div>
+                                    <a href="mailto:fastsales@gmail.com">fastsales@gmail.com</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Cart -->
+
+        <div th:unless="${list_cart_item != null and !list_cart_item.empty}" class="cart_section">
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center">
+                    <img alt="" th:src="@{/static/img/empty-cart.png}">
+                        <h1 class="text-center">Nothing in cart</h1>
+                        
+                        <div class="button banner_button">
+                            <a th:href="@{/}">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${list_cart_item != null and !list_cart_item.empty}" class="cart_section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 offset-lg-1">
+                        <div class="cart_container">
+                            <div class="cart_title">Shopping Cart</div>
+                            <div class="cart_items">
+                                <div class="cart_list">
+
+                                    <table class="table table-striped">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Image</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Total</th>
+                                            <th scope="col"></th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr th:each="cart_item, i : ${list_cart_item}" th:onclick="window.location=[[@{/product/__${cart_item.product}__}]];" >
+                                            <th scope="row" th:text="${i.count}">1</th>
+                                            <td><img th:src="@{__${cart_item.img}__}"
+                                                th:onerror="this.onerror=null;this.src=[[@{/static/img/default.png}]];"
+                                                alt="" style="width: 100px; height:100px;"></td>
+                                            <td th:text="${cart_item.name}">Product Name</td>
+                                            <td th:text="${cart_item.quantity}">999999999</td>
+                                            <td><span th:inline="text">$ [[${#numbers.formatDecimal(cart_item.price, 0, 'COMMA', 0, 'POINT')}]]</span></td>
+                                            <td><span th:inline="text">$ [[${#numbers.formatDecimal(cart_item.total, 0, 'COMMA', 0, 'POINT')}]]</span></td>
+                                            <td><button type="button" th:onclick="|deleteProduct(${cart_item.product})|"
+														class="btn btn-large btn-danger btn-just-icon">
+															<i class="fas fa-trash-alt"></i>
+														</button>
+												</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+
+                                    <!-- <li class="cart_item clearfix" th:each="cart_item : ${list_cart_item}">
+                                        <div class="cart_item_image"><img th:src="@{__${cart_item.img}__}"
+                                                th:onerror="this.onerror=null;this.src=[[@{/static/img/default.png}]];"
+                                                alt="">
+                                        </div>
+                                        <div
+                                            class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
+                                            <div class="cart_item_name cart_info_col">
+                                                <div class="cart_item_title">Name</div>
+                                                <div class="cart_item_text" th:text="${cart_item.name}">Product Name
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="cart_item_quantity cart_info_col">
+                                                <div class="cart_item_title">Quantity</div>
+                                                <div class="cart_item_text" th:text="${cart_item.quantity}">0</div>
+                                            </div>
+                                            <div class="cart_item_price cart_info_col">
+                                                <div class="cart_item_title">Price</div>
+                                                <div class="cart_item_text">$<th:block th:text="${cart_item.price}">$999999999</th:block>
+                                                </div>
+                                            </div>
+                                            <div class="cart_item_total cart_info_col">
+                                                <div class="cart_item_title">Total</div>
+                                                <div class="cart_item_text">$<th:block th:text="${cart_item.total}">$999999999</th:block>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li> -->
+
+                                </div>
+                            </div>
+
+                            <!-- Order Total -->
+                            <div class="order_total">
+                                <div class="order_total_content text-md-right">
+                                    <div class="order_total_title">Order Total:</div>
+                                    <div class="order_total_amount"><span th:inline="text">$ [[${#numbers.formatDecimal(total, 0, 'COMMA', 0, 'POINT')}]]</span></div>
+                                </div>
+                            </div>
+
+                            <div class="cart_buttons">
+                                <!-- <button type="button" class="button cart_button_clear">Add to Cart</button>
+                                <button type="button" class="button cart_button_checkout">Add to Cart</button> -->
+                                <form th:action="@{/cart/payment/momo}" method="POST" class="newsletter_form" style="float: right;">
+                                    <input type="address" class="newsletter_input" required="required"
+                                        placeholder="Enter your address" name="address">
+                                    <button class="button cart_button_checkout"
+                                        style="margin-top: 30px">Payment</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Newsletter -->
+
+        <div class="newsletter">
+            <div class="container">
+
+            </div>
+        </div>
+
+
+		<!-- Footer -->
+
+		<footer class="footer">
+			<div class="container">
+				<div class="row">
+
+					<div class="col-lg-3 footer_col">
+						<div class="footer_column footer_contact">
+							<div class="logo_container">
+								<div class="logo">
+									<a href="#">P2PO</a>
+								</div>
+							</div>
+							<div class="footer_title">Got Question? Call Us 24/7</div>
+							<div class="footer_phone">(+84 28) 3 9295 666</div>
+							<div class="footer_contact_text">
+								<p style="position: static;">374 Vo Van Tan Street, </p>
+								<p style="position: static;">Ward 5, 3 District, HCM City, Vietnam.</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-2 offset-lg-2">
+						<div class="footer_column">
+							<div class="footer_title">GET SOCIAL WITH US</div>
+							<br>
+							<div class="footer_subtitle"><a style="font-size: 20px; color: #0e8ce4" href="#" ><i class="fab fa-facebook-square"></i> Facebook</a></div>
+							<div class="footer_subtitle"><a style="font-size: 20px; color: #0e8ce4 " href="#" ><i class="fab fa-instagram-square"></i> Instagram</a></div>
+							<div class="footer_subtitle"><a style="font-size: 20px; color: #0e8ce4" href="#" ><i class="fab fa-youtube-square"></i> Youtube</a></div>
+							<div class="footer_subtitle"><a style="font-size: 20px; color: #0e8ce4" href="#" ><i class="fab fa-twitter-square"></i> Twitter</a></div>
+						</div>
+					</div>
+
+					<div class="col-lg-2">
+						<div class="footer_column">
+						</div>
+					</div>
+
+					<div class="col-lg-2">
+						<div class="footer_column">
+							<div class="footer_title">PAYMENT WITH</div>
+							<ul class="footer_list">
+								<li><a href="#"><img style="height: 50px; width: 50px" th:src="@{/static/img/logo__momo.jpg}" alt="">Mobile Money</a></li>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</footer>
+
+		<!-- Copyright -->
+
+		<div class="copyright">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+
+						<div
+							class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
+							<div class="copyright_content">
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								Copyright &copy;
+								<script>
+									document.write(new Date().getFullYear());
+								</script>
+							<i
+									class="fa fa-heart" aria-hidden="true"></i> by <a
+									href="https://unit.com.vn/" target="_blank">UNIT INTERN</a>
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+
+    <!-- <script src="js/jquery-3.3.1.min.js"></script>
+<script src="styles/bootstrap4/popper.js"></script>
+<script src="styles/bootstrap4/bootstrap.min.js"></script> -->
+
+    <th:block th:replace="layout/footer :: footer"></th:block>
+
+    <script th:src="@{/static/template/ontech/plugins/greensock/TweenMax.min.js}"></script>
+    <script th:src="@{/static/template/ontech/plugins/greensock/TimelineMax.min.js}"></script>
+    <script th:src="@{/static/template/ontech/plugins/scrollmagic/ScrollMagic.min.js}"></script>
+    <script th:src="@{/static/template/ontech/plugins/greensock/animation.gsap.min.js}"></script>
+    <script th:src="@{/static/template/ontech/plugins/greensock/ScrollToPlugin.min.js}"></script>
+    <script th:src="@{/static/template/ontech/plugins/easing/easing.js}"></script>
+    <script th:src="@{/static/template/ontech/js/cart_custom.js}"></script>
+    <script th:src="@{/static/admin/js/plugins/sweetalert2@9.js}"></script>
+    <script th:inline="javascript">
+    
+    
+	function deleteProduct(product_id) {
+		//stop function out side
+		   if (!e) var e = window.event;
+		    e.cancelBubble = true;
+		    if (e.stopPropagation) e.stopPropagation();
+   	 		//////////////////////////////////////////
+		    var token = $("meta[name='_csrf']").attr("content");
+	        var header = $("meta[name='_csrf_header']").attr("content");
+	        data = `{"product_id" : ${product_id}}`;
+           
+           Swal.fire({
+           	  title: 'Are you sure?',
+           	  html: 'This product will be delete!',
+           	  icon: 'warning',
+           	  showCancelButton: true,
+           	  confirmButtonColor: '#3085d6',
+           	  cancelButtonColor: '#d33',
+           	  confirmButtonText: 'Yes, delete it!'
+           	}).then((result) => {
+           		
+           	  if (result.value) {
+ 	                $.ajax({
+	                    url: `/cart/deletee`,
+	                    type: 'DELETE',
+
+	                    dataType: "json",
+	                    contentType: "application/json",
+
+	                    // data: JSON.stringify(`{"product_id" : ${product_id}}`),
+	                    data: data,
+	                    // data: JSON.stringify(data),
+
+	                    beforeSend: function (xhr) {
+	                        xhr.setRequestHeader(header, token);
+	                    },
+
+	                    success: function (data, status, xhr) {
+	                    	//md.showAddProductNoti('bottom','right',data.msg)
+	                    //  
+							Swal.fire({
+	                    		  position: 'center',
+	                    		  icon: 'success',
+	                    		  title: 'Delete Success',
+	                    		  showConfirmButton: false,
+	                    		  timer: 1000
+		                    		}).then(()=>{
+		                                window.location.href = window.location.href;
+		                    		}) 
+	                     },
+	                    error: function (request, status, error) {
+
+	                    	window.location.href = window.location.href;
+	                    }
+	                });
+           	  }
+           	})
+           	
+     
+       }
+    </script>
+
+</body>
+
+</html>

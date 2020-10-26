@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head></head>
+
+<body>
+	<th:block th:fragment="content" >
+		<div id="account-list-table">
+			<table class="table" >
+				<thead class=" text-primary">
+					<th>ID</th>
+					<th>Name</th>
+					<th>Username</th>
+					<th>Email</th>
+					<th>Phone</th>
+					<th>Role</th>
+					<th>Create_at</th>
+					<th class="text-center">Action</th>
+				</thead>
+				<tbody>
+					<tr th:if="${!pageable.data.empty or pageable.data != null}"
+						th:each="account, i : ${pageable.data}">
+						<td><span
+							th:text="${i.count+(pageable.limit*(pageable.page -1))}"></span></td>
+						<td><span th:text="${account.name}"></span></td>
+						<td><span th:text="${account.username}"></span></td>
+						<td><span th:text="${account.email}"></span></td>
+						<td><span th:text="${account.phone}"></span></td>
+						<td><th:block th:if="${account.roles != null}"
+								th:each="role, j : ${account.roles}">
+								<th:block th:if="${j.count > 1}">- </th:block>
+								<th:block th:if="${role.name == 'ROLE_ADMIN'}">
+									<th:block th:text="Admin"></th:block>
+								</th:block>
+								<th:block th:if="${role.name == 'ROLE_USER'}">
+									<th:block th:text="User"></th:block>
+								</th:block>
+								<th:block th:if="${role.name == 'ROLE_VENDOR'}">
+									<th:block th:text="Vender"></th:block>
+								</th:block>
+							</th:block></td>
+						<td><span
+							th:text=" ${account.createAt} ? ${#dates.format(account.createAt, 'dd-MM-yyyy')} "></span></td>
+						<td class="text-center"><span> <a type="button"
+								rel="tooltip" title="View account"
+								th:href="@{'/admin/account/' + ${account.id}}"
+								class="btn btn-large btn-info  btn-just-icon"> <i
+									class="fa fa-eye"> </i>
+							</a>
+						</span> <span>
+								<button rel="tooltip" title="Delete account" type="button"
+									class="btn  btn-danger  btn-just-icon"
+									th:onclick="|DeleteAccount(${i.index})|">
+									<i class="fas fa-trash-alt"></i>
+								</button>
+						</span></td>
+					</tr>
+				</tbody>
+			</table>
+			<div th:replace="admin/layout/panigation :: content(${pageable})"></div>	
+		</div>
+									
+		
+	</th:block>
+
+</body>
+
+</html>

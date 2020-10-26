@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head></head>
+
+<body>
+
+
+	<th:block th:fragment="leftNavAdmin">
+        <!-- data-image="../assets/img/sidebar-1.jpg" -->
+		<div class="sidebar" data-color="azure" data-background-color="white">
+		
+			<!--
+        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+        Tip 2: you can also add an image using data-image tag
+    -->
+			<div class="logo">
+				<a th:href="@{/}"
+					class="simple-text logo-normal"> P2Po </a>
+			</div>
+			<div class="sidebar-wrapper">
+				<ul class="nav">
+				
+					<li th:classappend="${#request.getRequestURI() == '/admin/home' ? 'nav-item active' : 'nav-item'}">
+					<a class="nav-link"
+						th:href="@{/admin/home}"> <i class="material-icons">dashboard</i>
+							<p>Dashboard</p>
+					</a></li>
+					<li th:classappend="${#request.getRequestURI().startsWith('/admin/account/') ? 'nav-item active' : 'nav-item'}">
+					<a class="nav-link" th:href="@{/admin/account/list}">
+							<i class="material-icons">person</i>
+							<p>Account</p>
+					</a></li>
+					<li th:classappend="${#request.getRequestURI().startsWith('/admin/shop/') ? 'nav-item active' : 'nav-item'}">
+					<a class="nav-link" th:href="@{/admin/shop/list}">
+							<i class="fas fa-store"></i>
+							<p>Shop</p>
+					</a></li>
+					<li th:classappend="${#request.getRequestURI().startsWith('/admin/category/') ? 'nav-item active' : 'nav-item'}">
+					<a class="nav-link"
+						th:href="@{/admin/category/list}"> <i class="material-icons">library_books</i>
+							<p>Category</p>
+					</a></li>
+					<li th:classappend="${#request.getRequestURI().startsWith('/admin/brand/') ? 'nav-item active' : 'nav-item'}">
+						<a class="nav-link"
+							th:href="@{/admin/brand/list}"> <i class="fas fa-star"></i>
+								<p>Brand</p>
+						</a></li>
+					<li th:classappend="${#request.getRequestURI().startsWith('/admin/log/') ? 'nav-item active' : 'nav-item'}">
+						<a class="nav-link"
+							th:href="@{/admin/log/list}"> <i class="fas fa-credit-card"></i>
+								<p>Payment Log</p>
+						</a></li>
+
+				</ul>
+			</div>
+		</div>
+	</th:block>
+</body>
+</html>

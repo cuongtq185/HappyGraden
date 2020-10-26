@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head th:fragment="head">
+
+    <title th:text="${title}"></title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" th:href="@{/static/bootstrap-4.5.0-dist/css/bootstrap.min.css}">
+
+    <link rel="stylesheet" th:href="@{/static/fontawesome-free-5.14.0-web/css/all.min.css}">
+    
+    <link rel="icon" 
+      type="image/png" 
+      th:href="@{/static/login-template/images/img-01.png}">
+    
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+	
+        /* Chrome, Safari, Opera */
+        * ::-webkit-scrollbar {
+            width: 0 !important;
+            height: 0 !important;
+        }
+
+        /* Firefox */
+        * {
+            overflow: -moz-scrollbars-none;
+        }
+
+        /* Internet Explorer */
+        * {
+            -ms-overflow-style: none;
+        }
+        
+        /* Chrome, Safari, Edge, Opera */
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+		}
+
+		/* Firefox */
+		input[type=number] {
+		  -moz-appearance: textfield;
+		}
+    </style>
+
+</head>
+
+<body>
+
+</body>
+
+</html>

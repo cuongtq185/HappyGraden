@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+
+</head>
+
+<body>
+	<th:block th:fragment="exisist-shop">
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="card">
+							<div class="card-header card-header-primary">
+								<h3 class="card-title">
+									Your shop exisist!
+								</h3>
+							</div>
+							<div class="card-body"
+								style="padding-left: 100px; padding-right: 100px">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="bmd-label-floating">You already have a shop!. Please check again!</label> 
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+
+	</th:block>
+</body>
+</html>

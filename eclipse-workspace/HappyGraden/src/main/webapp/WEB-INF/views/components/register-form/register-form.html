@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+
+<head th:fragment="head-form">
+    <meta th:name="_csrf" th:content="${_csrf.token}" />
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}" />
+</head>
+
+<body>
+
+
+    <th:block th:fragment="register-form">
+        <div class="limiter">
+            <div class="container-login100">
+                <div class="wrap-login100">
+                    <div class="login100-pic js-tilt" data-tilt>
+                        <img th:src="@{/static/login-template/images/img-01.png}" alt="IMG">
+                    </div>
+
+                    <div class="login100-form validate-form">
+                        <span class="login100-form-title"> REGISTER </span>
+
+                        <div class="wrap-input100 validate-input" data-validate="Username can't null!">
+                            <input id="addusername" class="input100" type="text" name="username" placeholder="Username">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100"> <i class="fa fa-user" aria-hidden="true"></i>
+                            </span>
+                        </div>
+
+                        <div class="wrap-input100 validate-input" data-validate="Password can't null!">
+                            <input id="addpassword" class="input100" type="password" name="password"
+                                placeholder="Password"> <span class="focus-input100"></span> <span
+                                class="symbol-input100">
+                                <i class="fa fa-lock" aria-hidden="true"></i>
+                            </span>
+                        </div>
+
+                        <div class="container-login100-form-btn">
+                            <button class="login100-form-btn" onclick="addAccount()">REGISTER</button>
+                        </div>
+
+                        <div class="text-center p-t-136">
+                            <a class="txt2" th:href="@{/login}"> Login with your account
+                                <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script th:inline="javascript">
+
+            let home = [[@{/}]];
+
+            if (home.slice(home.length - 1) == "/") {
+                home = home.slice(0, -1);
+            }
+
+            function addAccount() {
+                var token = $("meta[name='_csrf']").attr("content");
+                var header = $("meta[name='_csrf_header']").attr("content");
+
+                let newAccount = new Object();
+                newAccount.username = $("#addusername").val();
+                newAccount.password = $("#addpassword").val();
+
+
+                console.log(newAccount);
+                $.ajax({
+                    url: `${home}/register`,
+                    type: 'POST',
+
+
+                    dataType: "json",
+                    contentType: "application/json",
+
+
+                    data: JSON.stringify(newAccount),
+
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader(header, token);
+                    },
+
+                    success: function (data, status, xhr) {
+                        try {
+                            alert(data.msg);
+                            window.location.href = `${home}/login`;
+                        } catch (error) { }
+                    },
+                    error: function (request, status, error) {
+                        try {
+                            alert(request.responseJSON.msg);
+                        } catch (error) { }
+                    }
+                });
+
+            } 
+        </script>
+    </th:block>
+</body>
+
+</html>

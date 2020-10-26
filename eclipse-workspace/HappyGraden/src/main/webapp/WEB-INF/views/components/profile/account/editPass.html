@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+
+</head>
+
+<body>
+	<th:block th:fragment="editPass">
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="card">
+							<div class="card-header card-header-primary">
+								<h3 class="card-title">
+									Edit Password (ID: <span th:text="${current_account.id}"></span>)
+								</h3>
+							</div>
+								<div class="card-body"
+									style="padding-left: 100px; padding-right: 100px">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="bmd-label-floating">Old Password</label> <input
+													id="old-password" type="password" class="form-control"
+													name="old-password">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="bmd-label-floating">New Password</label> <input
+													type="password" id="new-pass" name="new-pass"
+													class="form-control">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="bmd-label-floating">Re New Password</label> <input
+													type="password" id="re-pass" name="re-pass"
+													class="form-control">
+												<div>
+													<p id="status" style="color: red"></p>
+													<p th:text="${result}" style="color: red"></p>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<button id="updatepass" onclick="editPass()" class="btn btn-primary pull-right">Update
+										Password</button>
+									<a th:href="@{/profile/myaccount?mode=edit}" class="btn btn-primary pull-right">Update
+										Profile</a>	
+									<div class="clearfix"></div>
+								</div>
+							<!-- <form style="padding-left: 100px; padding-right: 100px; margin-bottom: 20px" th:action="@{/profile/myaccount}"
+								th:object="${mymodelobject}" method="GET">
+								<input type="hidden" value="edit" name="mode" id="mode" />
+								<button type="submit" class="btn btn-primary pull-right">Update
+									Profile</button>
+							</form> -->
+						</div>
+					</div>
+					<div class="col-md-4">
+						<img alt="" src="">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script th:inline="javascript">	
+		
+		const account = [[${ current_account }]];
+		
+		$(document).ready(function(){
+			  $("#re-pass").focusin(function(){
+				  $("#status").text("");
+				  $("#updatepass").removeAttr('disabled');
+				  });
+			  $("#re-pass").focusout(function(){	  
+			    var rePass = $("#re-pass").val();
+			    var newPass = $("#new-pass").val();
+			        if(rePass != newPass){
+			        	$("#status").text("Your Password Incorrect!");
+			        	$("#updatepass").attr('disabled','disabled');
+			        }else{
+			        	$("#status").text("");
+			        	$("#updatepass").removeAttr('disabled');
+
+			        }
+			        
+			  });
+			});
+	
+		
+        function editPass() {
+		    console.log("Start edit");
+			console.log(account);
+		    account.password = $("#new-pass").val();
+			var old_password = $("#old-password").val();
+		    var token = $("meta[name='_csrf']").attr("content");
+		    var header = $("meta[name='_csrf_header']").attr("content");
+		    console.log(account)
+            Swal.fire({
+          	  title: 'Are you sure?',
+          	  html: 'Your password will be change! <br> You will not be able to revert this!',
+          	  icon: 'warning',
+          	  showCancelButton: true,
+          	  confirmButtonColor: '#3085d6',
+          	  cancelButtonColor: '#d33',
+          	  confirmButtonText: 'Yes, change it!'
+          	}).then((result) => {
+          		
+          	  if (result.value) {
+                  $.ajax({
+      		        type: "PUT",
+    		        url: `/password/${old_password}`,
+    		        dataType: "json",
+    		        contentType: "application/json",
+    		        data: JSON.stringify(account),
+    	
+    		        beforeSend: function (xhr) {
+    		            xhr.setRequestHeader(header, token);
+    		        },	
+
+	                    success: function (data, status, xhr) {
+	                    	//md.showAddProductNoti('bottom','right',data.msg)
+	                    //  
+							Swal.fire({
+	                    		  position: 'center',
+	                    		  icon: 'success',
+	                    		  title: 'Edit Password Success',
+	                    		  showConfirmButton: false,
+	                    		  timer: 1000
+		                    		}).then(()=>{
+		                    			window.location.href = window.location.href;
+		                    		}) 
+	                     },
+	                    error: function (request, status, error) {
+
+	                        try {
+	                            if (request.status == 405) {
+	                                window.location.href = `${home}/login`;
+	                            }
+	                            // console.log(request.status);
+	                            // console.log(status);
+	                            // console.log(error);
+	                            // window.location.href = `${home}/login`;
+	                        } catch (error) { }
+	                    }
+	                });
+          	  }
+          	})
+
+
+        }
+	
+
+		</script>
+
+	</th:block>
+</body>
+</html>

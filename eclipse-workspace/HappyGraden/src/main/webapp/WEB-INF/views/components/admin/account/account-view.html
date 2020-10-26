@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+
+</head>
+
+<body>
+	<th:block th:fragment="account-view">
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-7">
+						<div class="card">
+							<div class="card-header card-header-primary">
+								<h3 class="card-title">
+									Account-View (ID: <span th:text="${account.id}"></span>)
+								</h3>
+							</div>
+							<div class="card-body"
+								style="padding-left: 100px; padding-right: 100px">
+								<form action="" th:if="account != null" th:object="${account}">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+                                            <label class="bmd-label-floating">Username</label> <input
+                                                th:field="*{username}"
+												disabled type="text" class="form-control" name="username">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+                                            <label class="bmd-label-floating">Password</label> <input
+                                            th:field="*{password}"
+												disabled id="password" type="password" class="form-control"
+												name="password">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="bmd-label-floating">Email address 
+                                                <span style="color: red" id="email-stt"></span></label> 
+                                                <input
+                                                th:field="*{email}"
+                                                disabled
+												type="email" id="email" class="form-control"
+												>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+                                            <label class="bmd-label-floating">Phone <span style="color: red" id="phone-stt"></span></label> 
+                                            <input
+                                            th:field="*{phone}"
+                                            disabled id="phone" type="number" class="form-control"
+												>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+                                            <label class="bmd-label-floating">Full Name</label> <input
+                                            disabled
+                                            th:field="*{name}"
+												type="text" id="name" class="form-control"
+												>
+										</div>
+									</div>
+								</div>
+                                </form>
+							</div>
+						</div>
+                    </div>
+                    <div class="col-md-5" th:if="${shop !=null}">
+                        <div class="card">
+                            <div class="card-header card-header-icon card-header-rose">
+                              <div class="card-icon">
+                                <i class="material-icons">shop</i>
+                              </div>
+                            </div>
+                            <div class="card-body">
+                                <form action="" th:if="shop != null" th:object="${shop}">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating">Shop name</label> <input
+                                                    th:field="*{name}"
+                                                    disabled type="text" class="form-control" name="shopname">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating">Address</label> <input
+                                                th:field="*{address}"
+                                                    disabled id="AddressShop" 
+                                                    type="text" class="form-control"
+                                                    name="AddressShop">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating">Email address 
+                                                    <span style="color: red" id="email-stt"></span></label> 
+                                                    <input
+                                                    th:field="*{email}"
+                                                    disabled
+                                                    type="email" id="emailshop" class="form-control"
+                                                    >
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating">Phone <span style="color: red" id="phone-stt"></span></label> 
+                                                <input
+                                                th:field="*{phone}"
+                                                disabled id="phoneshop" type="number" class="form-control"
+                                                    >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="bmd-label-floating">Detail</label> <input
+                                                disabled
+                                                th:field="*{detail}"
+                                                    type="text" id="detail" class="form-control"
+                                                    >
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </form>
+                            </div>
+                        </div>
+                    </div>
+                
+				
+                </div>
+                
+    
+                
+			</div>
+		</div>
+
+		<script th:inline="javascript">
+            function clearFilter() {
+                window.location = '/admin/account/list'
+            }
+        </script>
+
+	</th:block>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head>
+</head>
+<body>
+	<th:block th:fragment="footer_index_template">
+		<!-- Brands Slider -->
+
+		<div class="newsletter">
+			<div class="container-fuild">
+				<div class="row">
+					<div class="col">
+						<div class="brands_slider_container">
+
+							<!-- Brands Slider -->
+
+							<div class="owl-carousel owl-theme brands_slider">
+
+								<div class="owl-item">
+									<div
+										class="brands_item d-flex flex-column justify-content-center">
+										<img th:src="@{/static/template/ontech/images/brands_1.jpg}" alt="">
+									</div>
+								</div>
+								<div class="owl-item">
+									<div
+										class="brands_item d-flex flex-column justify-content-center">
+										<img th:src="@{/static/template/ontech/images/brands_2.jpg}" alt="">
+									</div>
+								</div>
+								<div class="owl-item">
+									<div
+										class="brands_item d-flex flex-column justify-content-center">
+										<img th:src="@{/static/template/ontech/images/brands_3.jpg}" alt="">
+									</div>
+								</div>
+								<div class="owl-item">
+									<div
+										class="brands_item d-flex flex-column justify-content-center">
+										<img th:src="@{/static/template/ontech/images/brands_4.jpg}" alt="">
+									</div>
+								</div>
+								<div class="owl-item">
+									<div
+										class="brands_item d-flex flex-column justify-content-center">
+										<img th:src="@{/static/template/ontech/images/brands_5.jpg}" alt="">
+									</div>
+								</div>
+								<div class="owl-item">
+									<div
+										class="brands_item d-flex flex-column justify-content-center">
+										<img th:src="@{/static/template/ontech/images/brands_6.jpg}" alt="">
+									</div>
+								</div>
+								<div class="owl-item">
+									<div
+										class="brands_item d-flex flex-column justify-content-center">
+										<img th:src="@{/static/template/ontech/images/brands_7.jpg}" alt="">
+									</div>
+								</div>
+								<div class="owl-item">
+									<div
+										class="brands_item d-flex flex-column justify-content-center">
+										<img th:src="@{/static/template/ontech/images/brands_8.jpg}" alt="">
+									</div>
+								</div>
+
+							</div>
+
+							<!-- Brands Slider Navigation -->
+							<div class="brands_nav brands_prev">
+								<i class="fas fa-chevron-left"></i>
+							</div>
+							<div class="brands_nav brands_next">
+								<i class="fas fa-chevron-right"></i>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Footer -->
+
+		<footer class="footer">
+			<div class="container">
+				<div class="row">
+
+					<div class="col-lg-3 footer_col">
+						<div class="footer_column footer_contact">
+							<div class="logo_container">
+								<div class="logo">
+									<a href="#">P2PO</a>
+								</div>
+							</div>
+							<div class="footer_title">Got Question? Call Us 24/7</div>
+							<div class="footer_phone">(+84 28) 3 9295 666</div>
+							<div class="footer_contact_text">
+								<p style="position: static;">374 Vo Van Tan Street, </p>
+								<p style="position: static;">Ward 5, 3 District, HCM City, Vietnam.</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-2 offset-lg-2">
+						<div class="footer_column">
+							<div class="footer_title">GET SOCIAL WITH US</div>
+							<br>
+							<div class="footer_subtitle"><a style="font-size: 20px; color: #0e8ce4" href="#" ><i class="fab fa-facebook-square"></i> Facebook</a></div>
+							<div class="footer_subtitle"><a style="font-size: 20px; color: #0e8ce4 " href="#" ><i class="fab fa-instagram-square"></i> Instagram</a></div>
+							<div class="footer_subtitle"><a style="font-size: 20px; color: #0e8ce4" href="#" ><i class="fab fa-youtube-square"></i> Youtube</a></div>
+							<div class="footer_subtitle"><a style="font-size: 20px; color: #0e8ce4" href="#" ><i class="fab fa-twitter-square"></i> Twitter</a></div>
+						</div>
+					</div>
+
+					<div class="col-lg-2">
+						<div class="footer_column">
+						</div>
+					</div>
+
+					<div class="col-lg-2">
+						<div class="footer_column">
+							<div class="footer_title">PAYMENT WITH</div>
+							<ul class="footer_list">
+								<li><a href="#"><img style="height: 50px; width: 50px" th:src="@{/static/img/logo__momo.jpg}" alt="">Mobile Money</a></li>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</footer>
+
+		<!-- Copyright -->
+
+		<div class="copyright">
+			<div class="container">
+				<div class="row">
+					<div class="col">
+
+						<div
+							class="copyright_container d-flex flex-sm-row flex-column align-items-center justify-content-start">
+							<div class="copyright_content">
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+								Copyright &copy;
+								<script>
+									document.write(new Date().getFullYear());
+								</script>
+							<i
+									class="fa fa-heart" aria-hidden="true"></i> by <a
+									href="https://unit.com.vn/" target="_blank">UNIT INTERN</a>
+								<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+</body>
+</html>

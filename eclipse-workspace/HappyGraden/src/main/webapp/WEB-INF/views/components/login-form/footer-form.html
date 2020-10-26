@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head></head>
+
+<body>
+
+    <th:block th:fragment="footer-form">
+
+<!--===============================================================================================-->
+	<script th:src="@{/static/login-template/vendor/select2/select2.min.js}"></script>
+<!--===============================================================================================-->
+<script th:src="@{/static/login-template/vendor/tilt/tilt.jquery.min.js}"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script th:src="@{/static/login-template/js/main.js}"></script>
+    </th:block>
+
+</body>
+
+</html>

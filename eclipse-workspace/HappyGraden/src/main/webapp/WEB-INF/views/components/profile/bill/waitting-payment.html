@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head></head>
+
+<body>
+	<th:block th:fragment="waitting-payment">
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card">
+
+							<div class="card-header card-header-primary">
+                                <h4 class="card-title ">Waitting Payment List</h4>
+                                <div th:replace="components\profile\bill\head-nav-bill-table :: head-nav-bill-table"></div>
+
+							</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table">
+											<thead class=" text-primary">
+											<th>ID</th>
+											
+											<th>Shop Name</th>
+											<th>Shop Phone</th>
+											<th>Shop Email</th>
+											<th>Shiping Address</th>
+											<th>Total Price</th>
+											<th>Create Day</th>
+											<th class="text-center">Action</th>
+										</thead>
+										<tbody>
+
+									<tr th:if="${!bills.empty or bills != null}"
+												th:each="bill, i : ${bills}">
+												<td><span th:text="${bill.id}"></span></td>
+												<td><span th:text="${bill.shopName}"></span></td>
+												<td><span th:text="${bill.shopPhone}"></span></td>
+												<td><span th:text="${bill.shopEmail}"></span></td>
+												<td><span th:text="${bill.shippingAdd}"></span></td>
+												<td><span th:inline="text">$ [[${#numbers.formatDecimal(bill.totalPrice, 0, 'COMMA', 0, 'POINT')}]]</span></td>
+												<td><span th:text=" ${bill.createAt} ? ${#dates.format(bill.createAt, 'dd-MM-yyyy HH:mm')} "></span></td>
+												<td class="text-center"><span> 
+												<a th:href="@{'/profile/mybills/' + ${bill.id}}" type="button"
+														class="btn btn-large btn-info btn-just-icon"> 
+														<i class="fa fa-eye"></i>
+													</a>
+												</span> 
+												</tr> 
+										</tbody>
+									</table>
+									<div th:if="${pageable.totalPages > 0}" style="display: flex; align-items: center;">
+										<div class="btn-group">
+											<button type="button" style="background-color: #2196f3"
+												class="btn btn-sm btn-default" th:text="${pageable.limit}"></button>
+											<button type="button" style="background-color: #2196f3"
+												class="btn btn-default dropdown-toggle dropdown-toggle-split"
+												data-toggle="dropdown" aria-haspopup="true"
+												aria-expanded="false">
+												<span class="sr-only">Toggle Dropdown</span>
+											</button>
+											<div class="dropdown-menu">
+												<a class="dropdown-item"
+													th:href="@{/profile/mybills/waiting-payment(limit=${10}, page=${1}) }">10</a>
+												<a class="dropdown-item"
+													th:href="@{/profile/mybills/waiting-payment(limit=${25}, page=${1})}">25</a>
+												<a class="dropdown-item"
+													th:href="@{/profile/mybills/waiting-payment(limit=${50}, page=${1})}">50</a>
+											</div>
+										</div>
+										<nav  class="pagination">
+											<ul class="pagination" style="margin-bottom: 0px;">
+												<li
+													th:class="${pageable.preMaxPage > 0} ? 'page-item ' : 'page-item disabled'">
+													<a class="page-link" th:with="result=${ pageable.page - 1}"
+													th:href="@{/profile/mybills/waiting-payment(limit=${pageable.limit}, page=${result})}">Previous</a>
+												</li>
+												<input type="hidden" name="" id="input" class="form-control" value="">
+												<li th:each="item : ${pageable.items}"
+													th:class="${item.current == true} ? 'page-item active' : 'page-item'">
+													<!--  --> <a
+													th:href="@{/profile/mybills/waiting-payment(limit=${pageable.limit}, page=${item.number})}"
+													class="page-link" th:text="${item.number}"> </a>
+												</li>
+												<li
+													th:class="${pageable.nextMaxPage > 0} ? 'page-item ' : 'page-item disabled'">
+													<a class="page-link" th:with="result=${ pageable.page + 1}"
+													th:href="@{/profile/mybills/waiting-payment(limit=${pageable.limit}, page=${result})}">Next</a>
+												</li>
+											</ul>
+										</nav>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- 	<script th:inline="javascript">
+        const account = [[${ bills }]]
+        console.log([[${ pageable }]])
+      </script> -->
+	</th:block>
+
+</body>
+
+</html>

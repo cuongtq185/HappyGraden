@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head></head>
+
+<body>
+	<th:block th:fragment="account-add">
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header card-header-primary">
+								<h4 class="card-title ">Account Add</h4>
+							</div>
+							<div class="card-body">
+								<form method="POST" role="form">
+
+									<div class="form-group row">
+										
+										<div class="col-sm-10">
+											<input type="text" class="form-control"
+												id="addAccountUsername" placeholder="Enter your username" />
+										</div>
+									</div>
+
+									<div class="form-group row">
+										
+										<div class="col-sm-10">
+											<input type="password" class="form-control"
+												id="addAccountPassword" placeholder="Enter your password" />
+										</div>
+									</div>
+									<div class="card-footer"
+										style="display: flex; flex-direction: row; justify-content: flex-end;">
+										<button 
+											type="button" 
+											onClick="AddAccount()" 
+											class="btn btn-success ">Save <i class="fas fa-save"></i></button>
+										
+										<a th:href="@{/admin/account/list}" type="button"
+											class="btn btn-danger"> Return <i
+											class="fas fa-sign-out-alt"></i>
+										</a>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+	</th:block>
+</body>
+
+</html>

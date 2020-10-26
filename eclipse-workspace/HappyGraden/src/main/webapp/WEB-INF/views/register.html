@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+    <th:block th:include="layout/head :: head"></th:block>
+    <th:block th:include="components/login-form/head-form :: head-form"></th:block>
+    <th:block th:include="components/register-form/register-form :: head-form"></th:block>
+</head>
+
+<body>
+
+
+    <!-- <div th:replace="layout/nav :: nav"></div> -->
+    <div th:replace="layout/footer :: footer"></div>
+    <div th:replace="components/login-form/footer-form :: footer-form"></div>
+    <div th:replace="components/register-form/register-form :: register-form"></div> 
+
+
+
+
+
+</body>
+
+</html>

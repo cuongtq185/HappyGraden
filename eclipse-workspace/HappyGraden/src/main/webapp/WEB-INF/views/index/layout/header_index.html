@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+
+</head>
+
+<body>
+
+    <th:block th:fragment="header_index">
+        <!-- Header -->
+
+        <header class="header">
+
+            <!-- Top Bar -->
+
+            <div class="top_bar">
+                <div class="container">
+                    <div class="row">
+                        <div class="col d-flex flex-row">
+	                        <div class="top_bar_contact_item"><div class="top_bar_icon"><img th:src="@{/static/template/ontech/images/phone.png}" alt=""></div>+84 068 068 0068</div>
+							<div class="top_bar_contact_item"><div class="top_bar_icon"><img th:src="@{/static/template/ontech/images/mail.png}" alt=""></div><a href="mailto:p2po@gmail.com">p2po@gmail.com</a></div>
+                            <div class="top_bar_content ml-auto">
+                                <div class="top_bar_user">
+
+                                    <th:block sec:authorize="!isAuthenticated()">
+
+                                        <div class="user_icon">
+                                            <img th:src="@{/static/index-template/images/user.svg}" 
+                                            
+                                            alt="">
+                                        </div>
+                                        <div>
+                                            <a href="/login">Login</a>
+                                        </div>
+                                        <div class="horizontal-divider">
+                                            <a href="">|</a>
+                                        </div>
+                                        <div>
+                                            <a href="/register">Register</a>
+                                        </div>
+                                      
+
+                                    </th:block>
+
+
+                                    <th:block sec:authorize="isAuthenticated()">
+                                        
+                                        <div class="top_bar_menu">
+                                            <ul class="standard_dropdown top_bar_dropdown">
+                                                <li class="p-0"><a href="#">
+                                                        <div style="margin-right: 7px; margin-left: 13px;">
+                                                            <span
+                                                                style="font-size: 16px; font-weight: 300; line-height: 56px; color: #000; -webkit-transition: all 200ms ease; -moz-transition: all 200ms ease; -ms-transition: all 200ms ease; -o-transition: all 200ms ease; transition: all 200ms ease;">
+                                                                <!-- Hi, <span sec:authentication="name"></span> -->
+                                                                Hi, <span th:text="${#authentication.name}"></span>
+                                                            </span>
+                                                        </div>
+                                                        <div class="user_icon">
+                                                            <img th:src="@{/static/index-template/images/user.svg}"
+                                                                alt="">
+                                                        </div> <i class="fas fa-chevron-down"></i>
+                                                    </a>
+                                                    <ul>
+                                                        <li sec:authorize="hasRole('ROLE_ADMIN')" style="height: 35px;">
+                                                            <a href="/admin/home" style="line-height: 35px;">Admin Page</a>
+                                                        </li>
+                                                        <li sec:authorize="isAuthenticated()" style="height: 35px;">
+                                                            <a href="/profile/home" style="line-height: 35px;">My Profile</a>
+                                                        </li>
+                                                        <li sec:authorize="hasRole('ROLE_VENDOR')" style="height: 35px;">
+                                                            <a href="/shop/home" style="line-height: 35px;">My Shop</a>
+                                                        </li>
+
+                                                        <li sec:authorize="isAuthenticated()" style="height: 35px;">
+                                                            <a href="/logout" style="line-height: 35px;">Log out</a></li>
+                                                        <li sec:authorize="!isAuthenticated()" style="height: 35px;">
+                                                            <a href="/login" style="line-height: 35px;">Login</a>
+                                                        </li>
+
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </th:block>
+
+                                    <!-- <div class="nav-item dropdown" sec:authorize="isAuthenticated()">
+                                        <a class="nav-link" href="javascript:;" id="navbarDropdownProfile"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="material-icons">person</i></a>
+
+                                        <div class="dropdown-menu dropdown-menu-right"
+                                            aria-labelledby="navbarDropdownProfile">
+
+                                            <th:block sec:authorize="hasRole('ROLE_ADMIN')"><a class="dropdown-item"
+                                                    href="/admin/home">Admin Page</a></th:block>
+                                            <th:block sec:authorize="isAuthenticated()"><a class="dropdown-item"
+                                                    href="/profile/home">My Profile</a></th:block>
+                                            <th:block sec:authorize="hasRole('ROLE_VENDOR')"><a class="dropdown-item"
+                                                    href="/shop/home">My Shop</a></th:block>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" sec:authorize="isAuthenticated()"
+                                                href="/logout">Log out</a>
+                                            <th:block sec:authorize="!isAuthenticated()"><a class="dropdown-item"
+                                                    href="/login">Login</a></th:block>
+                                        </div>
+                                    </div> -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Header Main -->
+
+            <div class="header_main">
+                <div class="container">
+                    <div class="row">
+
+                        <!-- Logo -->
+                        <div class="col-lg-2 col-sm-3 col-3 order-1">
+                            <div class="logo_container">
+                                <div class="logo">
+                                    <a th:href="@{/}">P2PO</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Search -->
+                        <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
+                            <div class="header_search">
+                                <div class="header_search_content">
+                                    <div class="header_search_form_container">
+                                    
+                                        <form id="search-form" autocomplete="off" target="_blank" th:action="@{/product-by-search}" class="header_search_form clearfix">
+                                            <input id="searchBox"name="name" required="required" class="header_search_input"
+                                                placeholder="Search for products..." >
+                                            
+                                            <div class="custom_dropdown">
+                                                <div class="custom_dropdown_list">
+                                                    <span class="custom_dropdown_placeholder clc">All
+                                                        Categories</span> <i class="fas fa-chevron-down"></i>
+                                                    <ul class="custom_list clc">
+                                                    	<li><a class="clc" href="#"> All Category</a></li>
+                                                    	<th:block th:each="category : ${categories}">
+                                                    	
+                                                    	<li><a class="clc" href="#" th:text="${category.name}"></a></li>
+                                       					
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <!-- <button type="submit" class="header_search_button trans_300" value="Submit" onclick="clearSearch()">
+                                                <img th:src="@{/static/index-template/images/search.png}" alt="">
+                                            </button> -->
+                                            
+                                        </form>
+                                        <div id="result-items">
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Cart -->
+                        <div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
+                            <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
+                            
+                            	<div class="wishlist d-flex flex-row align-items-center justify-content-end">
+									<div class="wishlist_icon"><img th:src="@{/static/template/ontech/images/heart.png}" alt=""></div>
+									<div class="wishlist_content">
+										<div class="wishlist_text"><a href="#">Wishlist</a></div>
+										<div class="wishlist_count">115</div>
+									</div>
+								</div>
+
+                                <div class="cart" th:onclick="window.location=[[@{/cart}]];">
+                                    <div class="cart_container d-flex flex-row align-items-center justify-content-end">
+                                        <div class="cart_icon">
+                                            <img th:src="@{/static/index-template/images/cart.png}" alt="">
+                                            <div class="cart_count">
+                                                
+                                                <span id="count" th:text="${total_cart_item}">0</span>
+                                            </div>
+                                        </div>
+                                        <div class="cart_content">
+                                            <div class="cart_text">
+                                                <a th:href="@{/cart}">Cart</a>
+                                              
+                                            </div>
+                                            <div class="cart_price">
+                                            $<span id="total" th:text="${total_price}">0</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </header>
+    
+
+    </th:block>
+
+</body>
+
+</html>

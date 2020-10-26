@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+
+<th:block th:include="layout/head :: head"></th:block>
+<th:block th:include="index/layout/index-head :: index-head"></th:block>
+
+
+<link rel="stylesheet" type="text/css"
+	th:href="@{static/template/ontech/styles/shop_styles.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{static/template/ontech/styles/shop_responsive.css}">
+</head>
+
+<body>
+
+
+	<div class="super_container">
+
+		<div th:replace="index/layout/header_index :: header_index"></div>
+
+
+		<div th:replace="index/search/product-by-category :: product-by-category"></div>
+
+
+		<div th:replace="index/layout/footer_index_template :: footer_index_template"></div>
+
+	</div>
+	
+	<th:block th:replace="layout/footer :: footer"></th:block>
+	<th:block th:replace="index/layout/index-footer :: index-footer"></th:block>
+		
+
+</body>
+</html>

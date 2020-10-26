@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head></head>
+
+<body>
+	<th:block th:fragment="log-table">
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card">
+
+							<div class="card-header card-header-primary">
+								<h4 class="card-title ">Payment Log Table</h4>
+
+							</div>
+							<div class="card-body">
+								<div class="table-responsive">
+									<table class="table">
+										<thead class=" text-primary">
+											<th>ID</th>
+											<th>Log</th>
+											<th>Type</th>
+											<th>Author</th>
+											<th style="white-space: nowrap">Create Date</th>
+										</thead>
+										<tbody>
+											<tr th:if="${!logs.empty or logs != null}" th:each="log, i : ${logs}">
+												<td><span
+														th:text="${i.count+(pageable.limit*(pageable.page -1))}"></span>
+												</td>
+												<td><span th:text="${log.log}"></span></td>
+												<td><span th:text="${log.type}"></span></td>
+												<td><span th:text="${log.author}"></span></td>
+												<td><span style="white-space: nowrap" th:text=" ${log.createAt} ? ${#dates.format(log.createAt, 'hh:mm:ss dd-MM-yyyy')} "></span></td>
+										</tr> 
+ 							</tbody>
+									</table>
+									 <div th:if="${pageable.totalPages > 0}" style="display: flex; align-items: center;">
+										<div class="btn-group">
+											<button type="button" style="background-color: #2196f3"
+												class="btn btn-sm btn-default" th:text="${pageable.limit}"></button>
+											<button type="button" style="background-color: #2196f3"
+												class="btn btn-default dropdown-toggle dropdown-toggle-split"
+												data-toggle="dropdown" aria-haspopup="true"
+												aria-expanded="false">
+												<span class="sr-only">Toggle Dropdown</span>
+											</button>
+											<div class="dropdown-menu">
+												<a class="dropdown-item"
+													th:href="@{/admin/log/list(limit=${10}, page=${1})}">10</a>
+												<a class="dropdown-item"
+													th:href="@{/admin/log/list(limit=${25}, page=${1})}">25</a>
+												<a class="dropdown-item"
+													th:href="@{/admin/log/list(limit=${50}, page=${1})}">50</a>
+											</div>
+										</div>
+										<nav  class="pagination">
+											<ul class="pagination" style="margin-bottom: 0px;">
+												<li
+													th:class="${pageable.preMaxPage > 0} ? 'page-item ' : 'page-item disabled'">
+													<a class="page-link" th:with="result=${ pageable.page - 1}"
+													th:href="@{/admin/log/list(limit=${pageable.limit}, page=${result})}">Previous</a>
+												</li>
+
+												<li th:each="item : ${pageable.items}"
+													th:class="${item.current == true} ? 'page-item active' : 'page-item'">
+													 <a
+													th:href="@{/admin/log/list(limit=${pageable.limit}, page=${item.number})}"
+													class="page-link" th:text="${item.number}"> </a>
+												</li>
+												<li
+													th:class="${pageable.nextMaxPage > 0} ? 'page-item ' : 'page-item disabled'">
+													<a class="page-link" th:with="result=${ pageable.page + 1}"
+													th:href="@{/admin/log/list(limit=${pageable.limit}, page=${result})}">Next</a>
+												</li>
+											</ul>
+										</nav>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<script th:inline="javascript">
+				const logs = [[${ logs }]]
+				console.log([[${ logs }]])
+			</script>
+	</th:block>
+
+</body>
+
+</html>

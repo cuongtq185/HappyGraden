@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head></head>
+
+<body>
+	<th:block th:fragment="billItem">
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card">
+
+							<div class="card-header card-header-primary">
+								<h4 class="card-title ">All Bill Item of Bill </h4>
+                                <div><button class="btn btn-danger" onclick='javascript:window.history.back()' type="button"><i class="fas fa-backward"></i> &nbsp Back</button></div> 
+							</div>
+							<div class="card-body">
+								<div class="container-fluid d-flex justify-content-center">
+                                <div class="card card-1">
+                                    <div class="card-header bg-white">
+                                        <div class="media flex-sm-row flex-column-reverse justify-content-between ">
+                                            <div class="col my-auto">
+                                                <h4 class="mb-0">Thanks for your Order
+                                                    <span class="change-color" th:if="${current_account.name != ''}" th:text="${','+current_account.name}">Anjali</span> !</h4>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row justify-content-between mb-3">
+                                            <div class="col-auto">
+                                                <h6 style="cursor: pointer;" class="color-1 mb-0 change-color" th:if="${bill != null}"  >Receipt</h6>
+                                            </div>
+                                            <div class="col-auto "> Order :  <span th:text="${bill_id}"></span> </div>
+                                        </div>
+                                        <div th:if="${!billItems.empty or billItems != null}" th:each="item, i : ${billItems}" class="row" th:onclick="window.location=[[@{/product/__${item.product}__}]]">
+                                            <div class="col">
+                                                <div class="card card-2">
+                                                    <div class="card-body">
+
+                                          
+                                                        <div style="cursor: pointer;" class="media">
+                                                            <div class="sq align-self-center "> 
+                                                                <img class="img-fluid my-auto align-self-center mr-2 mr-md-4 pl-0 p-0 m-0" 
+                                                                th:src="${item.img}" width="135" height="135" /> </div>
+                                                            <div class="media-body my-auto text-right">
+                                                                <div class="row my-auto flex-column flex-md-row">
+                                                                    <div class="col my-auto">
+                                                                        <h6 class="mb-0" th:text="${item.productName}"></h6>
+                                                                    </div>
+                                                                    <div class="col-auto my-auto"> <small th:text="${item.brandName}">brandname </small></div>
+                                                                    <div class="col my-auto"> 
+                                                                        <small>Qty : <span th:text="${item.quantity}"></span></small>
+                                                                    </div>
+                                                                    <div class="col my-auto"> 
+                                                                        <small>Price : <span th:inline="text">$ [[${#numbers.formatDecimal(item.price, 0, 'COMMA', 0, 'POINT')}]]</span></small>
+                                                                    </div>
+                                                                    <div class="col my-auto">
+                                                                        <h6 class="mb-0"><span th:inline="text">$ [[${#numbers.formatDecimal(item.total, 0, 'COMMA', 0, 'POINT')}]]</span></h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <hr class="my-3 ">
+                                            
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                       
+                                  
+                                       
+                                       <div class="row">
+                                           <div class="col-xs- col-sm- col-md- col-lg-">
+                                            <p class="mb-1 text-dark"><b>Order Details</b></p>
+                                           </div>
+                                       </div>
+                                       
+                                       <div class="row">
+                                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                            <span class="mb-1"><b>Total: </b></span>
+                                            <span th:inline="text" th:text="'$'+ ${#numbers.formatDecimal(bill.totalPrice, 0, 'COMMA', 0, 'POINT')}"></span>
+                                           </div>
+                                       </div>
+                                       <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                         <span class="mb-1"><b>Shipping address: </b></span>
+                                         <span class="mb-1" th:text="${bill.shippingAdd}"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                         <span class="mb-1"><b>Payment: </b></span>
+                                         <span class="mb-1" th:if="${bill.payment > 0 }" th:text="${'Paid'}"></span>
+                                         <span class="mb-1" th:if="${bill.payment == 0 }" th:text="${'Waitting'}"></span>
+                                         <span class="mb-1" th:if="${bill.payment < 0 }" th:text="${'Error'}"></span>                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                         <span class="mb-1"><b>status: </b></span>
+                                         <span class="mb-1" th:if="${bill.status == 0 }" th:text="${'Waitting confirm'}"></span>
+                                         <span class="mb-1" th:if="${bill.status == 1 }" th:text="${'Approve'}"></span>
+                                         <span class="mb-1" th:if="${bill.status == 2 }" th:text="${'Deny'}"></span>
+                                         <span class="mb-1" th:if="${bill.status == 3 }" th:text="${'Complete'}"></span>
+                                         <span class="mb-1" th:if="${bill.status == 4 }" th:text="${'Cancel'}"></span>                                        </div>
+                                    </div>
+                                    </div>
+                                    
+                                </div>
+                                </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<script th:inline="javascript">
+        const account = [[${ billItems }]]
+        console.log([[${ billItems }]])
+      </script>
+	</th:block>
+
+</body>
+
+</html>

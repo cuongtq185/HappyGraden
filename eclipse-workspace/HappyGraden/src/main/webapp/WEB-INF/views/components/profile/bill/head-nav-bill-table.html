@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head></head>
+
+<body>
+	<th:block th:fragment="head-nav-bill-table">
+
+		<div class="card card-nav-tabs card-plain">
+			<div class="card-header card-header-cutstom-bill ">
+				<!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
+				<div class="nav-tabs-navigation">
+					<div class="nav-tabs-wrapper">
+						<ul class="nav nav-tabs" data-tabs="tabs">
+							<li class="nav-item"><a
+								th:classappend="${#request.getRequestURI().startsWith('/profile/mybills/waiting-payment') ? 'nav-item nav-link active' : 'nav-item nav-link' }"
+								th:href="@{/profile/mybills/waiting-payment}">Waiting
+									Payment</a></li>
+							<li class="nav-item"><a
+								th:classappend="${#request.getRequestURI().startsWith('/profile/mybills/waiting-confirm') ? 'nav-item nav-link active' : 'nav-item nav-link' }"
+								th:href="@{/profile/mybills/waiting-confirm}">Waiting
+									Confirm</a></li>
+							<li class="nav-item"><a
+								th:classappend="${#request.getRequestURI().startsWith('/profile/mybills/confirm') ? 'nav-item nav-link active' : 'nav-item nav-link' }"
+								th:href="@{/profile/mybills/confirm}">Confirm List</a></li>
+							<li class="nav-item"><a
+								th:classappend="${#request.getRequestURI().startsWith('/profile/mybills/deny') ? 'nav-item nav-link active' : 'nav-item nav-link' }"
+								th:href="@{/profile/mybills/deny}">Deny List</a></li>
+							<li class="nav-item"><a
+								th:classappend="${#request.getRequestURI().startsWith('/profile/mybills/error-payment') ? 'nav-item nav-link active' : 'nav-item nav-link' }"
+								th:href="@{/profile/mybills/error-payment}">Error Payment</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</th:block>
+
+</body>
+
+</html>

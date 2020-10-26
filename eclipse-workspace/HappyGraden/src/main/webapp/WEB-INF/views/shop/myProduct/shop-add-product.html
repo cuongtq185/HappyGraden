@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+    <th:block th:include="admin/layout/head :: head"></th:block>
+    <style>
+    .bmd-form-group label {
+    color:red;
+    }
+    .form-check, label {
+    color:red;
+    }
+    </style>
+</head>
+
+<body>
+  <div class="wrapper ">
+        
+    <div th:replace="shop/layout/leftNavShop :: leftNavShop"></div> 
+    
+    <div class="main-panel">
+      <!-- Navbar -->
+     	<div th:replace="admin/layout/HeadNavAdmin :: headNavAdmin"></div> 
+      <!-- End Navbar -->
+       <!-- content -->
+        <div th:replace="components/shop/myProduct/shop-add-product :: shop-add-product"></div> 
+        <!-- End content -->
+        <div th:replace="admin/layout/footerAdmin :: footerAdmin"></div> 
+    </div>
+  </div>
+  
+    <th:block th:replace="admin/layout/footer :: footer"></th:block>
+	    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js" type="text/javascript"></script>
+<script>
+
+
+$().ready(function() {
+	$("#add-product").validate({
+		onfocusout: false,
+		onkeyup: false,
+		onclick: false,
+		rules: {
+			"name": {
+				required: true
+			},
+			"price": {
+				required: true,
+				min: 1
+			},
+			"quantity": {
+				required: true,
+				min: 1
+			},
+			"details": {
+				required: true
+			},
+			"file": {
+				 required: true
+			},
+		},
+		messages: {
+			"name": {
+				required: "Product name can't be null!"
+			},
+			"price": {
+				required: "Product price can't be null!",
+				min: "Product price must be > 0"
+			},
+			"quantity": {
+				required: "Product quantity can't be null!",
+				min: "Product quantity must be > 0"
+			},
+			"details": {
+				required: "Product details can't be null!"
+			},
+			"file": {
+				required: "Product img can't be null!"
+			},
+		}
+	});
+})
+	
+
+/* $(document).ready(function(){
+	  $("#quantity").focusin(function(){
+		  $("#quantity-stt").text("");
+		  $('input[type="submit"]').attr('disabled','disabled');
+		  });
+	  $("#quantity").focusout(function(){	  
+	    var price = $("#quantity").val();
+	        if(price <= 0){
+	        	$("#quantity-stt").text("Quantity must be > 0");
+	        	$('input[type="submit"]').attr('disabled','disabled');
+	        }else{
+	        	$("#quantity-stt").text("");
+	        	$('input[type="submit"]').removeAttr('disabled');
+
+	        }
+	        
+	  });
+	});
+
+$(document).ready(function(){
+	  $("#price").focusin(function(){
+		  $("#price-stt").text("");
+		  $('input[type="submit"]').attr('disabled','disabled');
+		  });
+	  $("#price").focusout(function(){	  
+	    var price = $("#price").val();
+	        if(price <= 0){
+	        	$("#price-stt").text("Price must be > 0");
+	        	$('input[type="submit"]').attr('disabled','disabled');
+	        }else{
+	        	$("#price-stt").text("");
+	        	$('input[type="submit"]').removeAttr('disabled');
+
+	        }
+	        
+	  });
+	}); */
+
+    $(document).ready(function() {
+      $().ready(function() {
+        $sidebar = $('.sidebar');
+
+        $sidebar_img_container = $sidebar.find('.sidebar-background');
+
+        $full_page = $('.full-page');
+
+        $sidebar_responsive = $('body > .navbar-collapse');
+
+        window_width = $(window).width();
+
+        fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+
+        if (window_width > 767 && fixed_plugin_open == 'Dashboard') {
+          if ($('.fixed-plugin .dropdown').hasClass('show-dropdown')) {
+            $('.fixed-plugin .dropdown').addClass('open');
+          }
+
+        }
+
+        $('.fixed-plugin a').click(function(event) {
+          // Alex if we click on switch, stop propagation of the event, so the dropdown will not be hide, otherwise we set the  section active
+          if ($(this).hasClass('switch-trigger')) {
+            if (event.stopPropagation) {
+              event.stopPropagation();
+            } else if (window.event) {
+              window.event.cancelBubble = true;
+            }
+          }
+        });
+
+        $('.fixed-plugin .active-color span').click(function() {
+          $full_page_background = $('.full-page-background');
+
+          $(this).siblings().removeClass('active');
+          $(this).addClass('active');
+
+          var new_color = $(this).data('color');
+
+          if ($sidebar.length != 0) {
+            $sidebar.attr('data-color', new_color);
+          }
+
+          if ($full_page.length != 0) {
+            $full_page.attr('filter-color', new_color);
+          }
+
+          if ($sidebar_responsive.length != 0) {
+            $sidebar_responsive.attr('data-color', new_color);
+          }
+        });
+
+        $('.fixed-plugin .background-color .badge').click(function() {
+          $(this).siblings().removeClass('active');
+          $(this).addClass('active');
+
+          var new_color = $(this).data('background-color');
+
+          if ($sidebar.length != 0) {
+            $sidebar.attr('data-background-color', new_color);
+          }
+        });
+
+        $('.fixed-plugin .img-holder').click(function() {
+          $full_page_background = $('.full-page-background');
+
+          $(this).parent('li').siblings().removeClass('active');
+          $(this).parent('li').addClass('active');
+
+
+          var new_image = $(this).find("img").attr('src');
+
+          if ($sidebar_img_container.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+            $sidebar_img_container.fadeOut('fast', function() {
+              $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+              $sidebar_img_container.fadeIn('fast');
+            });
+          }
+
+          if ($full_page_background.length != 0 && $('.switch-sidebar-image input:checked').length != 0) {
+            var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+            $full_page_background.fadeOut('fast', function() {
+              $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+              $full_page_background.fadeIn('fast');
+            });
+          }
+
+          if ($('.switch-sidebar-image input:checked').length == 0) {
+            var new_image = $('.fixed-plugin li.active .img-holder').find("img").attr('src');
+            var new_image_full_page = $('.fixed-plugin li.active .img-holder').find('img').data('src');
+
+            $sidebar_img_container.css('background-image', 'url("' + new_image + '")');
+            $full_page_background.css('background-image', 'url("' + new_image_full_page + '")');
+          }
+
+          if ($sidebar_responsive.length != 0) {
+            $sidebar_responsive.css('background-image', 'url("' + new_image + '")');
+          }
+        });
+
+        $('.switch-sidebar-image input').change(function() {
+          $full_page_background = $('.full-page-background');
+
+          $input = $(this);
+
+          if ($input.is(':checked')) {
+            if ($sidebar_img_container.length != 0) {
+              $sidebar_img_container.fadeIn('fast');
+              $sidebar.attr('data-image', '#');
+            }
+
+            if ($full_page_background.length != 0) {
+              $full_page_background.fadeIn('fast');
+              $full_page.attr('data-image', '#');
+            }
+
+            background_image = true;
+          } else {
+            if ($sidebar_img_container.length != 0) {
+              $sidebar.removeAttr('data-image');
+              $sidebar_img_container.fadeOut('fast');
+            }
+
+            if ($full_page_background.length != 0) {
+              $full_page.removeAttr('data-image', '#');
+              $full_page_background.fadeOut('fast');
+            }
+
+            background_image = false;
+          }
+        });
+
+        $('.switch-sidebar-mini input').change(function() {
+          $body = $('body');
+
+          $input = $(this);
+
+          if (md.misc.sidebar_mini_active == true) {
+            $('body').removeClass('sidebar-mini');
+            md.misc.sidebar_mini_active = false;
+
+            $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar();
+
+          } else {
+
+            $('.sidebar .sidebar-wrapper, .main-panel').perfectScrollbar('destroy');
+
+            setTimeout(function() {
+              $('body').addClass('sidebar-mini');
+
+              md.misc.sidebar_mini_active = true;
+            }, 300);
+          }
+
+          // we simulate the window Resize so the charts will get updated in realtime.
+          var simulateWindowResize = setInterval(function() {
+            window.dispatchEvent(new Event('resize'));
+          }, 180);
+
+          // we stop the simulation of Window Resize after the animations are completed
+          setTimeout(function() {
+            clearInterval(simulateWindowResize);
+          }, 1000);
+
+        });
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+      // Javascript method's body can be found in assets/js/demos.js
+      md.initDashboardPageCharts();
+
+    });
+  </script>
+</body>
+</html>

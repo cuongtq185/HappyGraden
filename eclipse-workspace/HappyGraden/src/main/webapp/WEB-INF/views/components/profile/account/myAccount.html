@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+
+</head>
+
+<body>
+	<th:block th:fragment="account-table">
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="card">
+							<div class="card-header card-header-primary">
+								<h3 class="card-title">
+									Edit Your Account (ID: <span th:text="${current_account.id}"></span>)
+								</h3>
+							</div>
+							<div class="card-body"
+								style="padding-left: 100px; padding-right: 100px">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="bmd-label-floating">Username</label> <input
+												disabled type="text" class="form-control" name="username"
+												th:value="${current_account.username}">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="bmd-label-floating">Password</label> <input
+												disabled id="password" type="password" class="form-control"
+												name="password" th:value="${current_account.password}">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="bmd-label-floating">Email address <span style="color: red" id="email-stt"></span></label> <input
+												type="email" id="email" class="form-control"
+												th:value="${current_account.email}">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="bmd-label-floating">Phone <span style="color: red" id="phone-stt"></span></label> <input
+												id="phone" type="number" class="form-control"
+												th:value="${current_account.phone}">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label class="bmd-label-floating">Full Name</label> <input
+												type="text" id="name" class="form-control"
+												th:value="${current_account.name}">
+										</div>
+									</div>
+								</div>
+								<button id="update-btn" th:onclick="editAccount()"
+									class="btn btn-primary pull-right">Update Profile</button>
+									<a th:href="@{/profile/myaccount?mode=editPass}" class="btn btn-primary pull-right">Update
+										Password</a>	
+								<!-- <form th:action="@{/profile/myaccount}" th:object="${mymodelobject}" method="GET">
+								<input type="hidden" value="editPass" name="mode" id="mode" />
+								<button type="submit"
+									class="btn btn-primary pull-right">Update Password</button>
+								</form> -->
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<img alt="" src="">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<script th:inline="javascript">	
+		
+
+
+		const account = [[${ current_account }]];
+
+	
+		function editAccount() {
+		    console.log("Start edit");
+			console.log(account);
+		    account.phone = $("#phone").val();
+		    account.email = $("#email").val();
+		    account.name = $("#name").val();
+	
+		    var token = $("meta[name='_csrf']").attr("content");
+		    var header = $("meta[name='_csrf_header']").attr("content");
+		    
+		    console.log(token)
+		    console.log(header)
+		    
+		    console.log(account)
+	
+ 		     $.ajax({
+		        type: "PUT",
+		        url: `/account`,
+		        dataType: "json",
+		        contentType: "application/json",
+		        data: JSON.stringify(account),
+	
+		        beforeSend: function (xhr) {
+		            xhr.setRequestHeader(header, token);
+		        },
+	
+		        success: function (data, status, xhr) {
+		        	alert("Edit Information Success!");
+		        	window.location.href = window.location.href;
+		        },
+		        error: function (request, status, error) {
+		            alert(status + " " + error);
+		           // window.location.href = window.location.href;
+		        }
+		    });  
+	
+		    console.log("End edit");
+		}
+		</script>
+
+	</th:block>
+</body>
+</html>

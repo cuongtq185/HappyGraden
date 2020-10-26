@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+
+</head>
+
+<body>
+    <th:block th:fragment="editShop">
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header card-header-primary">
+                                <h3 class="card-title">
+                                    Edit Your Shop
+                                </h3>
+                            </div>
+                            <div class="card-body" style="padding-left: 100px; padding-right: 100px">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">Shop ID</label>
+                                            <input disabled id="id" name="id" type="text" class="form-control"
+                                                th:value="${shop.id}" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">Shop Name</label> <input id="name"
+                                                name="name" type="text" class="form-control" th:value="${shop.name}" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">Address</label> <input id="address"
+                                                name="address" type="text" class="form-control"
+                                                th:value="${shop.address}" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">Phone</label> <input id="phone"
+                                                name="phone" type="text" class="form-control"
+                                                th:value="${shop.phone}" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">Email</label> <input id="email"
+                                                name="email" type="text" class="form-control"
+                                                th:value="${shop.email}" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating">Details</label> <input id="detail"
+                                                name="detail" type="text" class="form-control"
+                                                th:value="${shop.detail}" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <button th:onclick="editShop()" class="btn btn-primary pull-right">Update Shop</button>
+                                <button class="btn btn-warning pull-right" th:onclick="deleteShop()" >Delete Shop</button>
+                                <div class="clearfix"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <img alt="" src="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <th:block th:replace="components/shop/myShop/deleteShop-modal :: deleteShop-modal"></th:block>
+        <script th:inline="javascript">
+
+
+
+            const account = [[${ current_account }]];
+            const shop = [[${ shop }]];
+            //edit Shop
+            function editShop() {
+                console.log("Start edit");
+                console.log(shop);
+                shop.phone = $("#phone").val();
+                shop.email = $("#email").val();
+                shop.name = $("#name").val();
+                shop.address = $("#address").val();
+                shop.detail = $("#detail").val();
+
+
+                var token = $("meta[name='_csrf']").attr("content");
+                var header = $("meta[name='_csrf_header']").attr("content");
+
+                console.log(shop)
+
+                $.ajax({
+                    type: "PUT",
+                    url: `/shop/edit`,
+                    dataType: "json",
+                    contentType: "application/json",
+                    data: JSON.stringify(shop),
+
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader(header, token);
+                    },
+
+                    success: function (data, status, xhr) {
+                        //alert("Edit Shop Success!");
+                        window.location.href = window.location.href;
+                    },
+                    error: function (request, status, error) {
+                        alert(status + " " + error);
+                        // window.location.href = window.location.href;
+                    }
+                });
+
+                console.log("End edit");
+            }
+
+
+            //delete shop
+            function deleteShop() {
+                var token = $("meta[name='_csrf']").attr("content");
+                var header = $("meta[name='_csrf_header']").attr("content");
+                Swal.fire({
+              	  title: 'Are you sure?',
+              	  html: 'Your shop will be delete! <br> You will not be able to revert this!',
+              	  icon: 'warning',
+              	  showCancelButton: true,
+              	  confirmButtonColor: '#3085d6',
+              	  cancelButtonColor: '#d33',
+              	  confirmButtonText: 'Yes, delete it!'
+              	}).then((result) => {
+              		
+              	  if (result.value) {
+                      $.ajax({
+                          url: `/shop/delete`,
+                          type: 'DELETE',
+                          beforeSend: function (xhr) {
+                              xhr.setRequestHeader(header, token);
+                          },
+
+  	                    success: function (data, status, xhr) {
+  	                    	//md.showAddProductNoti('bottom','right',data.msg)
+  	                    //  
+  							Swal.fire({
+  	                    		  position: 'center',
+  	                    		  icon: 'success',
+  	                    		  title: 'Delete Shop Success',
+  	                    		  showConfirmButton: false,
+  	                    		  timer: 1000
+  		                    		}).then(()=>{
+  		                                window.location.href = "/shop/home";
+  		                    		}) 
+  	                     },
+  	                    error: function (request, status, error) {
+
+  	                        try {
+  	                            if (request.status == 405) {
+  	                                window.location.href = `${home}/login`;
+  	                            }
+  	                            // console.log(request.status);
+  	                            // console.log(status);
+  	                            // console.log(error);
+  	                            // window.location.href = `${home}/login`;
+  	                        } catch (error) { }
+  	                    }
+  	                });
+              	  }
+              	})
+   
+
+            }
+        </script>
+
+    </th:block>
+</body>
+
+</html>

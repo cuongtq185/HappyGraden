@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head></head>
+
+<body>
+	<th:block th:fragment="account-table">
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card">
+
+							<div class="card-header card-header-primary">
+								<h4 class="card-title ">Account Table</h4>
+								<a th:href="@{/admin/account/add}" type="button" class="btn btn-danger"> add <i
+										class="fas fa-plus-circle"></i>
+								</a>
+
+							</div>
+
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+										<div class="navbar-form">
+											<div class="input-group no-border">
+												<input id="search-box" type="text" name="keyword" th:value="${keyword}"
+													class="form-control" placeholder="Search..." required>
+												<button 
+													th:onclick="|Pagging(${pageable.limit},1)|"
+													class="btn btn-white btn-round btn-just-icon">
+													<i class="material-icons">search</i>
+												</button>
+												&nbsp;
+												<!-- <button type="button" class="btn btn-default btn-round btn-just-icon"
+													onclick="clearFilter()">
+													<i class="fas fa-eraser"></i>
+												</button> -->
+												<div class="ripple-container">	
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<hr />
+								<div class="table-responsive">
+									<div th:replace="components/admin/account/account-list :: content"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<script th:inline="javascript">
+				function clearFilter() {
+					window.location = '/admin/account/list'
+				}
+				console.log([[${ pageable }]])
+			</script>
+	</th:block>
+
+</body>
+
+</html>

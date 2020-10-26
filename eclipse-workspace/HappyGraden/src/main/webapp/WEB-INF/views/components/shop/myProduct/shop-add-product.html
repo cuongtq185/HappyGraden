@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+
+</head>
+
+<body>
+	<th:block th:fragment="shop-add-product">
+		<div class="content">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="card">
+							<div class="card-header card-header-primary">
+								<h3 class="card-title">Add Your Product</h3>
+							</div>
+							<form id="add-product" th:action="@{/add-product}" th:object="${new_product}"
+								method="post" enctype="multipart/form-data">
+								<div class="card-body"
+									style="padding-left: 100px; padding-right: 100px">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="bmd-label-floating">Product Name</label> <input
+													id="name" name="name" type="text" class="form-control"
+													th:field="*{name}" />
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="bmd-label-floating">Category</label>
+												<select class="form-control" id="category" name="category">
+													<th:block th:each="category : ${categories}">
+														<option th:value="${category.id}"
+															th:text="${category.name}"></option>
+													</th:block>
+												</select>
+
+
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="bmd-label-floating">Quantity </label> <input
+													id="quantity" name="quantity" type="number"
+													class="form-control" th:field="*{quantity}" />
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="bmd-label-floating">Brand</label>
+												<select class="form-control" id="brand" name="brand">
+													<th:block th:each="brand : ${brands}">
+														<option th:value="${brand.id}" th:text="${brand.name}"></option>
+													</th:block>
+												</select>
+
+											</div>
+										</div>
+
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="bmd-label-floating">Price <span style="color: red" id="price-stt"></span> </label> <input
+													id="price" name="price" type="number"
+													class="form-control" th:field="*{price}" />
+											</div>
+											
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<!-- <label class="bmd-label-floating">Image</label> <input
+													readonly="true" type="text" class="form-control" id="img"
+                                                    name="img" value="/static/product/default.png" /> -->
+                                                    <label class="bmd-label-floating">Image</label>
+                                                    <input  class="form-control-file" id="file" name="file" type="file" style="opacity: 1 !important; position: static !important; margin-top: 7px;">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label class="bmd-label-floating">Details</label>
+												<textarea required class="form-control" rows="5" name="details" id="details"
+													th:field="*{detail}"></textarea>
+
+											</div>
+									</div>
+											<input id="add" type="submit" class="btn btn-primary pull-right"
+												value="submit" />
+											<div class="clearfix"></div>
+										</div>
+										</div>
+							</form>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<img alt="" src="">
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--         <th:block th:replace="components/vendor/shop/deleteShop-modal :: deleteShop-modal"></th:block> -->
+		<script th:inline="javascript">	
+		
+
+
+		const account = [[${ current_account }]];
+		const shop = [[${shop}]];
+		
+		//validate
+		
+
+		
+		
+	//edit Shop
+		function editShop() {
+		    console.log("Start edit");
+			console.log(shop);
+		    shop.phone = $("#phone").val();
+		    shop.email = $("#email").val();
+		    shop.name = $("#name").val();
+		    shop.address = $("#address").val();
+		    shop.detail = $("#detail").val();
+		    
+		    
+		    var token = $("meta[name='_csrf']").attr("content");
+		    var header = $("meta[name='_csrf_header']").attr("content");
+		    
+		    console.log(shop)
+	
+  		     $.ajax({
+		        type: "PUT",
+		        url: `/shop`,
+		        dataType: "json",
+		        contentType: "application/json",
+		        data: JSON.stringify(shop),
+	
+		        beforeSend: function (xhr) {
+		            xhr.setRequestHeader(header, token);
+		        },
+	
+		        success: function (data, status, xhr) {
+		        	//alert("Edit Shop Success!");
+		        	window.location.href = window.location.href;
+		        },
+		        error: function (request, status, error) {
+		            alert(status + " " + error);
+		           // window.location.href = window.location.href;
+		        }
+		    });   
+	
+		    console.log("End edit");
+		}
+	
+	
+	//delete shop
+	            function deleteShop() {
+                var token = $("meta[name='_csrf']").attr("content");
+                var header = $("meta[name='_csrf_header']").attr("content");
+
+                $.ajax({
+                    url: `/shop`,
+                    type: 'DELETE',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader(header, token);
+                    },
+
+                    success: function (data, status, xhr) {
+                        // alert(status);
+                        // To reload the page discarding the POST data(perform a GET request)
+                        window.location.href = window.location.href;
+                    },
+                    error: function (request, status, error) {
+                        alert(status);
+                        // To reload the page discarding the POST data(perform a GET request)
+                        window.location.href = window.location.href;
+                    }
+                });
+            }
+		</script>
+
+	</th:block>
+</body>
+</html>

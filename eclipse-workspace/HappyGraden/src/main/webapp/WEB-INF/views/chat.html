@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+
+</head>
+
+<body>
+
+
+
+    <input id="chat" type="text">
+    <button onclick="sendChat(document.getElementById('chat').value)">Send</button>
+    <button onclick="disconnectSocket()">Disconnect</button>
+
+    <!-- escape not working -->
+    <!-- <span><script>alert('a')</script></span> -->
+
+    <script th:src="@{/static/socket.io.js}"></script>
+
+    <script>
+
+        // var socket = io.connect('http://localhost:9092/chat', {
+        //     query: "token=xyz",
+        // });
+
+        var socket = io.connect('http://localhost:9092/chat');
+
+        socket.on('chat', chatHandler());
+        socket.on('disconnect', disconnectHandler());
+
+        function connectHandler() {
+            console.log('Client: connect');
+        }
+
+        function chatHandler() {
+            return function (data) {
+                console.log(data);
+            }
+        }
+
+        function disconnectHandler() {
+            return function () {
+                console.log('Server has been disconnect this connection successfully');
+            }
+        }
+
+        function disconnectSocket() {
+            console.log('Client want to disconnect this connection');
+            socket.disconnect();
+        }
+
+        function sendChat(chat) {
+            data = new Object();
+            data.message = String(chat);
+            console.log(`Client : ${JSON.stringify(data)}`);
+
+            socket.emit('chat', data);
+        }
+
+    </script>
+
+</body>
+
+</html>
