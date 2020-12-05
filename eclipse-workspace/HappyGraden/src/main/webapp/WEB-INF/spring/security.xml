@@ -39,7 +39,9 @@
 			access="permitAll" />
 
 		<intercept-url pattern="/**"
-			access="hasAnyRole('ROLE_USER', 'ROLE_VENDOR', 'ROLE_ADMIN')" />
+			access="permitAll" />
+		<!-- <intercept-url pattern="/**"
+		access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" /> -->
 
 		<form-login login-page="/login"
 			login-processing-url="/login"
