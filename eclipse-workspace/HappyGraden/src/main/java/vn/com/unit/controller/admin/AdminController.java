@@ -24,10 +24,10 @@ import vn.com.unit.service.LogService;
 public class AdminController {
 	@Autowired
 	private LogService logService;
-	@RequestMapping("/admin/home")
+	@RequestMapping("/admin")
 	public ModelAndView home(Model model) {
 
-		return new ModelAndView("admin/home");
+		return new ModelAndView("admin");
 	}
 	
 	@GetMapping("/admin/log/list")

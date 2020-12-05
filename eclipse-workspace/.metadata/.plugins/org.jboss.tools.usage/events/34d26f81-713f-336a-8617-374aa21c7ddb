@@ -6,6 +6,6 @@ d=1607148908150
 c=0
 cmp=usage
 a=finishWizard
-cl=org.eclipse.jdt.internal.ui.wizards.buildpaths.ClasspathContainerWizard
+cl=org.eclipse.wst.server.ui.internal.wizard.ModifyModulesWizard
 v=2.2.300
 s=0

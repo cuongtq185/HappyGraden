@@ -44,8 +44,8 @@ import vn.com.unit.utils.CommonUtils;
 @Controller
 public class HomeController {
 
-	@Autowired
-	CategoryService categoryService;
+//	@Autowired
+//	CategoryService categoryService;
 
 	@Autowired
 	ProductService productService;
@@ -69,7 +69,7 @@ public class HomeController {
 	@GetMapping("*")
 	public ModelAndView home(Model model, @Param("name") String name) {
 
-		model.addAllAttributes(CommonUtils.getMapHeaderAtribute(model, categoryService));
+		//model.addAllAttributes(CommonUtils.getMapHeaderAtribute(model, categoryService));
 
 		// Add Role if reload
 		int total_cart_item= 0;
@@ -91,11 +91,11 @@ public class HomeController {
 
 				SecurityContextHolder.getContext().setAuthentication(newAuth);
 				
-				total_cart_item = cartService.countAllCartItemByCurrentAccount(account.getId());
-				model.addAttribute("total_cart_item", total_cart_item);
+//				total_cart_item = cartService.countAllCartItemByCurrentAccount(account.getAccountId());
+//				model.addAttribute("total_cart_item", total_cart_item);
 				
-				total = cartService.calculateCartTotalByCurrentAccount();
-				model.addAttribute("total_price", Math.toIntExact(total));
+//				total = cartService.calculateCartTotalByCurrentAccount();
+//				model.addAttribute("total_price", Math.toIntExact(total));
 			}
 
 		} catch (Exception e) {
@@ -109,76 +109,76 @@ public class HomeController {
 		
 
 
-		List<Product> product = productService.findAllActiveProductOfShopActiveOfVendorActive();
-		model.addAttribute("product", product);
-		
-		Product top_product = productService.findOneTopProductPaymentSuccess();
-		model.addAttribute("top_product", top_product);
-		
-		List<Shop> shops = shopService.searchAllShop();
-		model.addAttribute("shops", shops);
+//		List<Product> product = productService.findAllActiveProductOfShopActiveOfVendorActive();
+//		model.addAttribute("product", product);
+//		
+//		Product top_product = productService.findOneTopProductPaymentSuccess();
+//		model.addAttribute("top_product", top_product);
+//		
+//		List<Shop> shops = shopService.searchAllShop();
+//		model.addAttribute("shops", shops);
 		
 		return new ModelAndView("index");
 	}
 
-	@GetMapping("/product-by-search")
-	public ModelAndView test(Model model, @RequestParam("name") String name) {
-		
-		// Prevent sql injection
-		name = String.join("%", name.split(""));
-		
-		model.addAllAttributes(CommonUtils.getMapHeaderAtribute(model, categoryService));
-		
-		List<Product> products = productService.searchProductByName(name);
-		model.addAttribute("products", products);
-		model.addAttribute("name", name);
-		
-		List<Brand> brands = brandService.findAllBrand();
-		model.addAttribute("brands", brands);
-
-		
-		int total_cart_item= 0;
-		Long total = 0L;
-		Account account = accountService.findCurrentAccount();
-		total_cart_item = cartService.countAllCartItemByCurrentAccount(account.getId());
-		model.addAttribute("total_cart_item", total_cart_item);
-		
-		total = cartService.calculateCartTotalByCurrentAccount();
-		model.addAttribute("total_price", total);
-		return new ModelAndView("product-by-search");
-	}
+//	@GetMapping("/product-by-search")
+//	public ModelAndView test(Model model, @RequestParam("name") String name) {
+//		
+//		// Prevent sql injection
+//		name = String.join("%", name.split(""));
+//		
+//		model.addAllAttributes(CommonUtils.getMapHeaderAtribute(model, categoryService));
+//		
+//		List<Product> products = productService.searchProductByName(name);
+//		model.addAttribute("products", products);
+//		model.addAttribute("name", name);
+//		
+//		List<Brand> brands = brandService.findAllBrand();
+//		model.addAttribute("brands", brands);
+//
+//		
+//		int total_cart_item= 0;
+//		Long total = 0L;
+//		Account account = accountService.findCurrentAccount();
+//		total_cart_item = cartService.countAllCartItemByCurrentAccount(account.getAccountId());
+//		model.addAttribute("total_cart_item", total_cart_item);
+//		
+//		total = cartService.calculateCartTotalByCurrentAccount();
+//		model.addAttribute("total_price", total);
+//		return new ModelAndView("product-by-search");
+//	}
 	
-	@GetMapping("/category")
-	public ModelAndView category(Model model, 
-			@RequestParam("id") Long id,
-    		@RequestParam(value = "page", required = false, defaultValue = "1") int page,
-			@RequestParam(value = "limit", required = false, defaultValue = "12") int limit
-			) {
-		
-		model.addAllAttributes(CommonUtils.getMapHeaderAtribute(model, categoryService));
-		
-		int totalitems = productService.countAllProductByCategoryId(id);
-		
-		Category cate = categoryService.findCategoryById(id);
-		model.addAttribute("cate", cate);
-		
-		PageRequest pageable = new PageRequest(page, limit, totalitems);
-		model.addAttribute("pageable", pageable);
-		
-		List<Product> products = productService.findAllProductByCategoryId(id, pageable.getLimit(),pageable.getOffset());
-		model.addAttribute("products", products);
-		
-		
-		int total_cart_item= 0;
-		Long total = 0L;
-		Account account = accountService.findCurrentAccount();
-		total_cart_item = cartService.countAllCartItemByCurrentAccount(account.getId());
-		model.addAttribute("total_cart_item", total_cart_item);
-		
-		total = cartService.calculateCartTotalByCurrentAccount();
-		model.addAttribute("total_price", total);
-		return new ModelAndView("product-by-category");
-	}
+//	@GetMapping("/category")
+//	public ModelAndView category(Model model, 
+//			@RequestParam("id") Long id,
+//    		@RequestParam(value = "page", required = false, defaultValue = "1") int page,
+//			@RequestParam(value = "limit", required = false, defaultValue = "12") int limit
+//			) {
+//		
+//		model.addAllAttributes(CommonUtils.getMapHeaderAtribute(model, categoryService));
+//		
+//		int totalitems = productService.countAllProductByCategoryId(id);
+//		
+//		Category cate = categoryService.findCategoryById(id);
+//		model.addAttribute("cate", cate);
+//		
+//		PageRequest pageable = new PageRequest(page, limit, totalitems);
+//		model.addAttribute("pageable", pageable);
+//		
+//		List<Product> products = productService.findAllProductByCategoryId(id, pageable.getLimit(),pageable.getOffset());
+//		model.addAttribute("products", products);
+//		
+//		
+//		int total_cart_item= 0;
+//		Long total = 0L;
+//		Account account = accountService.findCurrentAccount();
+//		total_cart_item = cartService.countAllCartItemByCurrentAccount(account.getAccountId());
+//		model.addAttribute("total_cart_item", total_cart_item);
+//		
+//		total = cartService.calculateCartTotalByCurrentAccount();
+//		model.addAttribute("total_price", total);
+//		return new ModelAndView("product-by-category");
+//	}
 
 	@GetMapping("/register")
 	public ModelAndView register(Model model) {

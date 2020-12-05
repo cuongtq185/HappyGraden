@@ -85,10 +85,10 @@ public class AdminCategoryController {
 	@PostMapping("/admin/category/add")
 	@ResponseBody
 	public ResponseEntity<String> createCategory(@RequestBody Category category, Model model) {
-		if (categoryService.findCategoryByName(category.getName()) != null) {
+		if (categoryService.findCategoryByName(category.getCategoryName()) != null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Category already exists\" }");
 			}
-		if (category.getName() == "") {
+		if (category.getCategoryName() == "") {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Name cannot be empty\" }");
 		}
 		Category check_category = categoryService.createCategory(category);
@@ -104,10 +104,10 @@ public class AdminCategoryController {
 	public ResponseEntity<String> editCategory(@RequestBody Category category, Model model) {
 		
 		
-		if (categoryService.findCategoryByName(category.getName()) != null) {
+		if (categoryService.findCategoryByName(category.getCategoryName()) != null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Category already exists\" }");}
 		
-		if (category.getName() == null) {
+		if (category.getCategoryName() == null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Name cannot be empty\" }");
 		}
 		categoryService.updateCategoryById(category);

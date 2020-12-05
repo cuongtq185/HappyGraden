@@ -121,7 +121,7 @@ public class AdminShopManagementController {
 		if (shopService.setDisableShop(shop_id, 1)) {
 			List<Role> roles = roleService.findRoleByAccountId(shop_id);
 			int index = IntStream.range(0,roles.size()  )
-					.filter(i -> "ROLE_VENDOR".equals(roles.get(i).getName()))
+					.filter(i -> "ROLE_VENDOR".equals(roles.get(i).getRoleName()))
 					.findFirst()
 					.orElse(-1);
 			

@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>vn.com.unit</groupId>
-	<artifactId>P2P</artifactId>
+	<artifactId>HappyGraden</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>P2P Maven Webapp</name>
+	<name>HappyGraden Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 
@@ -300,7 +300,7 @@
 
 
 	<build>
-		<finalName>P2P</finalName>
+		<finalName>HappyGraden</finalName>
 
 		<plugins>
 			<plugin>

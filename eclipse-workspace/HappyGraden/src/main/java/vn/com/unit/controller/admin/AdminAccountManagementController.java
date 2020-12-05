@@ -27,15 +27,15 @@ import vn.com.unit.service.AccountService;
 import vn.com.unit.service.ShopService;
 
 @Controller
-@PreAuthorize("hasRole('ROLE_ADMIN')")
+//@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class AdminAccountManagementController {
 
 	@Autowired
 	private AccountService accountService;
-	@Autowired
-	private ShopService shopService;
+//	@Autowired
+//	private ShopService shopService;
 	
-	@GetMapping("/admin/account/list")
+	@GetMapping("admin/account/list")
 	public ModelAndView accountList(Model model,
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
 			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
@@ -56,7 +56,7 @@ public class AdminAccountManagementController {
 		}
 		model.addAttribute("pageable", pageable);
 
-		return new ModelAndView("admin/account/account-table");
+		return new ModelAndView("account");
 	}
 	
 	
@@ -79,7 +79,7 @@ public class AdminAccountManagementController {
 		model.addAttribute("pageable", pageable);
 		model.addAttribute("keyword", keyword);
 		pageable.setData(accounts);
-		return new ModelAndView("components/admin/account/account-list");
+		return new ModelAndView("account");
 
 	}
 	@GetMapping("/admin/account/{account_id}")
@@ -88,10 +88,7 @@ public class AdminAccountManagementController {
 			HttpServletRequest request) {
 		
 		Account account = accountService.findAccountById(account_id);
-		Shop shop = shopService.findShopByAccountId(account_id);
 		model.addAttribute("account",account);
-		model.addAttribute("shop",shop);
-
 		return new ModelAndView("admin/account/account-view");
 	}
 	
@@ -105,20 +102,20 @@ public class AdminAccountManagementController {
 	@PostMapping("/admin/account/add")
 	@ResponseBody
 	public ResponseEntity<String> createAccount(@RequestBody Account account, Model model) {
-		if (account.getUsername() == null || account.getUsername().equals("")) {
+		if (account.getAccountUsername() == null || account.getAccountUsername().equals("")) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Username cannot be empty\" }");
 		}
 
-		if (account.getPassword() == null || account.getPassword().equals("")) {
+		if (account.getAccountPassword() == null || account.getAccountPassword().equals("")) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Password cannot be empty\" }");
 		}
 
-		if (account.getPassword().length() < 8) {
+		if (account.getAccountPassword().length() < 8) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("{ \"msg\" : \"Password too short - minimum length is 8 characters\" }");
 		}
 
-		if (accountService.findByUsername(account.getUsername()) != null) {
+		if (accountService.findByUsername(account.getAccountUsername()) != null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Username already exists\" }");
 		}
 
@@ -126,7 +123,7 @@ public class AdminAccountManagementController {
 
 		if (account_new != null) {
 			return ResponseEntity.ok(
-					"{ \"id\" : " + account_new.getId().toString() + ", \"msg\" : \"Create account successfully\" }");
+					"{ \"id\" : " + account_new.getAccountId().toString() + ", \"msg\" : \"Create account successfully\" }");
 		}
 
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)

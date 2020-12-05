@@ -49,7 +49,7 @@ public class CartController {
 		int total_cart_item= 0;
 		Long total = 0L;
 		Account account = accountService.findCurrentAccount();
-		total_cart_item = cartService.countAllCartItemByCurrentAccount(account.getId());
+		total_cart_item = cartService.countAllCartItemByCurrentAccount(account.getAccountId());
 		model.addAttribute("total_cart_item", total_cart_item);
 
 		
@@ -87,7 +87,7 @@ public class CartController {
 		
 		cartService.addCartItemCurrentAccount(Long.valueOf(json.get("product_id")), quantity);
 		Account account = accountService.findCurrentAccount();
-		int total_cart_item = cartService.countAllCartItemByCurrentAccount(account.getId());
+		int total_cart_item = cartService.countAllCartItemByCurrentAccount(account.getAccountId());
 		Long total = cartService.calculateCartTotalByCurrentAccount();
 		return ResponseEntity.ok(
 				"{\"msg\" : \"Add product succes! Please check again!\", \"total_item\" : \""+total_cart_item+"\", \"total\" : \""+total+"\"  }");
@@ -98,7 +98,7 @@ public class CartController {
 	@ResponseBody
 	public ResponseEntity<String> delete(Model model, @RequestBody Map<String, String> json) {
 		
-		Long curent_account_id = accountService.findCurrentAccount().getId();
+		Long curent_account_id = accountService.findCurrentAccount().getAccountId();
 		cartService.deleteCartItemCurrentAccount(Long.valueOf(json.get("product_id")), curent_account_id);
 		
 		return ResponseEntity.ok(

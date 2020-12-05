@@ -24,20 +24,20 @@ public class AccountController {
 	@PostMapping("/register")
 	@ResponseBody
 	public ResponseEntity<String> createAccount(@RequestBody Account account, Model model) {
-		if (account.getUsername() == null || account.getUsername().equals("")) {
+		if (account.getAccountUsername() == null || account.getAccountUsername().equals("")) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Username cannot be empty\" }");
 		}
 
-		if (account.getPassword() == null || account.getPassword().equals("")) {
+		if (account.getAccountPassword() == null || account.getAccountPassword().equals("")) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Password cannot be empty\" }");
 		}
 
-		if (account.getPassword().length() < 8) {
+		if (account.getAccountPassword().length() < 8) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
 					.body("{ \"msg\" : \"Password too short - minimum length is 8 characters\" }");
 		}
 
-		if (accountService.findByUsername(account.getUsername()) != null) {
+		if (accountService.findByUsername(account.getAccountUsername()) != null) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Username already exists\" }");
 		}
 
@@ -45,7 +45,7 @@ public class AccountController {
 
 		if (account_new != null) {
 			return ResponseEntity.ok(
-					"{ \"id\" : " + account_new.getId().toString() + ", \"msg\" : \"Create account successfully\" }");
+					"{ \"id\" : " + account_new.getAccountId().toString() + ", \"msg\" : \"Create account successfully\" }");
 		}
 
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
