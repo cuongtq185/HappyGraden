@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head>
+</head>
+<body>
+	<th:block th:fragment="register-form">
+	  <div class="main">
+        <!-- Sign up form -->
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">Sign up</h2>
+                        <form method="POST" class="register-form" id="register-form">
+                            <div class="form-group">
+                                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="username" id="addusername" placeholder="Your Name"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="email"><i class="zmdi zmdi-email"></i></label>
+                                <input type="email" name="email" id="email" placeholder="Your Email"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="password" id="addpassword" placeholder="Password"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
+                                <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                                <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                            </div>
+                            <div class="form-group form-button">
+                                <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/ onclick="addAccount()">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="signup-image">
+                        <figure><img th:src="@{static/template-login/images/signup-image.jpg}" alt="sing up image"></figure>
+                        <a th:href="@{/login}" class="signup-image-link">I am already member</a>
+                    </div>
+                          
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Script dang ki tai khoan nguoi dung -->
+		<script th:inline="javascript">
+
+            let home = [[@{/}]];
+
+            if (home.slice(home.length - 1) == "/") {
+                home = home.slice(0, -1);
+            }
+
+            function addAccount() {
+                var token = $("meta[name='_csrf']").attr("content");
+                var header = $("meta[name='_csrf_header']").attr("content");
+
+                let newAccount = new Object();
+                newAccount.username = $("#addusername").val();
+                newAccount.password = $("#addpassword").val();
+
+
+                console.log(newAccount);
+                $.ajax({
+                    url: `${home}/register`,
+                    type: 'POST',
+
+
+                    dataType: "json",
+                    contentType: "application/json",
+
+
+                    data: JSON.stringify(newAccount),
+
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader(header, token);
+                    },
+
+                    success: function (data, status, xhr) {
+                        try {
+                            alert(data.msg);
+                            window.location.href = `${home}/login`;
+                        } catch (error) { }
+                    },
+                    error: function (request, status, error) {
+                        try {
+                            alert(request.responseJSON.msg);
+                        } catch (error) { }
+                    }
+                });
+
+            } 
+        </script>
+	</th:block>
+</body>
+</html>
