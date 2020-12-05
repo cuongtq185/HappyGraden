@@ -10313,3 +10313,15 @@ org.eclipse.debug.core.DebugException: Invalid stack frame
 	at org.eclipse.jface.text.TextViewerHoverManager$1.run(TextViewerHoverManager.java:155)
 !SUBENTRY 1 org.eclipse.jdt.debug 4 130 2020-12-05 14:52:45.878
 !MESSAGE Invalid stack frame
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842776 2020-12-05 15:07:32.639
+!MESSAGE Server shutting down
+
+!ENTRY org.jboss.ide.eclipse.as.wtp.core 1 16973825 2020-12-05 15:07:33.854
+!MESSAGE Server processes have terminated prematurely. Please check your server logs for more details. 
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842760 2020-12-05 15:07:36.206
+!MESSAGE Server Starting
+
+!ENTRY org.jboss.ide.eclipse.as.core 1 16842769 2020-12-05 15:08:06.363
+!MESSAGE Server Startup Succeeded
