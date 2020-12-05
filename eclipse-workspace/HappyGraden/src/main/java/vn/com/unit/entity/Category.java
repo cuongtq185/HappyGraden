@@ -7,56 +7,42 @@ import jp.sf.amateras.mirage.annotation.PrimaryKey;
 import jp.sf.amateras.mirage.annotation.PrimaryKey.GenerationType;
 import jp.sf.amateras.mirage.annotation.Table;
 
-@Table(name = "p2p_category")
+@Table(name = "category")
 public class Category {
 
 	@Id
 	@PrimaryKey(generationType = GenerationType.IDENTITY) // Primary key // Auto increment
-	@Column(name = "id")
-	private Long id;
+	@Column(name = "category_id")
+	private Long categoryId;
 
-	@Column(name = "name")
-	private String name;
-
-	@Column(name = "img")
-	private String img;
-
-	@Column(name = "disable")
-	private boolean disable;
+	@Column(name = "category_name")
+	private String categoryName;
+	
 
 	public Category() {
 	}
 
-	public Long getId() {
-		return id;
+	public Long getCategoryId() {
+		return categoryId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+
+
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
 	}
 
-	public String getName() {
-		return name;
+
+
+	public String getCategoryName() {
+		return categoryName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
 
-	public String getImg() {
-		return img;
-	}
 
-	public void setImg(String img) {
-		this.img = img;
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
-
-	public boolean isDisable() {
-		return disable;
-	}
-
-	public void setDisable(boolean disable) {
-		this.disable = disable;
-	}
+	
 
 }

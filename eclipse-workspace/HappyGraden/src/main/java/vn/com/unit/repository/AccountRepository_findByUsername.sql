@@ -1,3 +1,3 @@
 SELECT *
-FROM p2p_account
-WHERE username = /*username*/
+FROM account
+WHERE account_username = /*username*/

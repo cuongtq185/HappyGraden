@@ -7,34 +7,36 @@ import jp.sf.amateras.mirage.annotation.PrimaryKey;
 import jp.sf.amateras.mirage.annotation.Table;
 import jp.sf.amateras.mirage.annotation.PrimaryKey.GenerationType;
 
-@Table(name = "p2p_name")
+@Table(name = "role")
 public class Role {
 	
 	@Id
 	@PrimaryKey(generationType = GenerationType.IDENTITY) // Primary key // Auto increment
-	@Column(name = "id")
-	private Long id;
+	@Column(name = "role_id")
+	private Long roleId;
 
-	@Column(name = "name")
-	private String name;
+	@Column(name = "role_name")
+	private String roleName;
 
 	public Role() {
 	}
 
-	public Long getId() {
-		return id;
+	public Long getRoleId() {
+		return roleId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setRoleId(Long roleId) {
+		this.roleId = roleId;
 	}
 
-	public String getName() {
-		return name;
+	public String getRoleName() {
+		return roleName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
+
+	
 
 }

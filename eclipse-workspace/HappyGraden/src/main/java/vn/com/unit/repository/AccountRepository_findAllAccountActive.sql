@@ -5,32 +5,27 @@ SELECT
 
 FROM
 	(	
-		(	p2p_account acc 
-		 	LEFT JOIN
-		    p2p_account_role accr
-			ON
-		    acc.id = accr.account
-		)
-  	LEFT JOIN p2p_role role ON accr.role = role.id	
+	account acc
+  	LEFT JOIN role role ON acc.role = role.role_id	
 	)
 	WHERE
-	acc.disable = 0
+	acc.account_disable = 0
 	/*IF role_id != null*/
-    AND role.id = /*role_id*/
+    AND role.role_id = /*role_id*/''
 	/*END*/
 	/*BEGIN*/
 	AND
 	(
 		/*IF keyword != null && keyword != ''*/
-		OR replace(UPPER(acc.id),' ','') LIKE ( '%' + UPPER(/*keyword*/) + '%' )
-		OR replace(UPPER(acc.name),' ','') LIKE ( '%' + UPPER(/*keyword*/) + '%' )
-		OR replace(UPPER(acc.username),' ','') LIKE ( '%' + UPPER(/*keyword*/) + '%' )
-	    OR replace(UPPER(acc.email),' ','') LIKE ( '%' + UPPER(/*keyword*/) + '%' )
-	    OR replace(UPPER(acc.phone),' ','') LIKE ( '%' + UPPER(/*keyword*/) + '%' )
+		OR replace(UPPER(acc.account_id),' ','') LIKE ( '%' + UPPER(/*keyword*/) + '%' )
+		OR replace(UPPER(acc.account_name),' ','') LIKE ( '%' + UPPER(/*keyword*/) + '%' )
+		OR replace(UPPER(acc.account_username),' ','') LIKE ( '%' + UPPER(/*keyword*/) + '%' )
+	    OR replace(UPPER(acc.account_email),' ','') LIKE ( '%' + UPPER(/*keyword*/) + '%' )
+	    OR replace(UPPER(acc.account_phone),' ','') LIKE ( '%' + UPPER(/*keyword*/) + '%' )
 	    /*END*/
     )
     /*END*/
 	
 ) Accont_t
-order by id
+order by account_id
 OFFSET  /*offset*/ ROWS FETCH NEXT  /*sizeOfPage*/ ROWS ONLY

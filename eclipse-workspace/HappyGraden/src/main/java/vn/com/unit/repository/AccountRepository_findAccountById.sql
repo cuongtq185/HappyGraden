@@ -1,3 +1,3 @@
 select *
-from p2p_account
-where id = /*id*/
+from account
+where account_id = /*id*/

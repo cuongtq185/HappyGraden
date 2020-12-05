@@ -16,6 +16,7 @@ public interface AccountRepository extends MirageRepository<Account, Long> {
 	public void updateAccountPassword(@Param("id") Long id, @Param("password") String password);
 	
 	public List<Account> findAllAccount();
+	
 	public List<Account> findAllAccountActive(@Param("sizeOfPage") Integer sizeOfPage,@Param("offset") Integer offset,@Param("keyword") String keyword,@Param("role_id") Long role_id);
 
 	public Long createNewAccount(@Param("username") String username, @Param("password") String password);
@@ -29,8 +30,10 @@ public interface AccountRepository extends MirageRepository<Account, Long> {
 	@Modifying
 	public void setRoleByAccountId(@Param("id_account") Long id_account, @Param("id_role") Long id_role );
 	
+	//tìm tài khoản bởi id
 	public Account findAccountById(@Param("id") Long id);
 	
+	//đếm tài khoản còn hoạt động	
 	public int countAccountActive(@Param("keyword") String keyword,@Param("role_id") Long role_id);
 	
 	@Modifying
