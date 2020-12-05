@@ -1,3 +1,3 @@
-select id
-from dbo.p2p_role
-where name = /*role_name*/
+select role_id
+from role
+where role_name = /*role_name*/

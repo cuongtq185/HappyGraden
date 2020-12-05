@@ -1,6 +1,6 @@
 select *
-from p2p_role
-where id
+from role
+where role_id
 in (select role
-	from p2p_account_role
-	where account = /*account_id*/)
+	from account
+	where account_id = /*account_id*/)
