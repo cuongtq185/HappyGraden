@@ -1,49 +1,22 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 
 <head>
-<th:block th:include="layout/head :: head"></th:block>
-<th:block th:include="index/layout/index-head :: index-head"></th:block>
-<link rel="stylesheet"
-	th:href="@{/static/index-template/styles/shop_style.css}">
+    <th:block th:include="layout/head :: head"></th:block>
+
 </head>
 
 <body>
 
-
-	<div class="super_container">
-
-
-		<div th:replace="index/layout/header_index :: header_index"></div>
-
-		<div
-			th:replace="components/index/shop/layout/header-shop :: header-shop"></div>
-		<div class="shop">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-3">
-						<div
-							th:replace="components/index/shop/layout/left-nav-shop :: left-nav-shop"></div>
-					</div>
-					<div
-						th:replace="components/index/shop/shop-product-list :: shop-product-list"></div> 	
-				</div>
-			</div>
-		</div>
-
-
-		<div
-			th:replace="index/layout/footer_index_template :: footer_index_template"></div>
-
-	</div>
-
-	<th:block th:replace="layout/footer :: footer"></th:block>
-	<th:block th:replace="index/layout/index-footer :: index-footer"></th:block>
-	<script th:src="@{/static/index-template/js/shop_custom.js}"></script>
-		
-	
+       		<div th:replace="components/index/header :: index-header"></div>
+			<div th:replace="components/cart/menu :: cart-menu"></div>
+			<div th:replace="components/shop/banner-shop :: shop-banner-shop"></div>
+        	<div th:replace="components/shop/product-shop :: shop-product-shop"></div>
+			<div th:replace="components/index/footer :: index-footer"></div>
+						
+    	<th:block th:replace="layout/footer :: footer"></th:block>
 </body>
+
 </html>

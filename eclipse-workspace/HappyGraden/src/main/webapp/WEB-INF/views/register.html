@@ -4,23 +4,14 @@
     xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
 
 <head>
-    <th:block th:include="layout/head :: head"></th:block>
-    <th:block th:include="components/login-form/head-form :: head-form"></th:block>
-    <th:block th:include="components/register-form/register-form :: head-form"></th:block>
+    <th:block th:include="components/login/login-head :: login-head"></th:block>
 </head>
 
 <body>
 
-
-    <!-- <div th:replace="layout/nav :: nav"></div> -->
-    <div th:replace="layout/footer :: footer"></div>
-    <div th:replace="components/login-form/footer-form :: footer-form"></div>
-    <div th:replace="components/register-form/register-form :: register-form"></div> 
-
-
-
-
-
+       	<div th:replace="components/login/register-form :: register-form"></div>			
+						
+    	<th:block th:include="components/login/login-footer :: login-footer"></th:block>
 </body>
 
 </html>
