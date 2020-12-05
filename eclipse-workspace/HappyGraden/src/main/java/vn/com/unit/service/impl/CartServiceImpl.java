@@ -25,7 +25,7 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public List<CartDto> findAllCartItemByCurrentAccount() {
 
-		Long curent_account_id = accountService.findCurrentAccount().getId();
+		Long curent_account_id = accountService.findCurrentAccount().getAccountId();
 
 		return this.findAllCartItemByAccountId(curent_account_id);
 	}
@@ -46,7 +46,7 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public Long calculateCartTotalByCurrentAccount() {
-		Long account_id = accountService.findCurrentAccount().getId();
+		Long account_id = accountService.findCurrentAccount().getAccountId();
 		return cartRepository.calculateCartTotalByAccountId(account_id);
 	}
 
@@ -58,7 +58,7 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public void addCartItemCurrentAccount(Long product_id, int quantity) {
-		Long curent_account_id = accountService.findCurrentAccount().getId();
+		Long curent_account_id = accountService.findCurrentAccount().getAccountId();
 
 //		select quantity
 //		from p2p_cart

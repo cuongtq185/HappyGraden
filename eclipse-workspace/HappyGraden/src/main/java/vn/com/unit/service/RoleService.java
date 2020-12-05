@@ -13,6 +13,7 @@ public interface RoleService {
 	
 	public List<Role> findRoleByAccount(Account account);
 	
+	//tìm quyển bởi id
 	public List<Role> findRoleByAccountId(Long accountId);
 	
 	public Long findRoleIdByName(String role_name);

@@ -73,7 +73,7 @@ public class ProductServiceImpl implements ProductService {
 				Brand brand = brandService.findBrandByProductId(product.getId());
 				product_dto.setBrandName(brand.getName());
 				Category category = categoryService.findCategoryByProductId(product.getId());
-				product_dto.setCategoryName(category.getName());
+				product_dto.setCategoryName(category.getCategoryName());
 
 				product_dto_list.add(product_dto);
 			}
@@ -100,7 +100,7 @@ public class ProductServiceImpl implements ProductService {
 				Brand brand = brandService.findBrandByProductId(product.getId());
 				product_dto.setBrandName(brand.getName());
 				Category category = categoryService.findCategoryByProductId(product.getId());
-				product_dto.setCategoryName(category.getName());
+				product_dto.setCategoryName(category.getCategoryName());
 
 				product_dto_list.add(product_dto);
 			}
@@ -127,7 +127,7 @@ public class ProductServiceImpl implements ProductService {
 				Brand brand = brandService.findBrandByProductId(product.getId());
 				product_dto.setBrandName(brand.getName());
 				Category category = categoryService.findCategoryByProductId(product.getId());
-				product_dto.setCategoryName(category.getName());
+				product_dto.setCategoryName(category.getCategoryName());
 
 				product_dto_list.add(product_dto);
 			}
@@ -156,7 +156,7 @@ public class ProductServiceImpl implements ProductService {
 				Brand brand = brandService.findBrandByProductId(product.getId());
 				product_dto.setBrandName(brand.getName());
 				Category category = categoryService.findCategoryByProductId(product.getId());
-				product_dto.setCategoryName(category.getName());
+				product_dto.setCategoryName(category.getCategoryName());
 
 				product_dto_list.add(product_dto);
 			}
@@ -176,7 +176,7 @@ public class ProductServiceImpl implements ProductService {
 			Brand brand = brandService.findBrandByProductId(product_id);
 			product_dto.setBrandName(brand.getName());
 			Category category = categoryService.findCategoryByProductId(product_id);
-			product_dto.setCategoryName(category.getName());
+			product_dto.setCategoryName(category.getCategoryName());
 
 		} catch (Exception e) {
 			// TODO: handle exception

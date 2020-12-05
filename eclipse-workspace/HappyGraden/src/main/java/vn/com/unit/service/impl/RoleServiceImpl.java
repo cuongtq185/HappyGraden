@@ -29,7 +29,7 @@ public class RoleServiceImpl implements RoleService {
 			List<Role> roles = this.findRoleByAccount(account);
 
 			for (Role role : roles) {
-				authorities.add(new SimpleGrantedAuthority(role.getName()));
+				authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -37,17 +37,18 @@ public class RoleServiceImpl implements RoleService {
 
 		return authorities;
 	}
-
+	//tìm quyền bởi account
 	@Override
 	public List<Role> findRoleByAccount(Account account) {
 		try {
-			return this.findRoleByAccountId(account.getId());
+			return this.findRoleByAccountId(account.getAccountId());
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		return new ArrayList<Role>();
 	}
-
+	
+	// tìm quyền bởi id
 	@Override
 	public List<Role> findRoleByAccountId(Long accountId) {
 		try {
@@ -57,7 +58,7 @@ public class RoleServiceImpl implements RoleService {
 		}
 		return new ArrayList<Role>();
 	}
-
+	// tìm quyền bởi tên quyền
 	@Override
 	public Long findRoleIdByName(String role_name){
 		try {

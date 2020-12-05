@@ -79,8 +79,8 @@ public class CategoryServiceImpl implements CategoryService {
 		try {
 
 			Category category_new = new Category();
-			category_new.setName(category.getName());
-			category_new.setDisable(false);
+			category_new.setCategoryName(category.getCategoryName());
+			//category_new.setDisable(false);
 			return categoryRepository.save(category_new);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -117,9 +117,9 @@ public class CategoryServiceImpl implements CategoryService {
 //
 //			category_temp.setId(category.getId());
 			
-			Category category_temp = categoryRepository.findOne(category.getId());
+			Category category_temp = categoryRepository.findOne(category.getCategoryId());
 			
-			category_temp.setName(category.getName());
+			category_temp.setCategoryName(category.getCategoryName());
 
 //			categoryRepository.updateCategoryById(category.getId(), category.getName());
 			categoryRepository.save(category_temp);
