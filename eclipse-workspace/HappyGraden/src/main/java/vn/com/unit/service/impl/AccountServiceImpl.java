@@ -87,24 +87,24 @@ public class AccountServiceImpl implements AccountService {
 
 	// tìm tất cả account kèm role
 	@Override
-	public List<AccountWithRoleDto> findAllAccount(int limit, int offset, String keyword, Long role_id) {
+	public List<Account> findAllAccount(int limit, int offset, String keyword, Long role_id) {
 		List<Account> accounts = new ArrayList<Account>();
-		List<AccountWithRoleDto> account_role_dto_list = new ArrayList<AccountWithRoleDto>();
+		//List<AccountWithRoleDto> account_role_dto_list = new ArrayList<AccountWithRoleDto>();
 		try {
 			accounts = accountRepository.findAllAccountActive(limit, offset, keyword, role_id);
 
-			for (Account account : accounts) {
-				List<Role> roles = roleService.findRoleByAccountId(account.getAccountId());
-
-				AccountWithRoleDto account_role_dto = new AccountWithRoleDto(account);
-
-				account_role_dto.setRoles(roles);
-				account_role_dto_list.add(account_role_dto);
-			}
+//			for (Account account : accounts) {
+//				List<Role> roles = roleService.findRoleByAccountId(account.getAccountId());
+//
+//				AccountWithRoleDto account_role_dto = new AccountWithRoleDto(account);
+//
+//				account_role_dto.setRoles(roles);
+//				//account_role_dto_list.add(account_role_dto);
+//			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		return account_role_dto_list;
+		return accounts;
 	}
 
 	// create new account

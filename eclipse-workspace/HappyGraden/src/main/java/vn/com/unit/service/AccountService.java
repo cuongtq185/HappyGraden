@@ -14,7 +14,7 @@ public interface AccountService {
 	public boolean checkPass(Account account, String oldPassword);
 		
 	//tìm tất cả account 
-	public List<AccountWithRoleDto> findAllAccount(int limit,int offset,String keyword,Long role_id);
+	public List<Account> findAllAccount(int limit,int offset,String keyword,Long role_id);
 	
 	public Account createNewAccount(Account account,String role_name);
 	

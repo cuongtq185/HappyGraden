@@ -52,7 +52,7 @@
                                                 </th>
                                                 <th>Họ & Tên</th>
                                                 <th>Email</th>
-                                                <th>Tài khoản</th>
+                                                <th>Tên tài khoản</th>
                                                 <th>Ngày tạo</th>
                                                 <th>Trạng thái</th>
                                                 <th>Quyền người dùng</th>
@@ -71,18 +71,34 @@
                                                     <span th:text="${account.accountEmail}"></span>
                                                 </td>
                                                 <td class="desc">
-                                                	<span th:text="${account.accountUserName}"></span>
+                                                	<span th:text="${account.accountUsername}"></span>
                                                 </td>
+                                                 </td>
+                                               
                                                 <td>
                                                 	<span th:text=" ${account.accountCreateAt} ? ${#dates.format(account.accountCreateAt, 'dd-MM-yyyy')} "></span>
                                                 </td>
-                                                <td>
-                                                    <span th:text="${account.accountUserName}"></span>
+                                                 <td class="desc">
+                                                	<!-- <span th:text="${account.accountDisable}"></span> -->
+                                                	<th:block th:if="${account.accountDisable == false}">
+														<th:block th:text="active"></th:block>
+													</th:block>
+													<th:block th:if="${account.accountDisable == true}">
+														<th:block th:text="inactive"></th:block>
+													</th:block>
                                                 </td>
                                                 <td>
+                                                    <th:block th:if="${account.role == 1}">
+														<th:block th:text="ROLE_ADMIN"></th:block>
+													</th:block>
+													<th:block th:if="${account.role == 2}">
+														<th:block th:text="ROLE_USER"></th:block>
+													</th:block>
+                                                </td>
+                                                <!-- <td>
                                                 	<th:block
-													th:if="${account.roles != null}"
-													th:each="role, j : ${account.roles}">
+													th:if="${account.role != null}"
+													th:each="role, j : ${account.role}">
 													<th:block th:if="${j.count > 1}">- </th:block>
 													<th:block th:if="${role.name == 'ROLE_ADMIN'}">
 														<th:block th:text="Admin"></th:block>
@@ -91,7 +107,7 @@
 														<th:block th:text="User"></th:block>
 													</th:block>													
 													</th:block>
-												</td>
+												</td> -->
                                                <td>
                                                     <div class="table-data-feature">
                                                         <!-- <button class="item" data-toggle="tooltip" data-placement="top" title="Chi tiết">

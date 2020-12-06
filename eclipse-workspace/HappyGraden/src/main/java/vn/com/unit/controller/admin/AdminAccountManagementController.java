@@ -46,9 +46,9 @@ public class AdminAccountManagementController {
 		int totalitems = accountService.countAccountActive(keyword,role_id);
 		int totalpages = (int) Math.ceil((double) totalitems / (double) limit);
 
-		PageRequest<AccountWithRoleDto> pageable = new PageRequest<AccountWithRoleDto>(page, limit, totalitems, totalpages);
+		PageRequest<Account> pageable = new PageRequest<Account>(page, limit, totalitems, totalpages);
 
-		List<AccountWithRoleDto> accounts = accountService.findAllAccount(pageable.getLimit(), pageable.getOffset(),keyword,role_id);
+		List<Account> accounts = accountService.findAllAccount(pageable.getLimit(), pageable.getOffset(),keyword,role_id);
 		pageable.setData(accounts);
 		if(keyword != null) {
 			model.addAttribute("keyword", keyword);
@@ -72,8 +72,8 @@ public class AdminAccountManagementController {
 		int totalpages = (int) Math.ceil((double) totalitems / (double) limit);
 
 		
-		PageRequest<AccountWithRoleDto> pageable = new PageRequest<AccountWithRoleDto>(page, limit, totalitems, totalpages);
-		List<AccountWithRoleDto> accounts = accountService.findAllAccount(pageable.getLimit(), pageable.getOffset(),keyword,role_id);
+		PageRequest<Account> pageable = new PageRequest<Account>(page, limit, totalitems, totalpages);
+		List<Account> accounts = accountService.findAllAccount(pageable.getLimit(), pageable.getOffset(),keyword,role_id);
 		
 		model.addAttribute("accounts", accounts);
 		model.addAttribute("pageable", pageable);
