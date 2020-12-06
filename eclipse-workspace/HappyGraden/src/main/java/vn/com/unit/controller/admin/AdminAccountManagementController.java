@@ -27,7 +27,7 @@ import vn.com.unit.service.AccountService;
 import vn.com.unit.service.ShopService;
 
 @Controller
-//@PreAuthorize("hasRole('ROLE_ADMIN')")
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class AdminAccountManagementController {
 
 	@Autowired
@@ -89,14 +89,14 @@ public class AdminAccountManagementController {
 		
 		Account account = accountService.findAccountById(account_id);
 		model.addAttribute("account",account);
-		return new ModelAndView("admin/account/account-view");
+		return new ModelAndView("account-detail");
 	}
 	
 	@GetMapping("/admin/account/add")
 	public ModelAndView accountAdd(Model model,
 			HttpServletRequest request) {
 		
-		return new ModelAndView("admin/account/add-account");
+		return new ModelAndView("account-add");
 	}
 	
 	@PostMapping("/admin/account/add")
