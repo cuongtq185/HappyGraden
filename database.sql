@@ -164,3 +164,15 @@ values (N'Trần Quốc Cường', 'admin', '', 'cuongtq.tvh@gmail.com','0398915
 
 insert into account(account_name, account_username, account_password, account_email,account_phone, account_address, role)
 values (N'Trần Quốc Vinh', 'user', '', 'vinh@gmail.com','0123456789', 'Châu Thành - Trà Vinh', 2)
+
+insert into account(account_name, account_username, account_password, account_email,account_phone, account_address, role)
+values (N'test1', 'test1', '', 'test1@gmail.com','0123456789', 'Châu Thành - Trà Vinh', 2)
+
+insert into account(account_name, account_username, account_password, account_email,account_phone, account_address, role)
+values (N'test2', 'test2', '', 'test2@gmail.com','0123456789', 'Châu Thành - Trà Vinh', 2)
+
+--insert category
+insert into category( category_name) values (N'Bonsai')
+insert into category( category_name) values (N'Cây Xương Rồng')
+insert into category( category_name) values (N'Cây Cảnh Trong Nhà')
+insert into category( category_name) values (N'Cây Cảnh Văn Phòng')
