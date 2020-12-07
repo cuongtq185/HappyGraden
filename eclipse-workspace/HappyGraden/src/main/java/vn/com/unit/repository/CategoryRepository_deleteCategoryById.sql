@@ -1,3 +1,2 @@
-UPDATE p2p_category
-SET disable = /*disable*/ 
-WHERE id = /*id*/
+delete category
+where category_id = /*id*/

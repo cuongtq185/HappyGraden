@@ -117,7 +117,7 @@ public class AdminCategoryController {
 	@DeleteMapping("/admin/category/delete/{category_id}")
 	public ResponseEntity<Boolean> AdminDisableCategory(Model model, @PathVariable("category_id") Long category_id,
 			HttpServletRequest request) {
-		categoryService.deleteCategoryById(category_id,(long) 1);
+		categoryService.deleteCategoryById(category_id);
 		return  ResponseEntity.ok(null);
 	}
 	

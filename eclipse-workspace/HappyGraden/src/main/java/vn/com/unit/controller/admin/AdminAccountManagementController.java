@@ -99,36 +99,36 @@ public class AdminAccountManagementController {
 		return new ModelAndView("account-add");
 	}
 	
-	@PostMapping("/admin/account/add")
-	@ResponseBody
-	public ResponseEntity<String> createAccount(@RequestBody Account account, Model model) {
-		if (account.getAccountUsername() == null || account.getAccountUsername().equals("")) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Username cannot be empty\" }");
-		}
-
-		if (account.getAccountPassword() == null || account.getAccountPassword().equals("")) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Password cannot be empty\" }");
-		}
-
-		if (account.getAccountPassword().length() < 8) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body("{ \"msg\" : \"Password too short - minimum length is 8 characters\" }");
-		}
-
-		if (accountService.findByUsername(account.getAccountUsername()) != null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Username already exists\" }");
-		}
-
-		Account account_new = accountService.createNewAccount(account, "ROLE_ADMIN");
-
-		if (account_new != null) {
-			return ResponseEntity.ok(
-					"{ \"id\" : " + account_new.getAccountId().toString() + ", \"msg\" : \"Create account successfully\" }");
-		}
-
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-				.body("{ \"msg\" : \"You can't create an account right now. Try again later\" }");
-	}
+//	@PostMapping("/admin/account/add")
+//	@ResponseBody
+//	public ResponseEntity<String> createAccount(@RequestBody Account account, Model model) {
+//		if (account.getAccountUsername() == null || account.getAccountUsername().equals("")) {
+//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Username cannot be empty\" }");
+//		}
+//
+//		if (account.getAccountPassword() == null || account.getAccountPassword().equals("")) {
+//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Password cannot be empty\" }");
+//		}
+//
+//		if (account.getAccountPassword().length() < 8) {
+//			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+//					.body("{ \"msg\" : \"Password too short - minimum length is 8 characters\" }");
+//		}
+//
+//		if (accountService.findByUsername(account.getAccountUsername()) != null) {
+//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Username already exists\" }");
+//		}
+//
+//		Account account_new = accountService.createNewAccount(account, "ROLE_ADMIN");
+//
+//		if (account_new != null) {
+//			return ResponseEntity.ok(
+//					"{ \"id\" : " + account_new.getAccountId().toString() + ", \"msg\" : \"Create account successfully\" }");
+//		}
+//
+//		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+//				.body("{ \"msg\" : \"You can't create an account right now. Try again later\" }");
+//	}
 	
 	@DeleteMapping("/admin/account/delete/{account_id}")
 	public ResponseEntity<Boolean> AdminDisableShop(Model model, @PathVariable("account_id") Long account_id,

@@ -27,5 +27,5 @@ public interface CategoryRepository extends MirageRepository<Category, Long> {
 	
 	public void updateCategoryById(@Param("id") Long id,@Param("name") String name);
 	
-	public void deleteCategoryById(@Param("id") Long id,@Param("disable") Long disable);
+	public void deleteCategoryById(@Param("id") Long id);
 }

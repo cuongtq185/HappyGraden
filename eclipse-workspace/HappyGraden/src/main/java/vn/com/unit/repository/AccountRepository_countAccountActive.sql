@@ -9,7 +9,7 @@ FROM
   	LEFT JOIN role role ON acc.role = role.role_id	
 	)
 	WHERE
-	acc.account_disable = 0
+	acc.account_disable = 0 
 	/*IF role_id != null*/
     AND role.role_id = /*role_id*/''
 	/*END*/
