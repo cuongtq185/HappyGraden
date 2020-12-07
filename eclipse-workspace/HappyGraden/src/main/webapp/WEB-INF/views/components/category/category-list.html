@@ -7,7 +7,7 @@
 
 </head>
 <body>
-	<th:block th:fragment="account-body">
+	<th:block th:fragment="category-body">
 	<div class="main-content">
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
@@ -15,7 +15,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- DATA TABLE -->
-                                <h3 class="title-5 m-b-35">Bảng Tài Khoản</h3>
+                                <h3 class="title-5 m-b-35">Bảng Loại</h3>
                                 <!-- <div class="table-data__tool">
                                     <div class="table-data__tool-left">
                                         <div class="rs-select2--light rs-select2--md">
@@ -51,12 +51,7 @@
                                                 <th>
                                                     STT
                                                 </th>
-                                                <th>Họ & Tên</th>
-                                                <th>Email</th>
-                                                <th>Tên tài khoản</th>
-                                                <th>Ngày tạo</th>
-                                                <th>Trạng thái</th>
-                                                <th>Quyền người dùng</th>
+                                                <th>Tên loại sản phẩm</th>                                              
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -68,55 +63,15 @@
                                                 <td>
                                                 	<span th:text="${account.accountName}"></span>
                                                 </td>
-                                                <td>
-                                                    <span th:text="${account.accountEmail}"></span>
-                                                </td>
-                                                <td class="desc">
-                                                	<span th:text="${account.accountUsername}"></span>
-                                                </td>
-                                                 </td>
                                                
-                                                <td>
-                                                	<span th:text=" ${account.accountCreateAt} ? ${#dates.format(account.accountCreateAt, 'dd-MM-yyyy')} "></span>
-                                                </td>
-                                                 <td class="desc">
-                                                	<!-- <span th:text="${account.accountDisable}"></span> -->
-                                                	<th:block th:if="${account.accountDisable == false}">
-														<th:block th:text="active"></th:block>
-													</th:block>
-													<th:block th:if="${account.accountDisable == true}">
-														<th:block th:text="inactive"></th:block>
-													</th:block>
-                                                </td>
-                                                <td>
-                                                    <th:block th:if="${account.role == 1}">
-														<th:block th:text="ROLE_ADMIN"></th:block>
-													</th:block>
-													<th:block th:if="${account.role == 2}">
-														<th:block th:text="ROLE_USER"></th:block>
-													</th:block>
-                                                </td>
-                                                <!-- <td>
-                                                	<th:block
-													th:if="${account.role != null}"
-													th:each="role, j : ${account.role}">
-													<th:block th:if="${j.count > 1}">- </th:block>
-													<th:block th:if="${role.name == 'ROLE_ADMIN'}">
-														<th:block th:text="Admin"></th:block>
-													</th:block>
-													<th:block th:if="${role.name == 'ROLE_USER'}">
-														<th:block th:text="User"></th:block>
-													</th:block>													
-													</th:block>
-												</td> -->
                                                <td>
                                                     <div class="table-data-feature">
                                                         <!-- <button class="item" data-toggle="tooltip" data-placement="top" title="Chi tiết">
                                                             <i class="zmdi zmdi-mail-send"></i>
                                                         </button> -->
-                                                        <!-- <button class="item" data-toggle="tooltip" data-placement="top" title="Sửa">
+                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Sửa">
                                                             <i class="zmdi zmdi-edit"></i>
-                                                        </button> -->
+                                                        </button>
                                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Xóa" type="button"> 
                                                             <i class="zmdi zmdi-delete" th:onclick="|DeleteAccount(${i.index})|"></i>
                                                         </button>
