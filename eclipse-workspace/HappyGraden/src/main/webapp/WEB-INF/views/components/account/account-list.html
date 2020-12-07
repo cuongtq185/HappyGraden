@@ -16,16 +16,16 @@
                             <div class="col-md-12">
                                 <!-- DATA TABLE -->
                                 <h3 class="title-5 m-b-35">Bảng Tài Khoản</h3>
-                                <div class="table-data__tool">
+                                <!-- <div class="table-data__tool">
                                     <div class="table-data__tool-left">
-                                        <!-- <div class="rs-select2--light rs-select2--md">
+                                        <div class="rs-select2--light rs-select2--md">
                                             <select class="js-select2" name="property">
                                                 <option selected="selected">All Properties</option>
                                                 <option value="">Option 1</option>
                                                 <option value="">Option 2</option>
                                             </select>
                                             <div class="dropDownSelect2"></div>
-                                        </div> -->
+                                        </div>
                                         <div class="rs-select2--light rs-select2--sm">
                                             <select class="js-select2" name="time">
                                                 <option selected="selected">Lọc</option>
@@ -34,8 +34,8 @@
                                             </select>
                                             <div class="dropDownSelect2"></div>
                                         </div>
-                                        <!-- <button class="au-btn-filter">
-                                            <i class="zmdi zmdi-filter-list"></i>Lọc</button> -->
+                                        <button class="au-btn-filter">
+                                            <i class="zmdi zmdi-filter-list"></i>Lọc</button>
                                     </div>
                                     <div class="table-data__tool-right">
                                     	<a th:href ="@{/admin/account/add}">
@@ -43,7 +43,7 @@
                                             <i class="zmdi zmdi-plus"></i>THÊM TÀI KHOẢN</button>
                                         </a>
                                     </div>
-                                </div>
+                                </div>  -->
                                 <div class="table-responsive table-responsive-data2">
                                     <table class="table table-data2">
                                         <thead>
@@ -114,15 +114,17 @@
                                                         <!-- <button class="item" data-toggle="tooltip" data-placement="top" title="Chi tiết">
                                                             <i class="zmdi zmdi-mail-send"></i>
                                                         </button> -->
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Sửa">
+                                                        <!-- <button class="item" data-toggle="tooltip" data-placement="top" title="Sửa">
                                                             <i class="zmdi zmdi-edit"></i>
+                                                        </button> -->
+                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Xóa" type="button"> 
+                                                            <i class="zmdi zmdi-delete" th:onclick="|DeleteAccount(${i.index})|"></i>
                                                         </button>
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Xóa">
-                                                            <i class="zmdi zmdi-delete"></i>
-                                                        </button>
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Chi tiết">
-                                                            <i class="zmdi zmdi-more"></i>
-                                                        </button>
+                                                        <a th:href="@{'/admin/account/' + ${account.accountId}}">
+	                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Chi tiết">
+	                                                            <i class="zmdi zmdi-more"></i>
+	                                                        </button>
+                                                        </a>
                                                     </div>
                                                 </td>
                                             </tr>

@@ -27,7 +27,7 @@ import vn.com.unit.service.AccountService;
 import vn.com.unit.service.ShopService;
 
 @Controller
-@PreAuthorize("hasRole('ROLE_ADMIN')")
+//@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class AdminAccountManagementController {
 
 	@Autowired
