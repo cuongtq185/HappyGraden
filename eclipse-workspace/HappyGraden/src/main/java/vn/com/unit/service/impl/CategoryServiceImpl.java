@@ -76,11 +76,7 @@ public class CategoryServiceImpl implements CategoryService {
 	public Category createCategory(Category category) {
 		// TODO Auto-generated method stub
 		try {
-
-			Category category_new = new Category();
-			category_new.setCategoryName(category.getCategoryName());
-			//category_new.setDisable(false);
-			return categoryRepository.save(category_new);
+			return categoryRepository.createCategory(category.getCategoryName());
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

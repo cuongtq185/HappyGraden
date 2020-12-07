@@ -68,7 +68,7 @@ public class AdminCategoryController {
 	public ModelAndView categoryAdd(Model model,
 			HttpServletRequest request) {
 
-		return new ModelAndView("admin/category/category-add");
+		return new ModelAndView("category-add");
 	}
 	
 	
@@ -86,10 +86,10 @@ public class AdminCategoryController {
 	@ResponseBody
 	public ResponseEntity<String> createCategory(@RequestBody Category category, Model model) {
 		if (categoryService.findCategoryByName(category.getCategoryName()) != null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Category already exists\" }");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Loại sản phẩm đã tồn tại\" }");
 			}
 		if (category.getCategoryName() == "") {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Name cannot be empty\" }");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Tên sản phẩm không được để trống\" }");
 		}
 		Category check_category = categoryService.createCategory(category);
 		if(check_category != null) {
