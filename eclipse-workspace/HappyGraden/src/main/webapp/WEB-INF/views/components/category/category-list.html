@@ -56,12 +56,12 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="tr-shadow" th:each="account, i : ${pageable.data}">
+                                            <tr class="tr-shadow" th:each="category, i : ${pageable.data}">
                                                 <td>
                                                     <span th:text="${i.count+(pageable.limit*(pageable.page -1))}"></span>
                                                 </td>
                                                 <td>
-                                                	<span th:text="${account.accountName}"></span>
+                                                	<span th:text="${category.categoryName}"></span>
                                                 </td>
                                                
                                                <td>
@@ -75,7 +75,7 @@
                                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Xóa" type="button"> 
                                                             <i class="zmdi zmdi-delete" th:onclick="|DeleteAccount(${i.index})|"></i>
                                                         </button>
-                                                        <a th:href="@{'/admin/account/' + ${account.accountId}}">
+                                                        <a th:href="@{'/admin/category/' + ${category.categoryId}}">
 	                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Chi tiết">
 	                                                            <i class="zmdi zmdi-more"></i>
 	                                                        </button>

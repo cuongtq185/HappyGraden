@@ -12,7 +12,6 @@ import vn.com.unit.repository.BrandRepository;
 import vn.com.unit.repository.CategoryRepository;
 import vn.com.unit.repository.ProductRepository;
 import vn.com.unit.repository.ShopRepository;
-//import vn.com.unit.repository.categoryEntityRepository;
 import vn.com.unit.service.CategoryService;
 
 @Service

@@ -25,7 +25,7 @@ import vn.com.unit.pageable.PageRequest;
 import vn.com.unit.service.CategoryService;
 
 @Controller
-@PreAuthorize("hasRole('ROLE_ADMIN')")
+//@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class AdminCategoryController {
 	@Autowired
 	private CategoryService categoryService;
@@ -42,7 +42,7 @@ public class AdminCategoryController {
 		List<Category> categories = categoryService.findCategoryPageable(pageable.getLimit(), pageable.getOffset());
 		model.addAttribute("pageable", pageable);
 		pageable.setData(categories);
-		return new ModelAndView("admin/category/category-table");
+		return new ModelAndView("category");
 	}
 	
 	
@@ -59,7 +59,7 @@ public class AdminCategoryController {
 		List<Category> categories = categoryService.findCategoryPageable(pageable.getLimit(), pageable.getOffset());
 		model.addAttribute("pageable", pageable);
 		pageable.setData(categories);
-		return new ModelAndView("components/admin/category/category-list");
+		return new ModelAndView("category");
 	}
 	
 	
