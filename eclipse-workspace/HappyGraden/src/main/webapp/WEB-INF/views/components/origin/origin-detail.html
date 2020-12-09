@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+
+<head>
+
+</head>
+<body>
+	<th:block th:fragment="category-detail">
+		<div class="main-content">
+			<div class="section__content section__content--p30">
+				<div class="container-fluid">
+					<div class="row">
+
+						<div class="col-lg-12">
+							<div class="card">
+								<div class="card-header">
+									<strong> Chi tiết loại sản phẩm</strong> 
+								</div>
+								<div class="card-body card-block">
+									<form action="" method="post" enctype="multipart/form-data" th:if="account != null" th:object="${category}"
+										class="form-horizontal">
+										<div class="row form-group">
+											<div class="col col-md-3">
+												<label class=" form-control-label">ID:</label>
+											</div>
+											<div class="col-12 col-md-9">
+												<input type="text" id="text-input" name="text-input" th:field="*{categoryId}"
+													 class="form-control" disabled>
+											</div>
+
+										</div>
+										
+										<div class="row form-group">
+											<div class="col col-md-3">
+												<label for="text-input" class=" form-control-label"> Tên loại sản phẩm:</label>
+											</div>
+											<div class="col-12 col-md-9">
+												<input type="text" id="text-input" name="text-input" th:field="*{categoryName}"
+													 class="form-control" disabled>
+											</div>
+										</div>
+									
+									</form>
+								</div>
+								<div class="card-footer" align = "right">
+									<!-- <button type="submit" class="btn btn-primary btn-sm">
+										<i class="fa fa-dot-circle-o"></i> Submit
+									</button> -->
+									
+									<a th:href ="@{/admin/account/list}">
+									<button type="reset" class="btn btn-danger btn-sm">
+										<i class="fa fa-ban"></i> Thoát
+									</button>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</th:block>
+
+</body>
+</html>

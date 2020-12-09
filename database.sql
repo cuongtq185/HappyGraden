@@ -176,3 +176,9 @@ insert into category( category_name) values (N'Bonsai')
 insert into category( category_name) values (N'Cây Xương Rồng')
 insert into category( category_name) values (N'Cây Cảnh Trong Nhà')
 insert into category( category_name) values (N'Cây Cảnh Văn Phòng')
+
+--insert origi
+insert into origin( origin_name) values (N'Đà Lạt')
+insert into origin( origin_name) values (N'Trà Vinh')
+insert into origin( origin_name) values (N'Đồng Nai')
+insert into origin( origin_name) values (N'Vĩnh Long')

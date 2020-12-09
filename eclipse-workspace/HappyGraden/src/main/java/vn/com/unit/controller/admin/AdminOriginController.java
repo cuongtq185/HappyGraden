@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,17 +19,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import vn.com.unit.entity.Category;
 import vn.com.unit.entity.Origin;
 import vn.com.unit.pageable.PageRequest;
-import vn.com.unit.service.CategoryService;
 import vn.com.unit.service.OriginService;
 
+@Controller
+//@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class AdminOriginController {
-	
-	@Autowired
-	private CategoryService categoryService;
-	
+		
 	@Autowired
 	private OriginService originService;
 	
