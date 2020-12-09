@@ -76,12 +76,12 @@ public class AdminOriginController {
 	
 	
 	
-	@GetMapping("/admin/category/edit/{category_id}")
-	public ModelAndView categoryEdit(@PathVariable("category_id") long category_id, Model model,
+	@GetMapping("/admin/origin/edit/{origin_id}")
+	public ModelAndView originEdit(@PathVariable("origin_id") long origin_id, Model model,
 			HttpServletRequest request) {
-		Category category = categoryService.findCategoryById(category_id);
-		model.addAttribute("category",category);
-		return new ModelAndView("category-edit");
+		Origin origin = originService.findOriginById(origin_id);
+		model.addAttribute("origin",origin);
+		return new ModelAndView("origin-edit");
 	}
 	
 	@PostMapping("/admin/origin/add")
@@ -101,25 +101,26 @@ public class AdminOriginController {
 				.body("{ \"msg\" : \"You can't create an origin right now. Try again later\" }");
 		
 	}
-	@PutMapping("/admin/category/edit")
+	@PutMapping("/admin/origin/edit")
 	@ResponseBody
-	public ResponseEntity<String> editCategory(@RequestBody Category category, Model model) {
+	public ResponseEntity<String> editCategory(@RequestBody Origin origin, Model model) {
 		
 		
-		if (categoryService.findCategoryByName(category.getCategoryName()) != null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Category already exists.\" }");}
+		if (originService.findOriginByName(origin.getOriginName()) != null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Origin already exists.\" }");}
 		
-		if (category.getCategoryName() == null) {
+		if (origin.getOriginName() == "") {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Name cannot be empty.\" }");
 		}
-		categoryService.updateCategoryById(category);
+		originService.updateOriginById(origin);
 
-		return ResponseEntity.ok("{ \"msg\" : \"update category successfully.\" }");
+		return ResponseEntity.ok("{ \"msg\" : \"update origin successfully.\" }");
 	}
-	@DeleteMapping("/admin/category/delete/{category_id}")
-	public ResponseEntity<Boolean> AdminDisableCategory(Model model, @PathVariable("category_id") Long category_id,
+	
+	@DeleteMapping("/admin/origin/delete/{origin_id}")
+	public ResponseEntity<Boolean> deleteOrigin(Model model, @PathVariable("origin_id") Long origin_id,
 			HttpServletRequest request) {
-		categoryService.deleteCategoryById(category_id);
+		originService.deleteOriginById(origin_id);
 		return  ResponseEntity.ok(null);
 	}
 	

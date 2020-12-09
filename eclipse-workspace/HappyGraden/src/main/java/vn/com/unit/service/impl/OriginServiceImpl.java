@@ -61,4 +61,48 @@ public class OriginServiceImpl implements OriginService {
 		}
 		return null;
 	}
+	
+	@Override
+	public Origin findOriginById(Long id) {
+		// TODO Auto-generated method stub
+		try {
+			return originRepository.findOriginById(id);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+	
+	@Override
+	public void updateOriginById(Origin origin) {
+		try {
+			Origin origin_temp = new Origin();
+
+			origin_temp.setOriginId(origin.getOriginId());
+			
+			/*
+			 * Category category_temp =
+			 * categoryRepository.findOne(category.getCategoryId());
+			 * 
+			 * category_temp.setCategoryName(category.getCategoryName());
+			 */
+
+			originRepository.updateOriginById(origin.getOriginId(), origin.getOriginName());
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		// TODO Auto-generated method stub
+
+	}
+	
+	@Override
+	public void deleteOriginById(Long id) {
+		// TODO Auto-generated method stub
+		try {
+			originRepository.deleteOriginById(id);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 }
