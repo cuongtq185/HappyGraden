@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+	<meta th:name="_csrf" th:content="${_csrf.token}" />
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}" />
+<head>
+    <th:block th:include="components/origin/admin-head :: admin-head"></th:block>
+
+</head>
+<body class="animsition">
+	<div class="page-wrapper">
+       		<div th:replace="components/origin/origin-header :: origin-header"></div>
+       		<div class="page-container">
+				<div th:replace="components/admin/admin-menu :: admin-menu"></div>
+				<div th:replace="components/origin/origin-edit :: origin-edit"></div>
+        	</div>
+        	
+	</div>					
+    <th:block th:replace="components/admin/admin-footer :: admin-footer"></th:block> 
+    
+    <script th:src="@{/static/admin/js/plugins/sweetalert2@9.js}"></script>
+    
+    <script th:inline="javascript">
+		const origin = [[${ origin }]];
+	</script>
+	
+    <script>
+		function editOrigin() {
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
+			origin.originName = $("#originName").val();
+			console.log(origin)
+			$.ajax({
+				url: `/admin/origin/edit`,
+				type: 'PUT',
+				dataType: "json",
+				contentType: "application/json",
+				data: JSON.stringify(origin),
+				beforeSend: function (xhr) {
+					xhr.setRequestHeader(header, token);
+				},
+				success: function (data, status, xhr) {
+					// alert(status)
+					// window.location.href = '/admin/category/list';
+					 try {
+                          Swal.fire({
+               		  position: 'center',
+               		  icon: 'success',
+               		  title: 'Update Success',
+               		  showConfirmButton: false,
+               		  timer: 800
+                   		}).then(()=>{
+                               window.location.href = '/admin/origin/list';
+
+                   		})             
+                     } catch (error) { }
+
+				},
+				error: function (request, status, error) {
+					  try {
+						  Swal.fire({
+							  icon: 'error',
+							  title: 'Oops...',
+							  text: request.responseJSON.msg,
+							})
+                      } catch (error) { }
+                  }
+				
+			});
+		}
+
+	</script>
+</body>
+</html>
