@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,54 +19,58 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import vn.com.unit.entity.Category;
+import vn.com.unit.entity.Origin;
 import vn.com.unit.pageable.PageRequest;
 import vn.com.unit.service.CategoryService;
+import vn.com.unit.service.OriginService;
 
-@Controller
-//@PreAuthorize("hasRole('ROLE_ADMIN')")
-public class AdminCategoryController {
+public class AdminOriginController {
+	
 	@Autowired
 	private CategoryService categoryService;
 	
-	@GetMapping("/admin/category/list")
-	public ModelAndView accountList(Model model,
+	@Autowired
+	private OriginService originService;
+	
+	@GetMapping("/admin/origin/list")
+	public ModelAndView originList(Model model,
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
 			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
 			HttpServletRequest request) {
 
-		int totalitems =  categoryService.countAllCategory();
+		int totalitems =  originService.countAllOrigin();
 		int totalpages = (int) Math.ceil((double) totalitems / (double) limit);
-		PageRequest<Category> pageable = new PageRequest<Category>(page, limit, totalitems, totalpages);
-		List<Category> categories = categoryService.findCategoryPageable(pageable.getLimit(), pageable.getOffset());
+		PageRequest<Origin> pageable = new PageRequest<Origin>(page, limit, totalitems, totalpages);
+		List<Origin> origins = originService.findOriginPageable(pageable.getLimit(), pageable.getOffset());
 		model.addAttribute("pageable", pageable);
-		pageable.setData(categories);
-		return new ModelAndView("category");
+		pageable.setData(origins);
+		return new ModelAndView("origin");
 	}
 	
 	
 	
-	@GetMapping("/admin/category/ajax-list")
-	public ModelAndView accountAjaxList(Model model,
+	@GetMapping("/admin/origin/ajax-list")
+	public ModelAndView originAjaxList(Model model,
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
 			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
 			HttpServletRequest request) {
 
-		int totalitems =  categoryService.countAllCategory();
+		int totalitems =  originService.countAllOrigin();
 		int totalpages = (int) Math.ceil((double) totalitems / (double) limit);
-		PageRequest<Category> pageable = new PageRequest<Category>(page, limit, totalitems, totalpages);
-		List<Category> categories = categoryService.findCategoryPageable(pageable.getLimit(), pageable.getOffset());
+		PageRequest<Origin> pageable = new PageRequest<Origin>(page, limit, totalitems, totalpages);
+		List<Origin> origins = originService.findOriginPageable(pageable.getLimit(), pageable.getOffset());
 		model.addAttribute("pageable", pageable);
-		pageable.setData(categories);
-		return new ModelAndView("category");
+		pageable.setData(origins);
+		return new ModelAndView("origin");
 	}
 	
 	
 	
-	@GetMapping("/admin/category/add")
+	@GetMapping("/admin/origin/add")
 	public ModelAndView categoryAdd(Model model,
 			HttpServletRequest request) {
 
-		return new ModelAndView("category-add");
+		return new ModelAndView("origin-add");
 	}
 	
 	
@@ -82,21 +84,21 @@ public class AdminCategoryController {
 		return new ModelAndView("category-edit");
 	}
 	
-	@PostMapping("/admin/category/add")
+	@PostMapping("/admin/origin/add")
 	@ResponseBody
-	public ResponseEntity<String> createCategory(@RequestBody Category category, Model model) {
-		if (categoryService.findCategoryByName(category.getCategoryName()) != null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Category already exists.\" }");
+	public ResponseEntity<String> createOrigin(@RequestBody Origin origin, Model model) {
+		if (originService.findOriginByName(origin.getOriginName()) != null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Origin already exists.\" }");
 			}
-		if (category.getCategoryName() == "") {
+		if (origin.getOriginName() == "") {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Name cannot be empty.\" }");
 		}
-		Category check_category = categoryService.createCategory(category);
-		if(check_category != null) {
-			return ResponseEntity.status(HttpStatus.OK).body("{\"msg\" : \"Create category successfully.\" }");
+		Origin check_origin = originService.createOrigin(origin);
+		if(check_origin != null) {
+			return ResponseEntity.status(HttpStatus.OK).body("{\"msg\" : \"Origin category successfully.\" }");
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-				.body("{ \"msg\" : \"You can't create an category right now. Try again later\" }");
+				.body("{ \"msg\" : \"You can't create an origin right now. Try again later\" }");
 		
 	}
 	@PutMapping("/admin/category/edit")
@@ -120,25 +122,5 @@ public class AdminCategoryController {
 		categoryService.deleteCategoryById(category_id);
 		return  ResponseEntity.ok(null);
 	}
-	
-	
-//	@PostMapping("/admin/category/addnew")
-//	@ResponseBody
-//	public ResponseEntity<String> createNewCategory(@RequestBody categoryEntity category, Model model) {
-//		if (categoryService.findCategoryByName(category.getName()) != null) {
-//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Category already exists\" }");
-//			}
-//		if (category.getName() == "") {
-//			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Name cannot be empty\" }");
-//		}
-//		categoryEntity result = categoryService.createNewCategory(category);
-//		if (result.getId() != null) {
-//			return ResponseEntity.ok("{ \"id\" : " + result.getId() + ", \"msg\" : \"Create category successfully\" }");
-//		}
-//		
-//		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-//				.body("{ \"msg\" : \"You can't create an category right now. Try again later\" }");
-//		
-//	}
 	
 }

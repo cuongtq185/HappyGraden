@@ -1,0 +1,1 @@
+insert into origin (origin_name) values (/*name*/'');
