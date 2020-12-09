@@ -69,7 +69,7 @@
                                                         <button class="item" data-toggle="tooltip" data-placement="top" title="Xóa" type="button"> 
                                                             <i class="zmdi zmdi-delete"th:onclick="|DeleteCategory(${category.categoryId})|"></i>
                                                         </button>
-                                                       <a th:href="@{'/admin/category/' + ${category.categoryId}}">
+                                                       <a th:href="@{'/admin/category/edit/' + ${category.categoryId}}">
 	                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Sửa">
 	                                                            <i class="zmdi zmdi-edit"></i>
 	                                                        </button>

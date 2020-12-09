@@ -1,3 +1,3 @@
-UPDATE p2p_category
-SET name = /*name*/
-WHERE id = /*id*/
+UPDATE category
+SET category_name = /*name*/
+WHERE category_id = /*id*/

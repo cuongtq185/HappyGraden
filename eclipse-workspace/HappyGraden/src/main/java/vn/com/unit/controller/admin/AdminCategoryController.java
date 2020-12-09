@@ -79,7 +79,7 @@ public class AdminCategoryController {
 			HttpServletRequest request) {
 		Category category = categoryService.findCategoryById(category_id);
 		model.addAttribute("category",category);
-		return new ModelAndView("admin/category/category-edit");
+		return new ModelAndView("category-edit");
 	}
 	
 	@PostMapping("/admin/category/add")
