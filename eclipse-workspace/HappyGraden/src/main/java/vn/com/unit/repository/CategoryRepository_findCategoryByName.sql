@@ -1,3 +1,3 @@
 select *
 from category
-where name = /*name*/ 
+where category_name = /*name*/ 

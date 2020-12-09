@@ -20,28 +20,29 @@
     <th:block th:replace="components/admin/admin-footer :: admin-footer"></th:block> 
     
     <script th:src="@{/static/admin/js/plugins/sweetalert2@9.js}"></script>
-     <script>
-		function EditCategory() {
+    <script>
+		function editCategory() {
 			var token = $("meta[name='_csrf']").attr("content");
 			var header = $("meta[name='_csrf_header']").attr("content");
-			let newCategory = new Object();
-			newCategory.categoryName = $("#addCategoryName").val();
-
+			category.categoryName = $("#categoryName").val();
+			console.log(category)
 			$.ajax({
 				url: `/admin/category/edit`,
-				type: 'POST',
+				type: 'PUT',
 				dataType: "json",
 				contentType: "application/json",
-				data: JSON.stringify(newCategory),
+				data: JSON.stringify(category),
 				beforeSend: function (xhr) {
 					xhr.setRequestHeader(header, token);
 				},
 				success: function (data, status, xhr) {
+					// alert(status)
+					// window.location.href = '/admin/category/list';
 					 try {
                           Swal.fire({
                		  position: 'center',
                		  icon: 'success',
-               		  title: 'Insert Success',
+               		  title: 'Update Success',
                		  showConfirmButton: false,
                		  timer: 800
                    		}).then(()=>{
@@ -64,6 +65,6 @@
 			});
 		}
 
-	</script>	 
+	</script>
 </body>
 </html>

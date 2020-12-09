@@ -86,17 +86,17 @@ public class AdminCategoryController {
 	@ResponseBody
 	public ResponseEntity<String> createCategory(@RequestBody Category category, Model model) {
 		if (categoryService.findCategoryByName(category.getCategoryName()) != null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Loại sản phẩm đã tồn tại\" }");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Loại sản phẩm đã tồn tại.\" }");
 			}
 		if (category.getCategoryName() == "") {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Tên sản phẩm không được để trống\" }");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Tên sản phẩm không được để trống.\" }");
 		}
 		Category check_category = categoryService.createCategory(category);
 		if(check_category != null) {
-			return ResponseEntity.status(HttpStatus.OK).body("{\"msg\" : \"Create category successfully\" }");
+			return ResponseEntity.status(HttpStatus.OK).body("{\"msg\" : \"Loại sản phẩm được tạo thành công.\" }");
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-				.body("{ \"msg\" : \"You can't create an category right now. Try again later\" }");
+				.body("{ \"msg\" : \"Bạn không thể tạo loại sản phẩm. Hãy thử lại.\" }");
 		
 	}
 	@PutMapping("/admin/category/edit")
@@ -105,14 +105,14 @@ public class AdminCategoryController {
 		
 		
 		if (categoryService.findCategoryByName(category.getCategoryName()) != null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Category already exists\" }");}
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Loại sản phẩm đã tồn tại.\" }");}
 		
 		if (category.getCategoryName() == null) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Name cannot be empty\" }");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Tên loại sản phẩm không được để trống.\" }");
 		}
 		categoryService.updateCategoryById(category);
 
-		return ResponseEntity.ok("{ \"msg\" : \"update category successfully\" }");
+		return ResponseEntity.ok("{ \"msg\" : \"Cập nhật loại sản phẩm thành công.\" }");
 	}
 	@DeleteMapping("/admin/category/delete/{category_id}")
 	public ResponseEntity<Boolean> AdminDisableCategory(Model model, @PathVariable("category_id") Long category_id,
