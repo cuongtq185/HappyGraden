@@ -70,9 +70,7 @@ public class AdminCategoryController {
 
 		return new ModelAndView("category-add");
 	}
-	
-	
-	
+		
 	
 	@GetMapping("/admin/category/edit/{category_id}")
 	public ModelAndView categoryEdit(@PathVariable("category_id") long category_id, Model model,
@@ -91,12 +89,12 @@ public class AdminCategoryController {
 		if (category.getCategoryName() == "") {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Name cannot be empty.\" }");
 		}
-		Category check_category = categoryService.createCategory(category);
-		if(check_category != null) {
-			return ResponseEntity.status(HttpStatus.OK).body("{\"msg\" : \"Create category successfully.\" }");
-		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-				.body("{ \"msg\" : \"You can't create an category right now. Try again later\" }");
+		 categoryService.createCategory(category);
+		/*
+		 * if(check_category != null) { return ResponseEntity.status(HttpStatus.OK).
+		 * body("{\"msg\" : \"Create category successfully.\" }"); }
+		 */
+		 return ResponseEntity.ok("{ \"msg\" : \"Create category successfully.\" }");
 		
 	}
 	@PutMapping("/admin/category/edit")

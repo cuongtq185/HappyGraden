@@ -1,1 +1,1 @@
-insert into category (category_name) values (/*name*/'');
+insert into category (category_name) values (/*name*/'')

@@ -92,12 +92,16 @@ public class AdminOriginController {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Name cannot be empty.\" }");
 		}
 		Origin check_origin = originService.createOrigin(origin);
-		if(check_origin != null) {
-			return ResponseEntity.status(HttpStatus.OK).body("{\"msg\" : \"Origin category successfully.\" }");
-		}
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-				.body("{ \"msg\" : \"You can't create an origin right now. Try again later\" }");
-		
+		/*
+		 * if(check_origin != null) { return ResponseEntity.status(HttpStatus.OK).
+		 * body("{\"msg\" : \"Origin category successfully.\" }"); }
+		 */
+		/*
+		 * return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+		 * .body("{ \"msg\" : \"You can't create an origin right now. Try again later\" }"
+		 * );
+		 */
+		return ResponseEntity.ok("{ \"msg\" : \"Create origin successfully.\" }");
 	}
 	@PutMapping("/admin/origin/edit")
 	@ResponseBody
