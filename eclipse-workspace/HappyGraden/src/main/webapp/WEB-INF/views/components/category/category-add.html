@@ -18,35 +18,36 @@
 							<div class="card">
 								<a th:href="@{/admin/category/add}">
 									<div class="card-header">
-										<strong> Thêm loại sản phẩm</strong> 
+										<strong> Thêm loại sản phẩm</strong>
 									</div>
 								</a>
 								<div class="card-body card-block">
-									<form action=""
-										class="form-horizontal">
-										
-										
+									<form action="" class="form-horizontal">
+
+
 										<div class="row form-group">
 											<div class="col col-md-3">
-												<label for="text-input" class=" form-control-label"> Tên loại sản phẩm:</label>
+												<label for="text-input" class=" form-control-label">
+													Tên loại sản phẩm:</label>
 											</div>
 											<div class="col-12 col-md-9">
-												<input type="text" id="addCategoryName" name="text-input" 
-													 class="form-control">
+												<input type="text" id="addCategoryName" name="text-input"
+													class="form-control">
 											</div>
 										</div>
-									
+
 									</form>
 								</div>
-								<div class="card-footer" align = "right">
-									<button type="submit" class="btn btn-primary btn-sm" onClick="AddCategory()">
-										<i class="fa fa-dot-circle-o"></i> Submit
+								<div class="card-footer" align="right">
+									<button type="submit" class="btn btn-primary btn-sm"
+										onClick="AddCategory()">
+										<i class="fa fa-dot-circle-o"></i> Lưu
 									</button>
-									
-									<a th:href ="@{/admin/category/list}">
-									<button type="reset" class="btn btn-danger btn-sm">
-										<i class="fa fa-ban"></i> Thoát
-									</button>
+
+									<a th:href="@{/admin/category/list}">
+										<button type="reset" class="btn btn-danger btn-sm">
+											<i class="fa fa-ban"></i> Thoát
+										</button>
 									</a>
 								</div>
 							</div>
@@ -54,6 +55,15 @@
 					</div>
 				</div>
 			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="copyright">
+						<p style="color: green">Copyright © 2020 Happy Graden. All
+							rights reserved.</p>
+					</div>
+				</div>
+			</div>
+		</div>
 		</div>		
 	</th:block>
 

@@ -14,9 +14,10 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- DATA TABLE -->
-                                <h3 class="title-5 m-b-35">Bảng Loại</h3>
+                                
                                 <div class="table-data__tool">
                                     <div class="table-data__tool-left">
+                                    <h3 class="title-5 m-b-35" style = "margin-bottom: 0px; color: red" >Bảng Loại Sản Phẩm</h3>
                                        <!--  <div class="rs-select2--light rs-select2--md">
                                             <select class="js-select2" name="property">
                                                 <option selected="selected">All Properties</option>
@@ -36,10 +37,10 @@
                                         <!-- <button class="au-btn-filter">
                                             <i class="zmdi zmdi-filter-list"></i>Lọc</button> -->
                                     </div>
-                                    <div class="table-data__tool-right">
+                                    <div class="table-data__tool-right" title = "Thêm loại">
                                     	<a th:href ="@{/admin/category/add}">
                                         <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                            <i class="zmdi zmdi-plus"></i>THÊM LOẠI</button>
+                                            <i class="fa fa-plus-circle" style ="margin-right: 0px;"></i>	</button>
                                         </a>
                                     </div>
                                 </div> 
@@ -50,7 +51,8 @@
                                                 <th>
                                                     STT
                                                 </th>
-                                                <th>Tên loại sản phẩm</th>                                              
+                                                <th>Tên loại sản phẩm</th>    
+                                                                                          
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -66,11 +68,11 @@
                                                <td>
                                                     <div class="table-data-feature">
                                                         
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Xóa" type="button"> 
+                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Xóa" type="button" style="background-color: blanchedalmond;"> 
                                                             <i class="zmdi zmdi-delete"th:onclick="|DeleteCategory(${category.categoryId})|"></i>
                                                         </button>
                                                        <a th:href="@{'/admin/category/edit/' + ${category.categoryId}}">
-	                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Sửa">
+	                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Sửa" style="background-color: blanchedalmond;">
 	                                                            <i class="zmdi zmdi-edit"></i>
 	                                                        </button>
                                                         </a>
@@ -80,6 +82,7 @@
                                            
                                         </tbody>
                                     </table>
+                                   <div th:replace="components/pagination/panigation :: content(${pageable})"></div>
                                 </div>
                                 <!-- END DATA TABLE -->
                             </div>
@@ -87,7 +90,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="copyright">
-								<p>Copyright © 2020 Happy Graden. All rights reserved.</p>
+								<p style="color:green">Copyright © 2020 Happy Graden. All rights reserved.</p>
 							</div>
 						</div>
 					</div>

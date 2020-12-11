@@ -14,9 +14,10 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- DATA TABLE -->
-                                <h3 class="title-5 m-b-35">Bảng Xuất Xứ Sản Phẩm</h3>
+                                
                                 <div class="table-data__tool">
                                     <div class="table-data__tool-left">
+                                    <h3 class="title-5 m-b-35" style = "margin-bottom: 0px; color: red">Bảng Xuất Xứ Sản Phẩm</h3>
                                        <!--  <div class="rs-select2--light rs-select2--md">
                                             <select class="js-select2" name="property">
                                                 <option selected="selected">All Properties</option>
@@ -38,8 +39,8 @@
                                     </div>
                                     <div class="table-data__tool-right">
                                     	<a th:href ="@{/admin/origin/add}">
-                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                            <i class="zmdi zmdi-plus"></i>THÊM XUẤT XỨ</button>
+                                       <button class="au-btn au-btn-icon au-btn--green au-btn--small" title = "Thêm xuất xứ">
+                                            <i class="fa fa-plus-circle" style ="margin-right: 0px;"></i>	</button>
                                         </a>
                                     </div>
                                 </div> 
@@ -66,11 +67,11 @@
                                                <td>
                                                     <div class="table-data-feature">
                                                         
-                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Xóa" type="button"> 
+                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Xóa" type="button" style="background-color: blanchedalmond;"> 
                                                             <i class="zmdi zmdi-delete"th:onclick="|DeleteOrigin(${origin.originId})|"></i>
                                                         </button>
                                                        <a th:href="@{'/admin/origin/edit/' + ${origin.originId}}">
-	                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Sửa">
+	                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Sửa" style="background-color: blanchedalmond;">
 	                                                            <i class="zmdi zmdi-edit"></i>
 	                                                        </button>
                                                         </a>
@@ -80,6 +81,7 @@
                                            
                                         </tbody>
                                     </table>
+                                    <div th:replace="components/pagination/panigation :: content(${pageable})"></div>
                                 </div>
                                 <!-- END DATA TABLE -->
                             </div>

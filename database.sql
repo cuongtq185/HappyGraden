@@ -171,6 +171,29 @@ values (N'test1', 'test1', '', 'test1@gmail.com','0123456789', 'Châu Thành - T
 insert into account(account_name, account_username, account_password, account_email,account_phone, account_address, role)
 values (N'test2', 'test2', '', 'test2@gmail.com','0123456789', 'Châu Thành - Trà Vinh', 2)
 
+insert into account(account_name, account_username, account_password, account_email,account_phone, account_address, role)
+values (N'test3', 'test3', '', 'test3@gmail.com','0123456789', 'Châu Thành - Trà Vinh', 2)
+
+insert into account(account_name, account_username, account_password, account_email,account_phone, account_address, role)
+values (N'test4', 'test4', '', 'test4@gmail.com','0123456789', 'Châu Thành - Trà Vinh', 2)
+
+insert into account(account_name, account_username, account_password, account_email,account_phone, account_address, role)
+values (N'test5', 'test5', '', 'test5@gmail.com','0123456789', 'Châu Thành - Trà Vinh', 2)
+
+insert into account(account_name, account_username, account_password, account_email,account_phone, account_address, role)
+values (N'test6', 'test6', '', 'test6@gmail.com','0123456789', 'Châu Thành - Trà Vinh', 2)
+
+insert into account(account_name, account_username, account_password, account_email,account_phone, account_address, role)
+values (N'test7', 'test7', '', 'test7@gmail.com','0123456789', 'Châu Thành - Trà Vinh', 2)
+
+insert into account(account_name, account_username, account_password, account_email,account_phone, account_address, role)
+values (N'test8', 'test8', '', 'test8@gmail.com','0123456789', 'Châu Thành - Trà Vinh', 2)
+
+insert into account(account_name, account_username, account_password, account_email,account_phone, account_address, role)
+values (N'test9', 'test9', '', 'test9@gmail.com','0123456789', 'Châu Thành - Trà Vinh', 2)
+
+insert into account(account_name, account_username, account_password, account_email,account_phone, account_address, role)
+values (N'test10', 'test10', '', 'test10@gmail.com','0123456789', 'Châu Thành - Trà Vinh', 2)
 --insert category
 insert into category( category_name) values (N'Bonsai')
 insert into category( category_name) values (N'Cây Xương Rồng')
