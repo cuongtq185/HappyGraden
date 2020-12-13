@@ -33,7 +33,7 @@ public class AdminCategoryController {
 	@GetMapping("/admin/category/list")
 	public ModelAndView accountList(Model model,
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
-			@RequestParam(value = "limit", required = false, defaultValue = "4") int limit,
+			@RequestParam(value = "limit", required = false, defaultValue = "20") int limit,
 			HttpServletRequest request) {
 
 		int totalitems =  categoryService.countAllCategory();
@@ -50,7 +50,7 @@ public class AdminCategoryController {
 	@GetMapping("/admin/category/ajax-list")
 	public ModelAndView accountAjaxList(Model model,
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
-			@RequestParam(value = "limit", required = false, defaultValue = "4") int limit,
+			@RequestParam(value = "limit", required = false, defaultValue = "20") int limit,
 			HttpServletRequest request) {
 
 		int totalitems =  categoryService.countAllCategory();

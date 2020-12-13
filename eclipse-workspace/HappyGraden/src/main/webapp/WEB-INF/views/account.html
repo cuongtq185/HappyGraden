@@ -78,6 +78,39 @@
                 }
             }) 
         }
+        
+        function Pagging(limit,page){
+         	 var token = $("meta[name='_csrf']").attr("content");
+              var header = $("meta[name='_csrf_header']").attr("content");
+      		var keyword = $("#search-box").val();
+
+              $.ajax({
+                 url: `/admin/account/list-ajax/?page=${page}&limit=${limit}&keyword=${keyword}`,
+                 type: 'GET', 		
+                 beforeSend: function (xhr) {
+                     xhr.setRequestHeader(header, token);
+                 },
+     
+                 success: function (data, status, xhr) {
+               	  var data = data.replace('<body', '<body><div id="body"').replace('</body>','</div></body>');
+                     var body = $(data).filter('#body');
+                     var idTable = $(data).find("#account-list-table").length;
+                     if(idTable > 0){
+                   	  $("#account-list-table").html(body)
+                     }else{
+                   	  window.location.href = "/login"
+                     }
+                       
+                 },
+                 error: function (request, status, error) {
+                /*     
+                     // To reload the page discarding the POST data(perform a GET request)
+                     window.location.href = window.location.href; */
+                     
+               	  alert(request.status);
+                 }
+             });  
+      	}
       </script>
 </body>
 </html>

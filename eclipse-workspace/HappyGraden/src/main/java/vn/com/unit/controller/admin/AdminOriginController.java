@@ -33,7 +33,7 @@ public class AdminOriginController {
 	@GetMapping("/admin/origin/list")
 	public ModelAndView originList(Model model,
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
-			@RequestParam(value = "limit", required = false, defaultValue = "4") int limit,
+			@RequestParam(value = "limit", required = false, defaultValue = "20") int limit,
 			HttpServletRequest request) {
 
 		int totalitems =  originService.countAllOrigin();
@@ -50,7 +50,7 @@ public class AdminOriginController {
 	@GetMapping("/admin/origin/ajax-list")
 	public ModelAndView originAjaxList(Model model,
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
-			@RequestParam(value = "limit", required = false, defaultValue = "4") int limit,
+			@RequestParam(value = "limit", required = false, defaultValue = "20") int limit,
 			HttpServletRequest request) {
 
 		int totalitems =  originService.countAllOrigin();

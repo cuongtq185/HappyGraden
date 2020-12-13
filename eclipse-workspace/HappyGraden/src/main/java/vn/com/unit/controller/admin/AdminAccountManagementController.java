@@ -38,7 +38,7 @@ public class AdminAccountManagementController {
 	@GetMapping("admin/account/list")
 	public ModelAndView accountList(Model model,
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
-			@RequestParam(value = "limit", required = false, defaultValue = "4") int limit,
+			@RequestParam(value = "limit", required = false, defaultValue = "20") int limit,
 			@RequestParam(value = "keyword", required = false) String keyword,
 			@RequestParam(value = "role_id", required = false) Long role_id,
 			HttpServletRequest request) {
@@ -63,7 +63,7 @@ public class AdminAccountManagementController {
 	@GetMapping("/admin/account/list-ajax")
 	public  ModelAndView  accountListAjax(Model model,
 			@RequestParam(value = "page", required = false, defaultValue = "1") int page,
-			@RequestParam(value = "limit", required = false, defaultValue = "4") int limit,
+			@RequestParam(value = "limit", required = false, defaultValue = "20") int limit,
 			@RequestParam(value = "keyword", required = false) String keyword,
 			@RequestParam(value = "role_id", required = false) Long role_id,
 			HttpServletRequest request) {

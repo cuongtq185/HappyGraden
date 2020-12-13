@@ -11,8 +11,10 @@ import vn.com.unit.dto.ProductDto;
 import vn.com.unit.entity.Brand;
 import vn.com.unit.entity.Category;
 import vn.com.unit.entity.Product;
+import vn.com.unit.entity.ProductImg2D;
 import vn.com.unit.repository.BrandRepository;
 import vn.com.unit.repository.CategoryRepository;
+import vn.com.unit.repository.ProductImg2DRepository;
 import vn.com.unit.repository.ProductRepository;
 import vn.com.unit.repository.ShopRepository;
 import vn.com.unit.service.BrandService;
@@ -40,6 +42,9 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	CategoryService categoryService;
+	
+	@Autowired
+	ProductImg2DRepository productImg2DRepository;
 
 	@Override
 	public List<ProductDto> findAllProductByShopId(Long shop_id, int limit, int offset) {
@@ -70,9 +75,9 @@ public class ProductServiceImpl implements ProductService {
 
 				ProductDto product_dto = new ProductDto(product);
 
-				Brand brand = brandService.findBrandByProductId(product.getId());
+				Brand brand = brandService.findBrandByProductId(product.getProductId());
 				product_dto.setBrandName(brand.getName());
-				Category category = categoryService.findCategoryByProductId(product.getId());
+				Category category = categoryService.findCategoryByProductId(product.getProductId());
 				product_dto.setCategoryName(category.getCategoryName());
 
 				product_dto_list.add(product_dto);
@@ -97,9 +102,9 @@ public class ProductServiceImpl implements ProductService {
 
 				ProductDto product_dto = new ProductDto(product);
 
-				Brand brand = brandService.findBrandByProductId(product.getId());
+				Brand brand = brandService.findBrandByProductId(product.getProductId());
 				product_dto.setBrandName(brand.getName());
-				Category category = categoryService.findCategoryByProductId(product.getId());
+				Category category = categoryService.findCategoryByProductId(product.getProductId());
 				product_dto.setCategoryName(category.getCategoryName());
 
 				product_dto_list.add(product_dto);
@@ -124,9 +129,9 @@ public class ProductServiceImpl implements ProductService {
 
 				ProductDto product_dto = new ProductDto(product);
 
-				Brand brand = brandService.findBrandByProductId(product.getId());
+				Brand brand = brandService.findBrandByProductId(product.getProductId());
 				product_dto.setBrandName(brand.getName());
-				Category category = categoryService.findCategoryByProductId(product.getId());
+				Category category = categoryService.findCategoryByProductId(product.getProductId());
 				product_dto.setCategoryName(category.getCategoryName());
 
 				product_dto_list.add(product_dto);
@@ -153,9 +158,9 @@ public class ProductServiceImpl implements ProductService {
 
 				ProductDto product_dto = new ProductDto(product);
 
-				Brand brand = brandService.findBrandByProductId(product.getId());
+				Brand brand = brandService.findBrandByProductId(product.getProductId());
 				product_dto.setBrandName(brand.getName());
-				Category category = categoryService.findCategoryByProductId(product.getId());
+				Category category = categoryService.findCategoryByProductId(product.getProductId());
 				product_dto.setCategoryName(category.getCategoryName());
 
 				product_dto_list.add(product_dto);
@@ -193,7 +198,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Product createNewProduct(Product product) {
-		product.setId(null);
+		product.setProductId(null);
 		return productRepository.save(product);
 	}
 
@@ -205,9 +210,9 @@ public class ProductServiceImpl implements ProductService {
 //			product_temp.setId(product_id);
 			Product product_temp = productRepository.findOne(product_id);
 			if (0 == status) {
-				product_temp.setDisable(false);
+				product_temp.setProductDisable(false);
 			} else {
-				product_temp.setDisable(true);
+				product_temp.setProductDisable(true);
 			}
 
 			productRepository.save(product_temp);
@@ -221,24 +226,24 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public void saveProduct(Long product_id, String name, int price, String detail, int category, int brand,
-			int quantity) {
-
-		try {
-//			productRepository.saveProduct(product_id, name, price, quantity, category, brand, detail);
-			
-			Product product_temp = new Product();
-			product_temp.setId(product_id);
-			product_temp.setName(name);
-			product_temp.setPrice(price);
-			product_temp.setQuantity(quantity);
-			product_temp.setCategory(category);
-			product_temp.setBrand(brand);
-			product_temp.setDetail(detail);
-			
-			productRepository.save(product_temp);
-			
-		} catch (Exception e) {
-		}
+		int quantity) {
+//
+//		try {
+////			productRepository.saveProduct(product_id, name, price, quantity, category, brand, detail);
+//			
+//			Product product_temp = new Product();
+//			product_temp.setId(product_id);
+//			product_temp.setName(name);
+//			product_temp.setPrice(price);
+//			product_temp.setQuantity(quantity);
+//			product_temp.setCategory(category);
+//			product_temp.setBrand(brand);
+//			product_temp.setDetail(detail);
+//			
+//			productRepository.save(product_temp);
+//			
+//		} catch (Exception e) {
+//		}
 	}
 
 	@Override
@@ -310,6 +315,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Product findOne(Long id) {
 		return productRepository.findOne(id);
+	}
+	
+	// bo sung product_img2D
+	public ProductImg2D save(ProductImg2D productImg2D) {
+		return productImg2DRepository.save(productImg2D);
 	}
 
 }

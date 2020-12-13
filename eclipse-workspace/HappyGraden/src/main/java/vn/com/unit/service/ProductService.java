@@ -4,6 +4,7 @@ import java.util.List;
 
 import vn.com.unit.dto.ProductDto;
 import vn.com.unit.entity.Product;
+import vn.com.unit.entity.ProductImg2D;
 
 public interface ProductService {
 	
@@ -38,6 +39,10 @@ public interface ProductService {
 	public Product findOneTopProductPaymentSuccess();
 	
 	public Product save(Product product);
+	
+	//bo sung product_img2d
+	
+	public ProductImg2D save(ProductImg2D productImg2D);
 	
 	public Product findOne(Long id);
 }

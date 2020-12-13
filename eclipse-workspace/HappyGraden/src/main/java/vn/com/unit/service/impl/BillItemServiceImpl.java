@@ -71,7 +71,7 @@ public class BillItemServiceImpl implements BillItemService {
 				Long product_id = (long) bill_item.getProduct();
 				Product product = productService.findProductByProductId(product_id);
 //				bill_item.setProduct_name(product_name);
-				total = total + (product.getPrice() * bill_item.getQuantity());
+//				total = total + (product.getPrice() * bill_item.getQuantity());
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -9,107 +9,84 @@ import jp.sf.amateras.mirage.annotation.PrimaryKey;
 import jp.sf.amateras.mirage.annotation.Table;
 import jp.sf.amateras.mirage.annotation.PrimaryKey.GenerationType;
 
-@Table(name = "p2p_product")
+@Table(name = "product")
 public class Product {
 	
 	@Id
 	@PrimaryKey(generationType = GenerationType.IDENTITY) // Primary key // Auto increment
-	@Column(name = "id")
-	private Long id;
+	@Column(name = "product_id")
+	private Long productId;
 
-	@Column(name = "shop")
-	private Long shop;
+	@Column(name = "product_name")
+	private String productName;
 	
-	@Column(name = "name")
-	private String name;
+	@Column(name = "product_detail")
+	private String productDetail;
 	
-	@Column(name = "price")
-	private int price;
+	@Column(name = "product_disable")
+	private boolean productDisable;
 	
-	@Column(name = "detail")
-	private String detail;
-	
-	@Column(name = "img")
-	private String img;
-	
-	@Column(name = "disable")
-	private boolean disable;
+	@Column(name = "product_createAt")
+	private Date productCreateAt;	
 	
 	@Column(name = "category")
 	private int category;
 	
-	@Column(name = "brand")
-	private int brand;
-	
-	@Column(name = "quantity")
-	private int quantity;
-
-	@Column(name = "create_at")
-	private Date createAt;
+	@Column(name = "origin")
+	private int origin;	
 	
 	public Product() {
 	}
 	
 	public Product(Product product) {
-		this.id = product.getId();
-		this.shop = product.getShop();
-		this.name = product.getName();
-		this.price = product.getPrice();
-		this.detail = product.getDetail();
-		this.img = product.getImg();
-		this.disable = product.isDisable();
+		this.productId = product.getProductId();
+		this.productName = product.getProductName();
+		this.productDetail = product.getProductDetail();
+		this.productDisable = product.isProductDisable();
+		this.productCreateAt = product.getProductCreateAt();
 		this.category = product.getCategory();
-		this.brand = product.getBrand();
-		this.quantity = product.getQuantity();
-		this.createAt = product.getCreateAt();
+		this.origin = product.getOrigin();
+		
 	}
 
-	public Long getId() {
-		return id;
+	public Long getProductId() {
+		return productId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setProductId(Long productId) {
+		this.productId = productId;
 	}
 
-	public Long getShop() {
-		return shop;
+	public String getProductName() {
+		return productName;
 	}
 
-	public void setShop(Long shop) {
-		this.shop = shop;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
-	public String getName() {
-		return name;
+	public String getProductDetail() {
+		return productDetail;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setProductDetail(String productDetail) {
+		this.productDetail = productDetail;
 	}
 
-	public int getPrice() {
-		return price;
+	public boolean isProductDisable() {
+		return productDisable;
 	}
 
-	public void setPrice(int price) {
-		this.price = price;
+	public void setProductDisable(boolean productDisable) {
+		this.productDisable = productDisable;
 	}
 
-	public String getDetail() {
-		return detail;
+	public Date getProductCreateAt() {
+		return productCreateAt;
 	}
 
-	public void setDetail(String detail) {
-		this.detail = detail;
-	}
-
-	public String getImg() {
-		return img;
-	}
-
-	public void setImg(String img) {
-		this.img = img;
+	public void setProductCreateAt(Date productCreateAt) {
+		this.productCreateAt = productCreateAt;
 	}
 
 	public int getCategory() {
@@ -120,36 +97,12 @@ public class Product {
 		this.category = category;
 	}
 
-	public boolean isDisable() {
-		return disable;
+	public int getOrigin() {
+		return origin;
 	}
 
-	public void setDisable(boolean disable) {
-		this.disable = disable;
-	}
-
-	public Date getCreateAt() {
-		return createAt;
-	}
-
-	public void setCreateAt(Date createAt) {
-		this.createAt = createAt;
-	}
-
-	public int getBrand() {
-		return brand;
-	}
-
-	public void setBrand(int brand) {
-		this.brand = brand;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+	public void setOrigin(int origin) {
+		this.origin = origin;
+	}	
 	
 }
