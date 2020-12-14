@@ -94,4 +94,8 @@ public interface ProductRepository extends MirageRepository<Product, Long> {
 	*/
 	public Product findOneTopProductPaymentSuccess();
 	
+	public int countAllProductActive();
+	
+	public List<ProductDto> findAllProductActive(@Param("sizeOfPage") Integer sizeOfPage, @Param("offset") Integer offset);
+	
 }

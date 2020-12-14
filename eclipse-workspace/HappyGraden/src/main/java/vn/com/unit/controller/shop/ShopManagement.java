@@ -121,7 +121,7 @@ public class ShopManagement {
 		 */
 
 		// Create product
-		//Product product_new = productService.save(product);
+		Product product_new = productService.save(product);
 		ProductImg2D img_new = productService.save(productImg2D);
 
 		Thread thread = new Thread(new Runnable() {
@@ -141,7 +141,7 @@ public class ShopManagement {
 		thread.start();
 		// --------
 
-		return "redirect:/shop/myproduct?mode=view";
+		return "account";
 	}
 
 	// edit Product

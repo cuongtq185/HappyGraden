@@ -44,7 +44,7 @@ public class ProductController {
 		model.addAttribute("products", products);
 		List<Category> categories = categoryService.findAllCategory();
 		model.addAttribute("categories", categories);
-		model.addAttribute("title", product.getName());
+//		model.addAttribute("title", product.getName());
 		
 		int total_cart_item= 0;
 		Long total = 0L;

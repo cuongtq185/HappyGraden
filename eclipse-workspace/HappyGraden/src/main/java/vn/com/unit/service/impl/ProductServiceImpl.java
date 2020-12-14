@@ -73,14 +73,14 @@ public class ProductServiceImpl implements ProductService {
 
 			for (Product product : product_list) {
 
-				ProductDto product_dto = new ProductDto(product);
-
-				Brand brand = brandService.findBrandByProductId(product.getProductId());
-				product_dto.setBrandName(brand.getName());
-				Category category = categoryService.findCategoryByProductId(product.getProductId());
-				product_dto.setCategoryName(category.getCategoryName());
-
-				product_dto_list.add(product_dto);
+//				ProductDto product_dto = new ProductDto(product);
+//
+//				Brand brand = brandService.findBrandByProductId(product.getProductId());
+//				product_dto.setBrandName(brand.getName());
+//				Category category = categoryService.findCategoryByProductId(product.getProductId());
+//				product_dto.setCategoryName(category.getCategoryName());
+//
+//				product_dto_list.add(product_dto);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -100,14 +100,14 @@ public class ProductServiceImpl implements ProductService {
 
 			for (Product product : product_list) {
 
-				ProductDto product_dto = new ProductDto(product);
-
-				Brand brand = brandService.findBrandByProductId(product.getProductId());
-				product_dto.setBrandName(brand.getName());
-				Category category = categoryService.findCategoryByProductId(product.getProductId());
-				product_dto.setCategoryName(category.getCategoryName());
-
-				product_dto_list.add(product_dto);
+//				ProductDto product_dto = new ProductDto(product);
+//
+//				Brand brand = brandService.findBrandByProductId(product.getProductId());
+//				product_dto.setBrandName(brand.getName());
+//				Category category = categoryService.findCategoryByProductId(product.getProductId());
+//				product_dto.setCategoryName(category.getCategoryName());
+//
+//				product_dto_list.add(product_dto);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -127,14 +127,14 @@ public class ProductServiceImpl implements ProductService {
 
 			for (Product product : product_list) {
 
-				ProductDto product_dto = new ProductDto(product);
-
-				Brand brand = brandService.findBrandByProductId(product.getProductId());
-				product_dto.setBrandName(brand.getName());
-				Category category = categoryService.findCategoryByProductId(product.getProductId());
-				product_dto.setCategoryName(category.getCategoryName());
-
-				product_dto_list.add(product_dto);
+//				ProductDto product_dto = new ProductDto(product);
+//
+//				Brand brand = brandService.findBrandByProductId(product.getProductId());
+//				product_dto.setBrandName(brand.getName());
+//				Category category = categoryService.findCategoryByProductId(product.getProductId());
+//				product_dto.setCategoryName(category.getCategoryName());
+//
+//				product_dto_list.add(product_dto);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -156,14 +156,14 @@ public class ProductServiceImpl implements ProductService {
 
 			for (Product product : product_list) {
 
-				ProductDto product_dto = new ProductDto(product);
+//				ProductDto product_dto = new ProductDto(product);
 
-				Brand brand = brandService.findBrandByProductId(product.getProductId());
-				product_dto.setBrandName(brand.getName());
-				Category category = categoryService.findCategoryByProductId(product.getProductId());
-				product_dto.setCategoryName(category.getCategoryName());
+//				Brand brand = brandService.findBrandByProductId(product.getProductId());
+//				product_dto.setBrandName(brand.getName());
+//				Category category = categoryService.findCategoryByProductId(product.getProductId());
+//				product_dto.setCategoryName(category.getCategoryName());
 
-				product_dto_list.add(product_dto);
+//				product_dto_list.add(product_dto);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -179,7 +179,7 @@ public class ProductServiceImpl implements ProductService {
 		try {
 			product_dto = productRepository.findProductByProductId(product_id);
 			Brand brand = brandService.findBrandByProductId(product_id);
-			product_dto.setBrandName(brand.getName());
+//			product_dto.setBrandName(brand.getName());
 			Category category = categoryService.findCategoryByProductId(product_id);
 			product_dto.setCategoryName(category.getCategoryName());
 
@@ -321,5 +321,29 @@ public class ProductServiceImpl implements ProductService {
 	public ProductImg2D save(ProductImg2D productImg2D) {
 		return productImg2DRepository.save(productImg2D);
 	}
+	
+	public int countAllProductActive() {
+		return productRepository.countAllProductActive();
+	}  
+	
+//	public Product findAllProductActive() {
+//		return productRepository.findAllProductActive();	
+//	}
+	@Override
+	public List<ProductDto> findAllProductActive(int limit, int offset) {
+
+//		List<Product> product_list = new ArrayList<Product>();
+		List<ProductDto> product_dto_list = new ArrayList<ProductDto>();
+
+		try {
+			product_dto_list = productRepository.findAllProductActive(limit, offset);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		return product_dto_list;
+	}
+
 
 }

@@ -21,7 +21,9 @@ public interface ProductService {
 	public Product findProductByProductId(Long product_id);
 	
 //	public Product createNewProduct(String name,int price,int quantity,int category,int brand,String detail,String img,Long shop);
+	
 	public Product createNewProduct(Product product);
+	
 	public boolean setDisableProductByProductId(Long product_id, int status);
 	
 	public void saveProduct(Long product_id, String name, int price, String detail, int category, int brand, int quantity);
@@ -45,4 +47,10 @@ public interface ProductService {
 	public ProductImg2D save(ProductImg2D productImg2D);
 	
 	public Product findOne(Long id);
+	
+	//tìm tất cả các product không bị disable
+	
+	public int countAllProductActive(); 
+	
+	public  List<ProductDto> findAllProductActive(int limit,int offset);
 }
