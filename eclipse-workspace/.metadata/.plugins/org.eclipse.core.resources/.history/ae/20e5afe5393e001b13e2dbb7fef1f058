@@ -91,7 +91,6 @@ public class ShopController {
 //		List<Category> categories = categoryService.findAllCategory();
 		model.addAttribute("products", products);		
 		model.addAttribute("pageable", pageable);
-		pageable.setData(products);
 //		model.addAttribute("categories", categories);
 //		model.addAttribute("new_product", new Product());
 		return new ModelAndView("product");

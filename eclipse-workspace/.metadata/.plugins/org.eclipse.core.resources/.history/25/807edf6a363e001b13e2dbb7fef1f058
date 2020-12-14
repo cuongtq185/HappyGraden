@@ -48,51 +48,39 @@
                                     <table class="table table-data2">
                                         <thead>
                                             <tr>
-											<th>STT</th>
-											<th>Tên sản phẩm</th>
-											<th>Giá</th>
-											<th>Hình ảnh</th>
-											<th>Loại sản phẩm</th>
-											<th>Xuất xứ</th>
-											<th>Ngày tạo</th>
-											<th></th>
-										</tr>
+                                                <th>
+                                                    STT
+                                                </th>
+                                                <th>Tên loại sản phẩm</th>    
+                                                                                          
+                                                <th></th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-										<tr class="tr-shadow" th:each="product, i : ${pageable.data}">
-											<td><span
-												th:text="${i.count+(pageable.limit*(pageable.page -1))}"></span>
-											</td>
-											<td><span th:text="${product.productName}"></span></td>
-											<td><span th:text="${product.productName}"></span></td>
-											<td><span th:text="${product.productName}"></span></td>
-											<td><span th:text="${product.productName}"></span></td>
-											<td><span th:text="${product.categoryName}"></span></td>
-											<td><span th:text="${product.originName}"></span></td>
-											<td><span th:text="${product.createAt}"></span></td>
-											
-											<td>
-												<div class="table-data-feature">
-
-													<button class="item" data-toggle="tooltip"
-														data-placement="top" title="Xóa" type="button"
-														style="background-color: blanchedalmond;">
-														<i class="zmdi zmdi-delete"
-															th:onclick="|DeleteCategory(${category.categoryId})|"></i>
-													</button>
-													<a
-														th:href="@{'/admin/category/edit/' + ${category.categoryId}}">
-														<button class="item" data-toggle="tooltip"
-															data-placement="top" title="Sửa"
-															style="background-color: blanchedalmond;">
-															<i class="zmdi zmdi-edit"></i>
-														</button>
-													</a>
-												</div>
-											</td>
-										</tr>
-
-									</tbody>
+                                            <tr class="tr-shadow" th:each="product, i : ${pageable.data}">
+                                                <td>
+                                                    <span th:text="${i.count+(pageable.limit*(pageable.page -1))}"></span>
+                                                </td>
+                                                <td>
+                                                	<span th:text="${product.productName}"></span>
+                                                </td>
+                                               
+                                               <td>
+                                                    <div class="table-data-feature">
+                                                        
+                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Xóa" type="button" style="background-color: blanchedalmond;"> 
+                                                            <i class="zmdi zmdi-delete"th:onclick="|DeleteCategory(${category.categoryId})|"></i>
+                                                        </button>
+                                                       <a th:href="@{'/admin/category/edit/' + ${category.categoryId}}">
+	                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Sửa" style="background-color: blanchedalmond;">
+	                                                            <i class="zmdi zmdi-edit"></i>
+	                                                        </button>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                           
+                                        </tbody>
                                     </table>
                                    <!-- <div th:replace="components/pagination/panigation :: content(${pageable})"></div> -->
                                 </div>

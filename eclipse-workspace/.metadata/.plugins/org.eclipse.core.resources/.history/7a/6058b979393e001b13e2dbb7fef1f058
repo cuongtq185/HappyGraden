@@ -82,7 +82,7 @@ public class ShopController {
 		int totalitems = productService.countAllProductActive();
 		int totalpages = (int) Math.ceil((double) totalitems / (double) limit);
 		
-		PageRequest<ProductDto> pageable = new PageRequest<ProductDto>(page, limit, totalitems, totalpages);
+		PageRequest pageable = new PageRequest(page, limit, totalitems, totalpages);
 		
 		List<ProductDto> products = productService.findAllProductActive(pageable.getLimit(), pageable.getOffset());
 		
@@ -91,7 +91,6 @@ public class ShopController {
 //		List<Category> categories = categoryService.findAllCategory();
 		model.addAttribute("products", products);		
 		model.addAttribute("pageable", pageable);
-		pageable.setData(products);
 //		model.addAttribute("categories", categories);
 //		model.addAttribute("new_product", new Product());
 		return new ModelAndView("product");
