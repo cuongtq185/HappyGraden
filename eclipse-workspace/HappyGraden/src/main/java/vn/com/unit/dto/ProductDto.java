@@ -8,7 +8,19 @@ public class ProductDto extends Product {
 	
 	private String categoryName;
 	
+	private int productPrice;
 	
+	
+	public int getProductPrice() {
+		return productPrice;
+	}
+
+
+	public void setProductPrice(int productPrice) {
+		this.productPrice = productPrice;
+	}
+
+
 	public ProductDto() {
 		// TODO Auto-generated constructor stub
 	}

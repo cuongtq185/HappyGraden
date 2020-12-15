@@ -205,3 +205,13 @@ insert into origin( origin_name) values (N'Đà Lạt')
 insert into origin( origin_name) values (N'Trà Vinh')
 insert into origin( origin_name) values (N'Đồng Nai')
 insert into origin( origin_name) values (N'Vĩnh Long')
+
+--insert product
+insert into product(product_name,product_detail,product_disable, category, origin, product_createAt)
+values(N'Cây bạch mã hoàng tử', N' Hợp với tuổi dần', 0,10,7, getutcdate())
+
+--insert product_price
+insert into product_price(create_at, product_price_id, product_price)
+values(getutcdate(),1 , 2000000)
+insert into product_price(create_at, product_price_id, product_price)
+values(getutcdate(),2,3000000)

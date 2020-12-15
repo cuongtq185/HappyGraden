@@ -50,11 +50,11 @@
                                             <tr>
 											<th>STT</th>
 											<th>Tên sản phẩm</th>
-											<th>Giá</th>
-											<th>Hình ảnh</th>
+											<th>Giá</th>											
 											<th>Loại sản phẩm</th>
 											<th>Xuất xứ</th>
-											<th>Ngày tạo</th>
+											<th style="min-width:130px">Ngày tạo</th>
+											<th>Hình ảnh</th>
 											<th></th>
 										</tr>
                                         </thead>
@@ -64,13 +64,11 @@
 												th:text="${i.count+(pageable.limit*(pageable.page -1))}"></span>
 											</td>
 											<td><span th:text="${product.productName}"></span></td>
-											<td><span th:text="${product.productName}"></span></td>
-											<td><span th:text="${product.productName}"></span></td>
-											<td><span th:text="${product.productName}"></span></td>
-											<td><span th:text="${product.categoryName}"></span></td>
+											<td><span th:text="${product.productPrice}">2000000</span></td>
+											<td><span th:text="${product.categoryName}"></span></td>																					
 											<td><span th:text="${product.originName}"></span></td>
-											<td><span th:text="${product.createAt}"></span></td>
-											
+											<td><span th:text="${product.productCreateAt} ? ${#dates.format(product.productCreateAt, 'dd-MM-yyyy')}"></span></td>
+											<td><span th:text="${product.productName}"></span></td>
 											<td>
 												<div class="table-data-feature">
 
@@ -78,10 +76,10 @@
 														data-placement="top" title="Xóa" type="button"
 														style="background-color: blanchedalmond;">
 														<i class="zmdi zmdi-delete"
-															th:onclick="|DeleteCategory(${category.categoryId})|"></i>
+															th:onclick="|DeleteCategory(${product.productId})|"></i>
 													</button>
 													<a
-														th:href="@{'/admin/category/edit/' + ${category.categoryId}}">
+														th:href="@{'/admin/category/edit/' + ${product.productId}}">
 														<button class="item" data-toggle="tooltip"
 															data-placement="top" title="Sửa"
 															style="background-color: blanchedalmond;">
