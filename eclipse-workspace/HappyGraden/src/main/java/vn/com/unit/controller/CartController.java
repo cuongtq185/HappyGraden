@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -105,4 +107,10 @@ public class CartController {
 				"{\"msg\" : \"Delete product succes! Please check again!\" }");
 	}
 
+	@GetMapping("/cart/add/{productId}")
+	@ResponseBody
+	public ResponseEntity<String> addProductIntoCart(@PathVariable Long productId) {
+		cartService.addCartItemCurrentAccount(productId, 1);
+		return ResponseEntity.ok("{}");
+	}
 }

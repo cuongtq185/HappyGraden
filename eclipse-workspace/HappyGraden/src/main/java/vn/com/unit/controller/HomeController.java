@@ -2,7 +2,6 @@ package vn.com.unit.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,26 +18,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import vn.com.unit.dto.ProductDto;
 import vn.com.unit.entity.Account;
-import vn.com.unit.entity.Brand;
-import vn.com.unit.entity.Category;
 import vn.com.unit.entity.Product;
-import vn.com.unit.entity.Shop;
-import vn.com.unit.pageable.PageRequest;
 import vn.com.unit.service.AccountService;
-import vn.com.unit.service.BrandService;
 import vn.com.unit.service.CartService;
-import vn.com.unit.service.CategoryService;
 import vn.com.unit.service.ProductService;
 import vn.com.unit.service.RoleService;
 import vn.com.unit.service.ShopService;
-import vn.com.unit.utils.CommonUtils;
 
 @Controller
 public class HomeController {
@@ -69,10 +60,11 @@ public class HomeController {
 		//model.addAllAttributes(CommonUtils.getMapHeaderAtribute(model, categoryService));
 
 		// Add Role if reload
-		int total_cart_item= 0;
+		int total_cart_item = 0;
 		Long total = 0L;
 		model.addAttribute("total_cart_item", total_cart_item);
 		model.addAttribute("total_price", Math.toIntExact(total));
+
 		try {
 			Account account = accountService.findCurrentAccount();
 
@@ -114,6 +106,10 @@ public class HomeController {
 //		
 //		List<Shop> shops = shopService.searchAllShop();
 //		model.addAttribute("shops", shops);
+		
+		List<ProductDto> lstProduct = productService.findAllProductActive(8, 0);
+		
+		model.addAttribute("lstProduct", lstProduct);
 		
 		return new ModelAndView("index");
 	}

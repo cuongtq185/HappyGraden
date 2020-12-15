@@ -10,6 +10,7 @@ public class ProductDto extends Product {
 	
 	private int productPrice;
 	
+	private String productImg;
 	
 	public int getProductPrice() {
 		return productPrice;
@@ -45,7 +46,14 @@ public class ProductDto extends Product {
 		this.categoryName = categoryName;
 	}
 
-	
+
+	public String getProductImg() {
+		return productImg;
+	}
+
+	public void setProductImg(String productImg) {
+		this.productImg = productImg;
+	}
 
 //	public Product extractProduct() {
 //		return (Product) this;
