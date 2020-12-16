@@ -77,23 +77,17 @@ public class ShopController {
 			@RequestParam(value = "limit", required = false, defaultValue = "10") int limit,
 			HttpServletRequest request
 			) {
-		
-//		Account account = accountService.findCurrentAccount();	
+			
 		int totalitems = productService.countAllProductActive();
 		int totalpages = (int) Math.ceil((double) totalitems / (double) limit);
 		
 		PageRequest<ProductDto> pageable = new PageRequest<ProductDto>(page, limit, totalitems, totalpages);
 		
-		List<ProductDto> products = productService.findAllProductActive(pageable.getLimit(), pageable.getOffset());
-		
-		
-//		List<Brand> brands = brandService.findAllBrand();
-//		List<Category> categories = categoryService.findAllCategory();
+		List<ProductDto> products = productService.findAllProductActive(pageable.getLimit(), pageable.getOffset());		
 		model.addAttribute("products", products);		
 		model.addAttribute("pageable", pageable);
 		pageable.setData(products);
-//		model.addAttribute("categories", categories);
-//		model.addAttribute("new_product", new Product());
+		
 		return new ModelAndView("product");
 	}
 	

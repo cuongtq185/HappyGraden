@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale.Category;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,6 +35,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import vn.com.unit.dto.BillSeparateShopViewDto;
 import vn.com.unit.dto.ShopCreateDto;
 import vn.com.unit.entity.Account;
+import vn.com.unit.entity.Origin;
 import vn.com.unit.entity.Product;
 import vn.com.unit.entity.ProductImg2D;
 import vn.com.unit.pageable.PageRequest;
@@ -44,9 +48,9 @@ import vn.com.unit.service.ProductService;
 import vn.com.unit.service.RoleService;
 import vn.com.unit.service.UploadImgService;
 import vn.com.unit.utils.CommonUtils;
+import vn.com.unit.pageable.PageRequest;
 
 @Controller
-
 public class ShopManagement {
 
 	@Autowired
@@ -68,13 +72,26 @@ public class ShopManagement {
 	CategoryService categoryService;
 
 	@Autowired
-	BillSeparateService billSeparateService;	
+	BillSeparateService billSeparateService;
+	
+	
+	@GetMapping("/admin/product/add")
+	@ResponseBody
+	public ModelAndView productAdd(Model model, 
+			HttpServletRequest request) {
+	
+	//	List<Category> categories = categoryService.findAllCategory();
+	//	model.addAttribute("categories", categories);
+		return new ModelAndView("product-add");
+	}
 
 	// add product
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@PostMapping("/add-product")
-	public String addProduct(@ModelAttribute("new_product") Product product, ProductImg2D productImg2D,
-			@RequestParam("file") MultipartFile multipartFile, Model model) {
+//	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PostMapping("admin/product/add")
+	@ResponseBody
+	public ModelAndView addProduct(@ModelAttribute("new_product") Product product, ProductImg2D productImg2D,
+			@RequestParam("file") MultipartFile multipartFile, Model model,
+			HttpServletRequest request) {
 
 //		String url = UploadImgService.uploadCloudinary(multipartFile);
 //		
@@ -114,11 +131,7 @@ public class ShopManagement {
 		// Get file
 		File file = UploadImgService.getFileFromMultipartFile(multipartFile);
 
-		Account account = accountService.findCurrentAccount();
-
-		/*
-		 * product.setId(null); product.setShop(account.getId()); product.setImg("");
-		 */
+		Account account = accountService.findCurrentAccount();		
 
 		// Create product
 		Product product_new = productService.save(product);
@@ -141,7 +154,7 @@ public class ShopManagement {
 		thread.start();
 		// --------
 
-		return "account";
+		return new ModelAndView("product-add");
 	}
 
 	// edit Product

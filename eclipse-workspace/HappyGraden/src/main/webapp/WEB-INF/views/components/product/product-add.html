@@ -18,7 +18,7 @@
 							<div class="card">
 								<a th:href="@{/admin/category/add}">
 									<div class="card-header">
-										<strong> Thêm loại sản phẩm</strong>
+										<strong> Thêm sản phẩm</strong>
 									</div>
 								</a>
 								<div class="card-body card-block">
@@ -28,13 +28,60 @@
 										<div class="row form-group">
 											<div class="col col-md-3">
 												<label for="text-input" class=" form-control-label">
-													Tên loại sản phẩm:</label>
+													Tên sản phẩm:</label>
 											</div>
 											<div class="col-12 col-md-9">
 												<input type="text" id="addCategoryName" name="text-input"
 													class="form-control">
 											</div>
 										</div>
+										 <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="select" class=" form-control-label">Loại sản phẩm:</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <select name="select" id="select" class="form-control">
+                                                        <option value="0">Please select</option>
+                                                        <option value="1">Option #1</option>
+                                                        <option value="2">Option #2</option>
+                                                        <option value="3">Option #3</option>
+                                                    </select>
+                                                </div>
+                                          </div>
+                                           <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="select" class=" form-control-label">Xuất xứ:</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <select name="select" id="select" class="form-control">
+                                                        <option value="0">Please select</option>
+                                                        <option value="1">Option #1</option>
+                                                        <option value="2">Option #2</option>
+                                                        <option value="3">Option #3</option>
+                                                    </select>
+                                                </div>
+                                          </div>
+                                          <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="textarea-input"
+                                                        class=" form-control-label">Chi tiết sản phẩm:</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <textarea name="textarea-input" id="textarea-input" rows="9"
+                                                        placeholder="Content..." class="form-control"></textarea>
+                                                </div>
+                                          </div>   
+                                          <div class="row form-group">
+                                                <div class="col col-md-3">
+                                                    <label for="file-multiple-input"
+                                                        class=" form-control-label">Hình ảnh sản phẩm:</label>
+                                                </div>
+                                                <div class="col-12 col-md-9">
+                                                    <input type="file" id="file-multiple-input"
+                                                        name="file-multiple-input" multiple=""
+                                                        class="form-control-file">
+                                                </div>
+                                            </div>
 
 									</form>
 								</div>
