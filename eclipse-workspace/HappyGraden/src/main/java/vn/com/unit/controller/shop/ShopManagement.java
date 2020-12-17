@@ -96,7 +96,7 @@ public class ShopManagement {
 //	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("admin/product/add")
 	@ResponseBody
-	public ModelAndView addProduct(@ModelAttribute("new_product") Product product, ProductImg2D productImg2D,
+	public ResponseEntity<String> addProduct(@ModelAttribute("new_product") ProductDto productDto, ProductImg2D productImg2D,
 			@RequestParam("file") MultipartFile multipartFile, Model model,
 			HttpServletRequest request) {
 
@@ -141,33 +141,41 @@ public class ShopManagement {
 //		Account account = accountService.findCurrentAccount();		
 
 		// Create product
-		product.setProductId(null);		
-		productImg2D.setProductImg("");
-
-		ProductDto product_new = new ProductDto();
 		
-		productService.createNewProduct(product_new.getProductName(),product_new.getCategoryId(), product_new.getOriginId(),product_new.getProductDetail(), product_new.getProductImg());
 		
+//		product.setProductId(null);		
+//		productImg2D.setProductImg("");
+		
+		if (productService.searchProductByName(productDto.getProductName()) != null) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Product already exists\" }");
+		}
+		if (productDto.getProductName() == "") {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{ \"msg\" : \"Name cannot be empty\" }");
+		}
+		 productService.createNewProduct(productDto.getProductName(),productDto.getCategoryId(), productDto.getOriginId(),productDto.getProductDetail(), productDto.getProductImg());
+//		ProductDto product_new = new ProductDto();
+					
 //		ProductImg2D img_new = productService.save(productImg2D);
 
-		Thread thread = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				String url = UploadImgService.uploadCloudinary(file);
-
-				product_new.setProductImg(url);
-
-				// Update img for product
-				productService.save(product_new);
-
-				file.delete();
-			}
-		});
-
-		thread.start();
-		// --------
-
-		return new ModelAndView("product-add");
+//		Thread thread = new Thread(new Runnable() {
+//			@Override
+//			public void run() {
+//				String url = UploadImgService.uploadCloudinary(file);
+//
+//				product_new.setProductImg(url);
+//
+//				// Update img for product
+//				productService.save(product_new);
+//
+//				file.delete();
+//			}
+//		});
+//
+//		thread.start();
+//		// --------
+//
+//		return new ModelAndView("product-add");
+		return ResponseEntity.ok("{ \"msg\" : \"update category successfully\" }");
 	}
 
 	// edit Product

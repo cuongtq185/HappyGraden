@@ -3,6 +3,7 @@ package vn.com.unit.service;
 import java.util.List;
 
 import vn.com.unit.dto.ProductDto;
+import vn.com.unit.entity.Category;
 import vn.com.unit.entity.Product;
 import vn.com.unit.entity.ProductImg2D;
 
@@ -53,4 +54,5 @@ public interface ProductService {
 	public int countAllProductActive(); 
 	
 	public  List<ProductDto> findAllProductActive(int limit,int offset);
+	
 }

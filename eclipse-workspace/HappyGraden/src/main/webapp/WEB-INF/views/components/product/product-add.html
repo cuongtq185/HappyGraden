@@ -22,7 +22,7 @@
 									</div>
 								</a>
 								<div class="card-body card-block">
-									<form class="form-horizontal" id="add-product" th:action="@{/add-product}" th:object="${new_product}"
+									<form class="form-horizontal" th:action="@{admin/product/add}"
 								method="post">
 
 
@@ -33,7 +33,7 @@
 											</div>
 											<div class="col-12 col-md-9">
 												<input type="text" id="addProductName" name="text-input" placeholder ="Nhập tên sản phẩm"
-													class="form-control" th:field="*{productName}">
+													class="form-control">
 											</div>
 										</div>
 										 <div class="row form-group">
@@ -41,7 +41,7 @@
                                                     <label for="select" class=" form-control-label">Loại sản phẩm:</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="select" id="select" class="form-control"  th:field="*{categoryName}">
+                                                    <select name="select" id="addCategoryName" class="form-control"  >
                                                         <option value="">Chọn loại sản phẩm</option>
                                                         <option th:each="category : ${categories}"
                                                         th:value= "${category.categoryId}"
@@ -55,7 +55,7 @@
                                                     <label for="select" class=" form-control-label">Xuất xứ:</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="select" id="select" class="form-control">
+                                                    <select name="select" id="addOrigintName" class="form-control">
                                                        <option value="">Chọn xuất xứ sản phẩm</option>
                                                         <option th:each="origin : ${origins}"
                                                         th:value= "${origin.originId}"
@@ -69,7 +69,7 @@
                                                         class=" form-control-label">Chi tiết sản phẩm:</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <textarea name="textarea-input" id="textarea-input" rows="9"
+                                                    <textarea name="textarea-input" id="addProductDetail" rows="9"
                                                         placeholder="Mô tả chi tiết sản phẩm..." class="form-control"></textarea>
                                                 </div>
                                           </div>   
@@ -79,7 +79,7 @@
                                                         class=" form-control-label">Hình ảnh sản phẩm:</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="file" id="file-multiple-input"
+                                                    <input type="file" id="addProductImg"
                                                         name="file-multiple-input" multiple=""
                                                         class="form-control-file">
                                                 </div>
@@ -89,7 +89,7 @@
 								</div>
 								<div class="card-footer" align="right">
 									<button type="submit" class="btn btn-primary btn-sm"
-										onClick="addProduct()">
+										onClick="AddProduct()">
 										<i class="fa fa-dot-circle-o"></i> Lưu
 									</button>
 
