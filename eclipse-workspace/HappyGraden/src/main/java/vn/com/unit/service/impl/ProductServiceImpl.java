@@ -190,17 +190,17 @@ public class ProductServiceImpl implements ProductService {
 		return product_dto;
 	}
 
-//	@Override
-//	public Product createNewProduct(String name,int price,int quantity,int category,int brand,String detail,String img,Long shop) {
-//		productRepository.createNewProduct(name, price, quantity, category, brand, detail, img, shop);
-//		return null;
-//	}
-
 	@Override
-	public Product createNewProduct(Product product) {
-		product.setProductId(null);
-		return productRepository.save(product);
+	public Product createNewProduct(String name,int category,int origin,String detail,String img) {
+		productRepository.createNewProduct(name,  category, origin, detail, img);
+		return null;
 	}
+
+//	@Override
+//	public Product createNewProduct(Product product) {
+//		product.setProductId(null);
+//		return productRepository.save(product);
+//	}
 
 	@Override
 	public boolean setDisableProductByProductId(Long product_id, int status) {

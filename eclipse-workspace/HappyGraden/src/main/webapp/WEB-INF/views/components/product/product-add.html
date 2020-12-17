@@ -16,13 +16,14 @@
 
 						<div class="col-lg-12">
 							<div class="card">
-								<a th:href="@{/admin/category/add}">
+								<a href="">
 									<div class="card-header">
 										<strong> Thêm sản phẩm</strong>
 									</div>
 								</a>
 								<div class="card-body card-block">
-									<form action="" class="form-horizontal">
+									<form class="form-horizontal" id="add-product" th:action="@{/add-product}" th:object="${new_product}"
+								method="post">
 
 
 										<div class="row form-group">
@@ -31,8 +32,8 @@
 													Tên sản phẩm:</label>
 											</div>
 											<div class="col-12 col-md-9">
-												<input type="text" id="addCategoryName" name="text-input" placeholder ="Nhập tên sản phẩm"
-													class="form-control">
+												<input type="text" id="addProductName" name="text-input" placeholder ="Nhập tên sản phẩm"
+													class="form-control" th:field="*{productName}">
 											</div>
 										</div>
 										 <div class="row form-group">
@@ -40,7 +41,7 @@
                                                     <label for="select" class=" form-control-label">Loại sản phẩm:</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <select name="select" id="select" class="form-control">
+                                                    <select name="select" id="select" class="form-control"  th:field="*{categoryName}">
                                                         <option value="">Chọn loại sản phẩm</option>
                                                         <option th:each="category : ${categories}"
                                                         th:value= "${category.categoryId}"
@@ -88,7 +89,7 @@
 								</div>
 								<div class="card-footer" align="right">
 									<button type="submit" class="btn btn-primary btn-sm"
-										onClick="AddCategory()">
+										onClick="addProduct()">
 										<i class="fa fa-dot-circle-o"></i> Lưu
 									</button>
 

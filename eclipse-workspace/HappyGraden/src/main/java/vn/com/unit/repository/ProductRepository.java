@@ -33,14 +33,11 @@ public interface ProductRepository extends MirageRepository<Product, Long> {
 	public ProductDto findProductByProductId(@Param("product_id") Long product_id); 
 	
 	@Modifying
-	public Long createNewProduct(@Param("name") String name,
-								@Param("price") int price,
-								@Param("quantity") int quantity,
+	public Long createNewProduct(@Param("name") String name,								
 								@Param("category") int category,
-								@Param("brand") int brand,
+								@Param("origin") int origin,
 								@Param("detail") String detail,
-								@Param("img") String img,
-								@Param("shop") Long shop
+								@Param("img") String img
 			);
 	
 	@Modifying

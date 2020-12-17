@@ -20,9 +20,9 @@ public interface ProductService {
 	
 	public Product findProductByProductId(Long product_id);
 	
-//	public Product createNewProduct(String name,int price,int quantity,int category,int brand,String detail,String img,Long shop);
+	public Product createNewProduct(String name,int category,int origin,String detail,String img);
 	
-	public Product createNewProduct(Product product);
+//	public ProductDto createNewProduct(Product product);
 	
 	public boolean setDisableProductByProductId(Long product_id, int status);
 	

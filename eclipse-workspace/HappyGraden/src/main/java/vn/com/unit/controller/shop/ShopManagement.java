@@ -32,6 +32,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
 import vn.com.unit.dto.BillSeparateShopViewDto;
+import vn.com.unit.dto.ProductDto;
 import vn.com.unit.dto.ShopCreateDto;
 import vn.com.unit.entity.Account;
 import vn.com.unit.entity.Category;
@@ -143,7 +144,10 @@ public class ShopManagement {
 		product.setProductId(null);		
 		productImg2D.setProductImg("");
 
-		Product product_new = productService.save(product);
+		ProductDto product_new = new ProductDto();
+		
+	//	productService.createNewProduct(product_new.getProductName(),product_new.getca, product_new.getOriginName(),product_new.getProductDetail(), product_new.getProductImg());
+		
 		ProductImg2D img_new = productService.save(productImg2D);
 
 		Thread thread = new Thread(new Runnable() {
