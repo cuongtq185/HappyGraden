@@ -105,4 +105,9 @@ public class OriginServiceImpl implements OriginService {
 			// TODO: handle exception
 		}
 	}
+	
+	@Override
+	public List<Origin> findAllOrigin(){
+		return originRepository.findAllOrigin();
+	}
 }

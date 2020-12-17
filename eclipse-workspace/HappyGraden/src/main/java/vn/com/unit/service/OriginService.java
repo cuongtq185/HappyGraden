@@ -18,4 +18,6 @@ public interface OriginService {
 	public void updateOriginById(Origin origin);
 	
 	public void deleteOriginById(Long id);
+	
+	public List<Origin> findAllOrigin();
 }

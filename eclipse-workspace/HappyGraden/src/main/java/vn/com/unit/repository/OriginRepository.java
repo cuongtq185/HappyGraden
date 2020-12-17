@@ -23,4 +23,6 @@ public interface OriginRepository extends MirageRepository<Origin, Long> {
 	public void updateOriginById(@Param("id") Long id,@Param("name") String name);
 	
 	public void deleteOriginById(@Param("id") Long id);
+	
+	public List<Origin> findAllOrigin(); 
 }

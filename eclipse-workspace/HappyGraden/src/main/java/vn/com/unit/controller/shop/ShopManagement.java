@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale.Category;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +34,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import vn.com.unit.dto.BillSeparateShopViewDto;
 import vn.com.unit.dto.ShopCreateDto;
 import vn.com.unit.entity.Account;
+import vn.com.unit.entity.Category;
 import vn.com.unit.entity.Origin;
 import vn.com.unit.entity.Product;
 import vn.com.unit.entity.ProductImg2D;
@@ -44,6 +44,7 @@ import vn.com.unit.service.BillItemService;
 import vn.com.unit.service.BillSeparateService;
 //import vn.com.unit.service.BillService;
 import vn.com.unit.service.CategoryService;
+import vn.com.unit.service.OriginService;
 import vn.com.unit.service.ProductService;
 import vn.com.unit.service.RoleService;
 import vn.com.unit.service.UploadImgService;
@@ -70,6 +71,9 @@ public class ShopManagement {
 
 	@Autowired
 	CategoryService categoryService;
+	
+	@Autowired
+	OriginService originService;
 
 	@Autowired
 	BillSeparateService billSeparateService;
@@ -80,8 +84,10 @@ public class ShopManagement {
 	public ModelAndView productAdd(Model model, 
 			HttpServletRequest request) {
 	
-	//	List<Category> categories = categoryService.findAllCategory();
-	//	model.addAttribute("categories", categories);
+		List<Category> categories = categoryService.findAllCategory();
+		model.addAttribute("categories", categories);
+		List<Origin> origins = originService.findAllOrigin();
+		model.addAttribute("origins",origins);
 		return new ModelAndView("product-add");
 	}
 
@@ -131,9 +137,12 @@ public class ShopManagement {
 		// Get file
 		File file = UploadImgService.getFileFromMultipartFile(multipartFile);
 
-		Account account = accountService.findCurrentAccount();		
+//		Account account = accountService.findCurrentAccount();		
 
 		// Create product
+		product.setProductId(null);		
+		productImg2D.setProductImg("");
+
 		Product product_new = productService.save(product);
 		ProductImg2D img_new = productService.save(productImg2D);
 
