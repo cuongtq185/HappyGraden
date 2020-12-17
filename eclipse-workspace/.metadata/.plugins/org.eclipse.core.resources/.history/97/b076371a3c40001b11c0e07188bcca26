@@ -24,7 +24,7 @@ public interface ProductService {
 	
 //	public ProductDto createNewProduct(Product product);
 	
-	public boolean setDisableProductByProductId(Long product_id);
+	public boolean setDisableProductByProductId(Long product_id, int status);
 	
 	public void saveProduct(Long product_id, String name, int price, String detail, int category, int brand, int quantity);
 	

@@ -203,7 +203,7 @@ public class ProductServiceImpl implements ProductService {
 //	}
 
 	@Override
-	public boolean setDisableProductByProductId(Long product_id) {
+	public boolean setDisableProductByProductId(Long product_id, int status) {
 		try {
 			productRepository.setDisableProductByProductId(product_id);
 //			Product product_temp = new Product();

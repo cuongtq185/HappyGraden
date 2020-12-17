@@ -20,6 +20,53 @@
     <th:block th:replace="components/admin/admin-footer :: admin-footer"></th:block> 
     
     <script th:src="@{/static/admin/js/plugins/sweetalert2@9.js}"></script>
-    
+     <script>
+		function AddProduct() {
+			var token = $("meta[name='_csrf']").attr("content");
+			var header = $("meta[name='_csrf_header']").attr("content");
+			let newProduct = new Object();
+			newProduct.productName = $("#addProductName").val();
+			newProduct.categoryId = $("#addCategoryName").val();
+			newProduct.originId = $("#addOrigintName").val();
+			newProduct.productDetail = $("#addProductDetail").val();
+			newProduct.productImg = $("#addProductImg").val();
+			$.ajax({
+				url: `/admin/product/add`,
+				type: 'POST',
+				dataType: "json",
+				contentType: "application/json",
+				data: JSON.stringify(newOrigin),
+				beforeSend: function (xhr) {
+					xhr.setRequestHeader(header, token);
+				},
+				success: function (data, status, xhr) {
+					 try {
+                          Swal.fire({
+               		  position: 'center',
+               		  icon: 'success',
+               		  title: 'Insert Success',
+               		  showConfirmButton: false,
+               		  timer: 800
+                   		}).then(()=>{
+                               window.location.href = '/admin/product/list';
+
+                   		})             
+                     } catch (error) { }
+
+				},
+				error: function (request, status, error) {
+					  try {
+						  Swal.fire({
+							  icon: 'error',
+							  title: 'Oops...',
+							  text: request.responseJSON.msg,
+							})
+                      } catch (error) { }
+                  }
+				
+			});
+		}
+
+	</script>	 
 </body>
 </html>

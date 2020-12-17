@@ -6,10 +6,6 @@ public class ProductDto extends Product {
 
 	private String originName;
 	
-	private int originId;
-	
-	private int categoryId; 
-	
 	private String categoryName;
 	
 	private int productPrice;
@@ -58,28 +54,6 @@ public class ProductDto extends Product {
 	public void setProductImg(String productImg) {
 		this.productImg = productImg;
 	}
-
-
-	public int getOriginId() {
-		return originId;
-	}
-
-
-	public void setOriginId(int originId) {
-		this.originId = originId;
-	}
-
-
-	public int getCategoryId() {
-		return categoryId;
-	}
-
-
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
-	
-	
 
 //	public Product extractProduct() {
 //		return (Product) this;

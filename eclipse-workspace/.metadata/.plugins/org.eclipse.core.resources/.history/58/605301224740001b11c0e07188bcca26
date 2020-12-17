@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+	<meta th:name="_csrf" th:content="${_csrf.token}" />
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}" />
+<head>
+    <th:block th:include="components/product/admin-head :: admin-head"></th:block>
+
+</head>
+<body class="animsition">
+	<div class="page-wrapper">
+       		<div th:replace="components/product/product-header :: product-header"></div>
+       		<div class="page-container">
+				<div th:replace="components/admin/admin-menu :: admin-menu"></div>
+				<div th:replace="components/product/product-add :: product-add"></div>
+        	</div>
+        	
+	</div>					
+    <th:block th:replace="components/admin/admin-footer :: admin-footer"></th:block> 
+    
+    <script th:src="@{/static/admin/js/plugins/sweetalert2@9.js}"></script>
+    
+</body>
+</html>

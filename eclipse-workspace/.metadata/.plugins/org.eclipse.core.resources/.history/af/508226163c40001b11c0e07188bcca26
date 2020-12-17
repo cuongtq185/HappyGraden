@@ -203,19 +203,19 @@ public class ProductServiceImpl implements ProductService {
 //	}
 
 	@Override
-	public boolean setDisableProductByProductId(Long product_id) {
+	public boolean setDisableProductByProductId(Long product_id, int status) {
 		try {
-			productRepository.setDisableProductByProductId(product_id);
+//			productRepository.setDisableProductByProductId(product_id, status);
 //			Product product_temp = new Product();
 //			product_temp.setId(product_id);
-//			Product product_temp = productRepository.findOne(product_id);
-//			if (0 == status) {
-//				product_temp.setProductDisable(false);
-//			} else {
-//				product_temp.setProductDisable(true);
-//			}
-//
-//			productRepository.save(product_temp);
+			Product product_temp = productRepository.findOne(product_id);
+			if (0 == status) {
+				product_temp.setProductDisable(false);
+			} else {
+				product_temp.setProductDisable(true);
+			}
+
+			productRepository.save(product_temp);
 			
 			return true;
 		} catch (Exception e) {

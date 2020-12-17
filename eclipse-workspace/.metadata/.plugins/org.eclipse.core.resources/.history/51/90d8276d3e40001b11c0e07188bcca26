@@ -212,10 +212,11 @@ public class ShopManagement {
 
 	// deleteProduct
 	@DeleteMapping("/admin/product/delete/{product_id}")
-	public ResponseEntity<Void> deleteProduct(HttpServletRequest request,@PathVariable("product_id") Long product_id) {		
-		productService.setDisableProductByProductId(product_id);
-		return ResponseEntity.status(HttpStatus.OK).body(null);
-		
+	public ResponseEntity<Void> deleteProduct(@PathVariable("product_id") Long product_id) {		
+		if (productService.setDisableProductByProductId(product_id)) {
+			return ResponseEntity.status(HttpStatus.OK).body(null);
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 	}
 
 	// confirm bill

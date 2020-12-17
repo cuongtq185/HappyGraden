@@ -148,17 +148,17 @@ public class ShopManagement {
 		
 		productService.createNewProduct(product_new.getProductName(),product_new.getCategoryId(), product_new.getOriginId(),product_new.getProductDetail(), product_new.getProductImg());
 		
-//		ProductImg2D img_new = productService.save(productImg2D);
+		ProductImg2D img_new = productService.save(productImg2D);
 
 		Thread thread = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				String url = UploadImgService.uploadCloudinary(file);
 
-				product_new.setProductImg(url);
+				img_new.setProductImg(url);
 
 				// Update img for product
-				productService.save(product_new);
+				productService.save(img_new);
 
 				file.delete();
 			}
@@ -211,11 +211,14 @@ public class ShopManagement {
 //	}
 
 	// deleteProduct
-	@DeleteMapping("/admin/product/delete/{product_id}")
-	public ResponseEntity<Void> deleteProduct(HttpServletRequest request,@PathVariable("product_id") Long product_id) {		
-		productService.setDisableProductByProductId(product_id);
-		return ResponseEntity.status(HttpStatus.OK).body(null);
-		
+	@PreAuthorize("hasRole('ROLE_VENDOR')")
+	@DeleteMapping("/product/{product_id}")
+	public ResponseEntity<Void> deleteProduct(@PathVariable("product_id") Long product_id) {
+		int status = 1;
+		if (productService.setDisableProductByProductId(product_id, status)) {
+			return ResponseEntity.status(HttpStatus.OK).body(null);
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 	}
 
 	// confirm bill

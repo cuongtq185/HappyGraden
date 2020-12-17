@@ -211,11 +211,14 @@ public class ShopManagement {
 //	}
 
 	// deleteProduct
-	@DeleteMapping("/admin/product/delete/{product_id}")
-	public ResponseEntity<Void> deleteProduct(HttpServletRequest request,@PathVariable("product_id") Long product_id) {		
-		productService.setDisableProductByProductId(product_id);
-		return ResponseEntity.status(HttpStatus.OK).body(null);
-		
+	@PreAuthorize("hasRole('ROLE_VENDOR')")
+	@DeleteMapping("/product/{product_id}")
+	public ResponseEntity<Void> deleteProduct(@PathVariable("product_id") Long product_id) {
+		int status = 1;
+		if (productService.setDisableProductByProductId(product_id, status)) {
+			return ResponseEntity.status(HttpStatus.OK).body(null);
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 	}
 
 	// confirm bill

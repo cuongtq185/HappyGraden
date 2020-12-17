@@ -76,10 +76,10 @@
 														data-placement="top" title="Xóa" type="button"
 														style="background-color: blanchedalmond;">
 														<i class="zmdi zmdi-delete"
-															th:onclick="|DeleteProduct(${product.productId})|"></i>
+															th:onclick="|DeleteCategory(${product.productId})|"></i>
 													</button>
 													<a
-														th:href="@{'/admin/product/edit/' + ${product.productId}}">
+														th:href="@{'/admin/category/edit/' + ${product.productId}}">
 														<button class="item" data-toggle="tooltip"
 															data-placement="top" title="Sửa"
 															style="background-color: blanchedalmond;">

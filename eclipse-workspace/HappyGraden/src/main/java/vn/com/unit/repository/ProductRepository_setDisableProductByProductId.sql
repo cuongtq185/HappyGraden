@@ -1,3 +1,3 @@
-UPDATE p2p_product
-SET disable = /*status*/ 
-WHERE id = /*product_id*/
+UPDATE product
+SET product_disable = 1
+WHERE product_id = /*product_id*/
