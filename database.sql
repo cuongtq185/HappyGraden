@@ -117,7 +117,12 @@ create table cart(
 
 create table cart_item(
 	cartitem_id bigint primary key identity(1,1),
-	quantity int
+	cart bigint,
+	product bigint,
+	quantity int,
+
+	constraint fk_product_id_products foreign key(product) references product(product_id),
+	constraint fk_product_id_cartitem_id foreign key(cart) references cart(cart_id)
 )
 
 create table promotion(
